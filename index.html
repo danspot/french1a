@@ -1,0 +1,1003 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#173b63">
+  <title>French 1A Study Guide — Numbers, Alphabet & Greetings</title>
+  <style>
+    :root {
+      --ink: #17324d;
+      --muted: #60758a;
+      --paper: #fffdf8;
+      --blue: #1f5d8f;
+      --blue-dark: #173b63;
+      --blue-soft: #e8f3fb;
+      --red: #e05b52;
+      --red-soft: #fff0ed;
+      --gold: #f2bb45;
+      --green: #26856a;
+      --green-soft: #e8f6f0;
+      --line: #dbe5ed;
+      --shadow: 0 16px 40px rgba(23, 50, 77, .12);
+      --radius: 22px;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 8% 4%, rgba(242, 187, 69, .20), transparent 23rem),
+        radial-gradient(circle at 94% 20%, rgba(31, 93, 143, .12), transparent 28rem),
+        #f4f8fb;
+      font-family: Inter, ui-rounded, "Segoe UI", system-ui, -apple-system, sans-serif;
+      line-height: 1.5;
+    }
+
+    button, input { font: inherit; }
+    button { touch-action: manipulation; }
+
+    .skip-link {
+      position: absolute;
+      left: -9999px;
+      top: 1rem;
+      z-index: 100;
+      padding: .7rem 1rem;
+      background: white;
+      color: var(--blue-dark);
+      border-radius: 10px;
+    }
+    .skip-link:focus { left: 1rem; }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      backdrop-filter: blur(14px);
+      background: rgba(244, 248, 251, .88);
+      border-bottom: 1px solid rgba(219, 229, 237, .9);
+    }
+
+    .nav {
+      width: min(1120px, calc(100% - 32px));
+      min-height: 66px;
+      margin: auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--ink);
+      font-weight: 900;
+      letter-spacing: -.02em;
+      white-space: nowrap;
+    }
+
+    .flag-mark {
+      width: 34px;
+      height: 24px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      overflow: hidden;
+      border-radius: 5px;
+      box-shadow: 0 0 0 1px rgba(23, 50, 77, .12);
+    }
+    .flag-mark i:nth-child(1) { background: #1f5d8f; }
+    .flag-mark i:nth-child(2) { background: white; }
+    .flag-mark i:nth-child(3) { background: #e05b52; }
+
+    .nav-links { display: flex; align-items: center; gap: 4px; }
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-weight: 700;
+      font-size: .9rem;
+      padding: 8px 10px;
+      border-radius: 9px;
+    }
+    .nav-links a:hover { color: var(--blue); background: white; }
+
+    .btn {
+      border: 0;
+      border-radius: 12px;
+      padding: 11px 16px;
+      min-height: 44px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      background: var(--blue);
+      color: white;
+      font-weight: 850;
+      cursor: pointer;
+      box-shadow: 0 7px 16px rgba(31, 93, 143, .16);
+      transition: transform .16s ease, box-shadow .16s ease, background .16s ease;
+    }
+    .btn:hover { transform: translateY(-1px); box-shadow: 0 10px 22px rgba(31, 93, 143, .22); }
+    .btn:active { transform: translateY(0); }
+    .btn.secondary { background: white; color: var(--blue-dark); box-shadow: inset 0 0 0 1.5px var(--line); }
+    .btn.warm { background: var(--red); }
+    .btn.small { padding: 8px 12px; min-height: 38px; font-size: .88rem; }
+    .btn:focus-visible, .sound-button:focus-visible, .letter-button:focus-visible, input:focus-visible {
+      outline: 3px solid rgba(242, 187, 69, .75);
+      outline-offset: 3px;
+    }
+
+    .hero {
+      width: min(1120px, calc(100% - 32px));
+      margin: 46px auto 30px;
+      min-height: 410px;
+      display: grid;
+      grid-template-columns: 1.15fr .85fr;
+      align-items: center;
+      gap: 44px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin: 0 0 14px;
+      color: var(--blue);
+      font-weight: 900;
+      font-size: .78rem;
+      letter-spacing: .13em;
+      text-transform: uppercase;
+    }
+    .eyebrow::before { content: ""; width: 28px; height: 3px; border-radius: 3px; background: var(--red); }
+
+    h1, h2, h3, p { margin-top: 0; }
+    h1 {
+      max-width: 720px;
+      margin-bottom: 18px;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(3rem, 7vw, 5.5rem);
+      line-height: .93;
+      letter-spacing: -.055em;
+      color: var(--blue-dark);
+    }
+    .accent-word { color: var(--red); font-style: italic; }
+    .hero-copy > p:not(.eyebrow) { max-width: 650px; color: var(--muted); font-size: 1.08rem; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 24px; }
+
+    .hero-art {
+      position: relative;
+      min-height: 340px;
+      display: grid;
+      place-items: center;
+    }
+    .orb {
+      width: min(340px, 88vw);
+      aspect-ratio: 1;
+      border-radius: 50%;
+      background: linear-gradient(145deg, var(--blue-dark), var(--blue));
+      box-shadow: 20px 24px 0 var(--gold), var(--shadow);
+      display: grid;
+      place-content: center;
+      text-align: center;
+      color: white;
+      transform: rotate(-3deg);
+    }
+    .orb .bonjour { font-family: Georgia, serif; font-size: clamp(2.6rem, 6vw, 4.4rem); font-style: italic; line-height: 1; }
+    .orb .translation { margin-top: 12px; opacity: .75; font-weight: 800; text-transform: uppercase; letter-spacing: .13em; font-size: .75rem; }
+    .doodle {
+      position: absolute;
+      padding: 10px 14px;
+      border-radius: 14px;
+      background: white;
+      box-shadow: var(--shadow);
+      font-weight: 900;
+      color: var(--blue-dark);
+    }
+    .doodle.one { top: 7%; right: 0; transform: rotate(7deg); }
+    .doodle.two { bottom: 7%; left: 0; transform: rotate(-8deg); }
+    .doodle.three { top: 26%; left: -3%; background: var(--red-soft); color: var(--red); transform: rotate(-5deg); }
+
+    .progress-strip {
+      width: min(1120px, calc(100% - 32px));
+      margin: 0 auto 56px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      background: white;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+    .progress-item { padding: 18px 22px; display: flex; align-items: center; gap: 13px; }
+    .progress-item + .progress-item { border-left: 1px solid var(--line); }
+    .progress-icon {
+      width: 42px; height: 42px; flex: 0 0 auto;
+      border-radius: 12px; display: grid; place-items: center;
+      background: var(--blue-soft); color: var(--blue); font-weight: 950;
+    }
+    .progress-item:nth-child(2) .progress-icon { background: var(--red-soft); color: var(--red); }
+    .progress-item:nth-child(3) .progress-icon { background: #fff6df; color: #9b6a00; }
+    .progress-item strong { display: block; font-size: .95rem; }
+    .progress-item span { color: var(--muted); font-size: .82rem; }
+
+    main { overflow: hidden; }
+    .study-section { padding: 70px 0; }
+    .study-section.alt { background: white; }
+    .section-inner { width: min(1120px, calc(100% - 32px)); margin: auto; }
+    .section-heading {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 24px;
+      margin-bottom: 26px;
+    }
+    .section-heading h2 {
+      margin-bottom: 7px;
+      font-family: Georgia, serif;
+      font-size: clamp(2rem, 4vw, 3.1rem);
+      line-height: 1;
+      letter-spacing: -.035em;
+      color: var(--blue-dark);
+    }
+    .section-heading p { margin: 0; color: var(--muted); }
+
+    .number-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 13px; }
+    .number-card {
+      position: relative;
+      min-height: 156px;
+      padding: 20px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: var(--paper);
+      overflow: hidden;
+      transition: transform .16s ease, box-shadow .16s ease, border-color .16s ease;
+    }
+    .number-card:hover { transform: translateY(-3px); box-shadow: var(--shadow); border-color: #b9ccdb; }
+    .number-card .numeral {
+      position: absolute; right: 12px; bottom: -22px;
+      color: var(--blue-soft); font-family: Georgia, serif; font-size: 7.5rem; font-weight: 900; line-height: 1;
+      pointer-events: none;
+    }
+    .number-card .french { position: relative; display: block; font-family: Georgia, serif; font-size: 1.75rem; font-weight: 800; color: var(--blue-dark); }
+    .number-card .english { position: relative; color: var(--muted); font-size: .82rem; font-weight: 800; text-transform: uppercase; letter-spacing: .08em; }
+    .number-card .sound-row { position: relative; display: flex; align-items: center; gap: 8px; margin-top: 18px; }
+    .sound-button {
+      width: 38px; height: 38px; border: 0; border-radius: 50%;
+      display: grid; place-items: center; cursor: pointer;
+      color: white; background: var(--blue); box-shadow: 0 6px 12px rgba(31, 93, 143, .18);
+    }
+    .sound-button:hover { background: var(--blue-dark); }
+    .sound-hint { font-size: .8rem; font-weight: 750; color: var(--muted); }
+
+    .alphabet-wrap { display: grid; grid-template-columns: 1fr 280px; gap: 24px; align-items: stretch; }
+    .alphabet-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 9px; }
+    .letter-button {
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: #f8fbfd;
+      padding: 12px 7px 10px;
+      min-height: 88px;
+      cursor: pointer;
+      text-align: center;
+      color: var(--ink);
+      transition: transform .15s ease, background .15s ease, border-color .15s ease;
+    }
+    .letter-button:hover { transform: translateY(-2px); background: var(--blue-soft); border-color: #aac7dc; }
+    .letter-button .letter { display: block; font-family: Georgia, serif; font-size: 2rem; font-weight: 900; color: var(--blue); line-height: 1; }
+    .letter-button .pronunciation { display: block; margin-top: 8px; font-size: .72rem; font-weight: 800; color: var(--muted); }
+    .alphabet-tip {
+      padding: 24px;
+      border-radius: 20px;
+      color: white;
+      background: linear-gradient(160deg, var(--blue-dark), #214f78);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      box-shadow: var(--shadow);
+    }
+    .alphabet-tip h3 { font-family: Georgia, serif; font-size: 1.65rem; margin-bottom: 9px; }
+    .alphabet-tip p { color: rgba(255,255,255,.78); font-size: .9rem; }
+    .alphabet-tip .mini-note { margin-top: 24px; padding-top: 18px; border-top: 1px solid rgba(255,255,255,.18); font-size: .8rem; }
+
+    .phrase-groups { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; }
+    .phrase-group {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+    .phrase-group h3 {
+      margin: 0;
+      padding: 17px 20px;
+      font-size: .78rem;
+      text-transform: uppercase;
+      letter-spacing: .13em;
+      color: var(--blue);
+      background: var(--blue-soft);
+    }
+    .phrase-list { list-style: none; padding: 0; margin: 0; }
+    .phrase-item {
+      display: grid;
+      grid-template-columns: 38px 1fr;
+      gap: 12px;
+      align-items: center;
+      padding: 15px 18px;
+      border-top: 1px solid var(--line);
+    }
+    .phrase-item:first-child { border-top: 0; }
+    .phrase-item .sound-button { width: 34px; height: 34px; }
+    .phrase-fr { display: block; font-family: Georgia, serif; font-size: 1.13rem; font-weight: 800; color: var(--blue-dark); }
+    .phrase-en { display: block; color: var(--muted); font-size: .8rem; margin-top: 1px; }
+
+    .quiz-section { padding: 82px 0 90px; background: var(--blue-dark); color: white; }
+    .quiz-layout { width: min(1000px, calc(100% - 32px)); margin: auto; display: grid; grid-template-columns: .72fr 1.28fr; gap: 36px; align-items: center; }
+    .quiz-copy h2 { font-family: Georgia, serif; font-size: clamp(2.4rem, 5vw, 4rem); line-height: .97; margin-bottom: 16px; }
+    .quiz-copy p { color: rgba(255,255,255,.7); }
+    .score-row { display: flex; gap: 10px; margin-top: 24px; }
+    .score-pill { min-width: 92px; padding: 10px 13px; border-radius: 13px; background: rgba(255,255,255,.09); }
+    .score-pill span { display: block; color: rgba(255,255,255,.58); font-size: .68rem; text-transform: uppercase; letter-spacing: .1em; font-weight: 850; }
+    .score-pill strong { font-size: 1.35rem; }
+    .quiz-card { min-height: 390px; padding: 32px; border-radius: 26px; background: white; color: var(--ink); box-shadow: 0 24px 60px rgba(0,0,0,.22); }
+    .quiz-label { margin: 0; color: var(--muted); text-align: center; font-size: .76rem; text-transform: uppercase; letter-spacing: .13em; font-weight: 900; }
+    .quiz-number { margin: 4px 0 12px; text-align: center; font-family: Georgia, serif; color: var(--red); font-size: 7rem; font-weight: 900; line-height: 1; }
+    .quiz-card label { display: block; margin-bottom: 7px; font-weight: 850; font-size: .88rem; }
+    .answer-row { display: grid; grid-template-columns: 1fr auto; gap: 9px; }
+    #quiz-answer {
+      width: 100%;
+      min-height: 50px;
+      padding: 10px 14px;
+      border: 2px solid var(--line);
+      border-radius: 12px;
+      color: var(--ink);
+      background: #fbfdff;
+    }
+    #quiz-answer::placeholder { color: #9aaab8; }
+    .feedback {
+      min-height: 48px;
+      margin: 14px 0 0;
+      padding: 11px 13px;
+      border-radius: 11px;
+      font-weight: 780;
+      text-align: center;
+      color: var(--muted);
+      background: #f4f7f9;
+    }
+    .feedback.correct { color: #14634e; background: var(--green-soft); }
+    .feedback.incorrect { color: #a23832; background: var(--red-soft); }
+    .quiz-tools { display: flex; justify-content: center; gap: 8px; margin-top: 12px; }
+
+    .print-cta {
+      width: min(1120px, calc(100% - 32px));
+      margin: 55px auto;
+      padding: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 28px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: white;
+      box-shadow: var(--shadow);
+    }
+    .print-cta h2 { margin-bottom: 5px; font-family: Georgia, serif; font-size: 1.8rem; }
+    .print-cta p { margin: 0; color: var(--muted); }
+
+    footer { padding: 0 16px 42px; text-align: center; color: var(--muted); font-size: .82rem; }
+    .print-sheet { display: none; }
+
+    .speaker-icon { width: 17px; height: 17px; fill: currentColor; }
+
+    @media (max-width: 850px) {
+      .nav-links a { display: none; }
+      .hero { grid-template-columns: 1fr; margin-top: 36px; gap: 20px; }
+      .hero-art { min-height: 330px; }
+      .progress-strip { grid-template-columns: 1fr; }
+      .progress-item + .progress-item { border-left: 0; border-top: 1px solid var(--line); }
+      .number-grid { grid-template-columns: repeat(3, 1fr); }
+      .alphabet-wrap { grid-template-columns: 1fr; }
+      .alphabet-grid { grid-template-columns: repeat(5, 1fr); }
+      .phrase-groups { grid-template-columns: 1fr; }
+      .quiz-layout { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 560px) {
+      .nav .btn { padding: 8px 10px; font-size: .78rem; }
+      .hero { margin-top: 26px; }
+      .hero-art { transform: scale(.9); margin-inline: -20px; }
+      .section-heading { display: block; }
+      .section-heading .btn { margin-top: 14px; }
+      .number-grid { grid-template-columns: repeat(2, 1fr); }
+      .number-card { min-height: 145px; padding: 16px; }
+      .alphabet-grid { grid-template-columns: repeat(4, 1fr); }
+      .quiz-card { padding: 24px 18px; }
+      .answer-row { grid-template-columns: 1fr; }
+      .print-cta { align-items: stretch; flex-direction: column; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { transition: none !important; }
+    }
+
+    /* Two-sided printable guide: front and back, US Letter portrait. */
+    @page { size: letter portrait; margin: .33in; }
+
+    @media print {
+      * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+      body { background: white; color: #142b3f; }
+      .screen-only, .site-header, main, footer, .print-cta { display: none !important; }
+      .print-sheet { display: block !important; }
+      .print-page {
+        height: 10.34in;
+        overflow: hidden;
+        position: relative;
+        padding: .12in .17in;
+        background: white;
+        break-after: page;
+        page-break-after: always;
+      }
+      .print-page:last-child { break-after: auto; page-break-after: auto; }
+      .print-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border-bottom: 3px solid #1f5d8f;
+        padding-bottom: .09in;
+        margin-bottom: .13in;
+      }
+      .print-kicker { font: 800 8pt/1 "Segoe UI", sans-serif; letter-spacing: .13em; text-transform: uppercase; color: #e05b52; }
+      .print-title { margin: 2px 0 0; font: 800 21pt/1 Georgia, serif; color: #173b63; }
+      .print-name { width: 2.15in; font: 700 9pt/1.5 "Segoe UI", sans-serif; color: #61788d; border-bottom: 1px solid #93a9ba; }
+      .print-grid { display: grid; grid-template-columns: 1fr 1.08fr; gap: .16in; }
+      .print-box {
+        margin-bottom: .13in;
+        border: 1px solid #cbd9e4;
+        border-radius: 10px;
+        overflow: hidden;
+      }
+      .print-box-title {
+        margin: 0;
+        padding: .075in .11in;
+        color: #173b63;
+        background: #e8f3fb;
+        font: 900 9pt/1 "Segoe UI", sans-serif;
+        text-transform: uppercase;
+        letter-spacing: .1em;
+      }
+      .print-box-body { padding: .09in .11in; }
+      .print-number-grid {
+        display: grid;
+        grid-template-rows: repeat(6, auto);
+        grid-auto-flow: column;
+        grid-auto-columns: 1fr;
+        gap: 2px .13in;
+      }
+      .print-number { display: grid; grid-template-columns: 22px 1fr; align-items: baseline; font: 10pt/1.5 "Segoe UI", sans-serif; }
+      .print-number b { color: #e05b52; }
+      .print-number strong { color: #173b63; }
+      .print-number em { color: #61788d; font-size: 7.5pt; }
+      .letter-print-grid {
+        display: grid;
+        grid-template-rows: repeat(9, auto);
+        grid-auto-flow: column;
+        grid-auto-columns: 1fr;
+        gap: 2px 8px;
+      }
+      .letter-print-item { white-space: nowrap; font: 8.4pt/1.48 "Segoe UI", sans-serif; }
+      .letter-print-item b { display: inline-block; width: 16px; color: #1f5d8f; font-size: 9.4pt; }
+      .letter-print-item span { color: #4f6578; }
+      .print-tip { padding: .08in .11in; background: #fff5de; color: #72520b; font: 7.6pt/1.35 "Segoe UI", sans-serif; border-radius: 8px; }
+      .print-tip strong { color: #5c4007; }
+      .phrase-print-list { margin: 0; padding: 0; list-style: none; }
+      .phrase-print-list li { display: grid; grid-template-columns: 1.05fr .95fr; gap: 7px; padding: 3.5px 0; border-bottom: .5px solid #dce5ec; font: 8.2pt/1.25 "Segoe UI", sans-serif; }
+      .phrase-print-list li:last-child { border: 0; }
+      .phrase-print-list strong { color: #173b63; }
+      .phrase-print-list span { color: #60758a; }
+      .mini-dialogue { margin: 0; padding: .09in .12in; background: #173b63; color: white; border-radius: 9px; font: 8.3pt/1.55 "Segoe UI", sans-serif; }
+      .mini-dialogue b { color: #f7cd72; }
+      .practice-lines { display: grid; grid-template-columns: repeat(2, 1fr); gap: .09in; }
+      .practice-card { min-height: .84in; padding: .08in .1in; border: 1px dashed #8fa6b9; border-radius: 8px; font: 8pt/1.35 "Segoe UI", sans-serif; }
+      .practice-card b { display: block; margin-bottom: 4px; color: #1f5d8f; }
+      .blank { display: block; height: .2in; border-bottom: 1px solid #b8c7d2; }
+      .print-challenge {
+        margin-top: .04in;
+        border: 1.5px solid #d5a43c;
+        border-radius: 10px;
+        overflow: hidden;
+        break-inside: avoid;
+      }
+      .print-challenge-title {
+        margin: 0;
+        padding: .08in .12in;
+        color: #714e05;
+        background: #fff1c9;
+        font: 900 9pt/1 "Segoe UI", sans-serif;
+        text-transform: uppercase;
+        letter-spacing: .1em;
+      }
+      .challenge-grid { display: grid; grid-template-columns: repeat(3, 1fr); }
+      .challenge-card { min-height: 3.42in; padding: .12in .14in; font: 8.5pt/1.55 "Segoe UI", sans-serif; }
+      .challenge-card + .challenge-card { border-left: 1px solid #e3d6b8; }
+      .challenge-card h3 { margin: 0 0 8px; color: #173b63; font: 900 8.8pt/1.1 "Segoe UI", sans-serif; }
+      .challenge-card p { margin: 7px 0; }
+      .answer-line { display: inline-block; min-width: .55in; height: 11px; border-bottom: 1px solid #8196a7; vertical-align: bottom; }
+      .scramble { display: inline-block; min-width: .38in; color: #e05b52; font-weight: 900; letter-spacing: .06em; }
+      .scenario-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: .08in; padding: .09in .11in .11in; }
+      .scenario { min-height: 2.18in; padding: .1in .11in; border: 1px dashed #91a6b7; border-radius: 7px; font: 8.1pt/1.38 "Segoe UI", sans-serif; }
+      .scenario b { display: block; color: #1f5d8f; margin-bottom: 3px; }
+      .scenario-divider { margin: .13in 0 .07in; border-top: 1px solid #d7e0e7; }
+      .print-footer { position: absolute; left: .17in; right: .17in; bottom: .06in; display: flex; justify-content: space-between; color: #718598; font: 7pt/1 "Segoe UI", sans-serif; }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to the study guide</a>
+
+  <header class="site-header screen-only">
+    <nav class="nav" aria-label="Main navigation">
+      <div class="brand"><span class="flag-mark" aria-hidden="true"><i></i><i></i><i></i></span> French 1A</div>
+      <div class="nav-links">
+        <a href="#numbers">Numbers</a>
+        <a href="#alphabet">Alphabet</a>
+        <a href="#phrases">Phrases</a>
+        <a href="#quiz">Quiz</a>
+      </div>
+      <button class="btn secondary small" type="button" onclick="window.print()" aria-label="Print the two-sided study sheet">Print sheet</button>
+    </nav>
+  </header>
+
+  <div class="screen-only">
+    <section class="hero" aria-labelledby="page-title">
+      <div class="hero-copy">
+        <p class="eyebrow">French 1A · Study Guide</p>
+        <h1 id="page-title">Salut, <span class="accent-word">let’s learn!</span></h1>
+        <p>Master the numbers 0–10, say the alphabet, and practice the greetings and goodbyes from class. Tap any speaker to hear clear French.</p>
+        <div class="hero-actions">
+          <a class="btn" href="#quiz">Quiz me</a>
+          <button class="btn secondary" type="button" data-speak="Bonjour ! Comment ça va ?" aria-label="Hear a welcome phrase">▶ Hear French</button>
+        </div>
+      </div>
+      <div class="hero-art" aria-hidden="true">
+        <div class="orb"><span class="bonjour">Bonjour!</span><span class="translation">Hello · Good day</span></div>
+        <span class="doodle one">A · B · C</span>
+        <span class="doodle two">zéro → dix</span>
+        <span class="doodle three">Ça va ?</span>
+      </div>
+    </section>
+
+    <div class="progress-strip" aria-label="Topics in this guide">
+      <div class="progress-item"><span class="progress-icon">10</span><div><strong>Numbers 0–10</strong><span>Spell and say each one</span></div></div>
+      <div class="progress-item"><span class="progress-icon">A</span><div><strong>Alphabet A–Z</strong><span>Tap a letter to hear it</span></div></div>
+      <div class="progress-item"><span class="progress-icon">♥</span><div><strong>Everyday phrases</strong><span>Greet, respond, say goodbye</span></div></div>
+    </div>
+  </div>
+
+  <main id="main">
+    <section class="study-section" id="numbers" aria-labelledby="numbers-title">
+      <div class="section-inner">
+        <div class="section-heading">
+          <div><p class="eyebrow">Les nombres</p><h2 id="numbers-title">Numbers 0–10</h2><p>See it, say it, spell it. Sound hints are approximate.</p></div>
+          <button class="btn secondary small" type="button" id="play-numbers">▶ Play all</button>
+        </div>
+        <div class="number-grid" id="number-grid"></div>
+      </div>
+    </section>
+
+    <section class="study-section alt" id="alphabet" aria-labelledby="alphabet-title">
+      <div class="section-inner">
+        <div class="section-heading">
+          <div><p class="eyebrow">L’alphabet</p><h2 id="alphabet-title">The French alphabet</h2><p>Tap any letter to hear its French name.</p></div>
+          <button class="btn secondary small" type="button" id="play-alphabet">▶ Play A–Z</button>
+        </div>
+        <div class="alphabet-wrap">
+          <div class="alphabet-grid" id="alphabet-grid"></div>
+          <aside class="alphabet-tip">
+            <div><h3>Listen first.</h3><p>English sound hints get you close, but the audio is the best guide. Notice the rounded French <strong>U</strong> and the French <strong>R</strong>.</p></div>
+            <p class="mini-note"><strong>Spelling a name?</strong><br>Je m’appelle… then say each letter slowly.</p>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <section class="study-section" id="phrases" aria-labelledby="phrases-title">
+      <div class="section-inner">
+        <div class="section-heading">
+          <div><p class="eyebrow">Je salue</p><h2 id="phrases-title">Greetings & goodbyes</h2><p>Tap a speaker, listen, then repeat the full phrase.</p></div>
+          <button class="btn secondary small" type="button" id="play-phrases">▶ Play essentials</button>
+        </div>
+        <div class="phrase-groups" id="phrase-groups"></div>
+      </div>
+    </section>
+
+    <section class="quiz-section" id="quiz" aria-labelledby="quiz-title">
+      <div class="quiz-layout">
+        <div class="quiz-copy">
+          <p class="eyebrow" style="color:#f7cd72">À toi ! · Your turn</p>
+          <h2 id="quiz-title">Can you spell the number?</h2>
+          <p>Type the French word. Accents are optional, so <strong>zero</strong> counts for <strong>zéro</strong>.</p>
+          <div class="score-row" aria-live="polite">
+            <div class="score-pill"><span>Score</span><strong id="score">0 / 0</strong></div>
+            <div class="score-pill"><span>Streak</span><strong id="streak">0 🔥</strong></div>
+          </div>
+        </div>
+        <form class="quiz-card" id="quiz-form" autocomplete="off">
+          <p class="quiz-label">Spell this number in French</p>
+          <div class="quiz-number" id="quiz-number" aria-live="polite">7</div>
+          <label for="quiz-answer">Your answer</label>
+          <div class="answer-row">
+            <input id="quiz-answer" name="answer" type="text" inputmode="text" placeholder="Type the French word…" autocapitalize="none" spellcheck="false" aria-describedby="feedback">
+            <button class="btn" type="submit">Check</button>
+          </div>
+          <p class="feedback" id="feedback" aria-live="polite">Take your best shot!</p>
+          <div class="quiz-tools">
+            <button class="btn secondary small" type="button" id="hear-answer">🔊 Hear it</button>
+            <button class="btn secondary small" type="button" id="next-question">Next →</button>
+          </div>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <section class="print-cta screen-only" aria-labelledby="print-title">
+    <div><h2 id="print-title">Take it offline.</h2><p>Print the two-page guide double-sided: front for numbers and letters, back for useful phrases and practice.</p></div>
+    <button class="btn warm" type="button" onclick="window.print()">Print study sheet</button>
+  </section>
+
+  <footer class="screen-only">French 1A · Numbers, alphabet, greetings & farewells · Bonne chance !</footer>
+
+  <!-- This section appears only when printing. It is intentionally two pages. -->
+  <section class="print-sheet" aria-label="Two-sided printable French study guide">
+    <article class="print-page">
+      <header class="print-header">
+        <div><div class="print-kicker">French 1A · Side 1</div><h1 class="print-title">Numbers & Alphabet</h1></div>
+        <div class="print-name">Name:</div>
+      </header>
+      <div class="print-grid">
+        <div>
+          <section class="print-box">
+            <h2 class="print-box-title">Les nombres · Numbers 0–10</h2>
+            <div class="print-box-body"><div class="print-number-grid" id="print-numbers"></div></div>
+          </section>
+          <div class="print-tip"><strong>Study move:</strong> Cover the French column. Look at the numeral, say the word, then spell it aloud.</div>
+          <section class="print-box" style="margin-top:.13in">
+            <h2 class="print-box-title">Quick number check</h2>
+            <div class="print-box-body practice-lines">
+              <div class="practice-card"><b>4 =</b><span class="blank"></span></div>
+              <div class="practice-card"><b>8 =</b><span class="blank"></span></div>
+              <div class="practice-card"><b>2 =</b><span class="blank"></span></div>
+              <div class="practice-card"><b>10 =</b><span class="blank"></span></div>
+            </div>
+          </section>
+        </div>
+        <div>
+          <section class="print-box">
+            <h2 class="print-box-title">L’alphabet · Say each letter</h2>
+            <div class="print-box-body"><div class="letter-print-grid" id="print-alphabet"></div></div>
+          </section>
+          <div class="print-tip"><strong>Sound-hint key:</strong> “zh” is the soft sound in <em>vision</em>. “ay” sounds like <em>day</em>. Hints are approximate—use the audio page to practice.</div>
+          <section class="print-box" style="margin-top:.13in">
+            <h2 class="print-box-title">Spell it aloud</h2>
+            <div class="print-box-body practice-lines">
+              <div class="practice-card"><b>My first name</b><span class="blank"></span><span class="blank"></span></div>
+              <div class="practice-card"><b>My last name</b><span class="blank"></span><span class="blank"></span></div>
+            </div>
+          </section>
+        </div>
+      </div>
+      <section class="print-challenge">
+        <h2 class="print-challenge-title">Challenge zone · Try without looking above</h2>
+        <div class="challenge-grid">
+          <div class="challenge-card">
+            <h3>1 · Complete the patterns</h3>
+            <p>zéro, un, <span class="answer-line"></span>, trois</p>
+            <p>quatre, cinq, <span class="answer-line"></span>, sept</p>
+            <p>8, 9, <span class="answer-line"></span></p>
+            <p><span class="answer-line"></span>, cinq, six</p>
+            <p>3 = <span class="answer-line"></span></p>
+            <p>7 = <span class="answer-line"></span></p>
+          </div>
+          <div class="challenge-card">
+            <h3>2 · Unscramble the number</h3>
+            <p><span class="scramble">xued</span> = <span class="answer-line"></span></p>
+            <p><span class="scramble">qnic</span> = <span class="answer-line"></span></p>
+            <p><span class="scramble">xid</span> = <span class="answer-line"></span></p>
+            <p><span class="scramble">tihu</span> = <span class="answer-line"></span></p>
+            <p><span class="scramble">rotis</span> = <span class="answer-line"></span></p>
+            <p><span class="scramble">ufne</span> = <span class="answer-line"></span></p>
+          </div>
+          <div class="challenge-card">
+            <h3>3 · Which letter is it?</h3>
+            <p>“zhay” = <span class="answer-line"></span></p>
+            <p>“ee-grek” = <span class="answer-line"></span></p>
+            <p>“doo-bluh-vay” = <span class="answer-line"></span></p>
+            <p>“ahsh” = <span class="answer-line"></span></p>
+            <p>“say” = <span class="answer-line"></span></p>
+            <p>“tay” = <span class="answer-line"></span></p>
+          </div>
+        </div>
+      </section>
+      <div class="print-footer"><span>French 1A Study Guide</span><span>Side 1 · Numbers & Alphabet</span></div>
+    </article>
+
+    <article class="print-page">
+      <header class="print-header">
+        <div><div class="print-kicker">French 1A · Side 2</div><h1 class="print-title">Greetings & Farewells</h1></div>
+        <div class="print-name">Name:</div>
+      </header>
+      <div class="print-grid">
+        <div>
+          <section class="print-box">
+            <h2 class="print-box-title">Say hello & introduce yourself</h2>
+            <div class="print-box-body"><ul class="phrase-print-list" id="print-greetings"></ul></div>
+          </section>
+          <section class="print-box">
+            <h2 class="print-box-title">Ask and answer: How are you?</h2>
+            <div class="print-box-body"><ul class="phrase-print-list" id="print-responses"></ul></div>
+          </section>
+          <p class="mini-dialogue"><b>A:</b> Bonjour ! Comment vas-tu ?<br><b>B:</b> Très bien, merci. Et toi ?<br><b>A:</b> Ça va bien, merci !</p>
+        </div>
+        <div>
+          <section class="print-box">
+            <h2 class="print-box-title">Say goodbye</h2>
+            <div class="print-box-body"><ul class="phrase-print-list" id="print-farewells"></ul></div>
+          </section>
+          <section class="print-box">
+            <h2 class="print-box-title">Build a mini-conversation</h2>
+            <div class="print-box-body">
+              <div class="practice-card" style="margin-bottom:.08in"><b>1. Greet your teacher</b><span class="blank"></span></div>
+              <div class="practice-card" style="margin-bottom:.08in"><b>2. Say how you are</b><span class="blank"></span></div>
+              <div class="practice-card"><b>3. Say “See you tomorrow”</b><span class="blank"></span></div>
+            </div>
+          </section>
+          <div class="print-tip"><strong>Accent marks matter in writing:</strong> zéro, ça, très, à, bientôt. In the online number quiz, answers without accents are accepted while you learn.</div>
+        </div>
+      </div>
+      <section class="print-challenge">
+        <h2 class="print-challenge-title">Choose the best farewell</h2>
+        <div class="scenario-grid">
+          <div class="scenario">
+            <b>1 · School ends for today.</b>You will see your friend tomorrow.<span class="blank"></span>
+            <div class="scenario-divider"></div>
+            <b>2 · Class is beginning.</b>Greet your teacher politely.<span class="blank"></span>
+          </div>
+          <div class="scenario">
+            <b>3 · Lunch is in two hours.</b>You will see your friend then.<span class="blank"></span>
+            <div class="scenario-divider"></div>
+            <b>4 · You’ll meet again tonight.</b>Say “See you later.”<span class="blank"></span>
+          </div>
+          <div class="scenario">
+            <b>5 · You’re leaving now.</b>You do not know exactly when you’ll meet again.<span class="blank"></span>
+            <div class="scenario-divider"></div>
+            <b>6 · A dramatic final goodbye!</b>Which rare farewell fits?<span class="blank"></span>
+          </div>
+        </div>
+      </section>
+      <div class="print-footer"><span>Bonne chance ! · Good luck!</span><span>Side 2 · Useful Phrases</span></div>
+    </article>
+  </section>
+
+  <script>
+    const speakerSvg = `<svg class="speaker-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9v6h4l5 4V5L7 9H3zm13.5 3a4.5 4.5 0 0 0-2.5-4.03v8.05A4.5 4.5 0 0 0 16.5 12zm-2.5-8.7v2.06a7 7 0 0 1 0 13.28v2.06a9 9 0 0 0 0-17.4z"/></svg>`;
+
+    const numbers = [
+      { n: 0, fr: "zéro", en: "zero", hint: "zay-roh" },
+      { n: 1, fr: "un", en: "one", hint: "uhn (nasal)" },
+      { n: 2, fr: "deux", en: "two", hint: "duh" },
+      { n: 3, fr: "trois", en: "three", hint: "trwah" },
+      { n: 4, fr: "quatre", en: "four", hint: "katr" },
+      { n: 5, fr: "cinq", en: "five", hint: "sank" },
+      { n: 6, fr: "six", en: "six", hint: "sees" },
+      { n: 7, fr: "sept", en: "seven", hint: "set" },
+      { n: 8, fr: "huit", en: "eight", hint: "weet" },
+      { n: 9, fr: "neuf", en: "nine", hint: "nurf" },
+      { n: 10, fr: "dix", en: "ten", hint: "dees" }
+    ];
+
+    const letters = [
+      ["A","ah"], ["B","bay"], ["C","say"], ["D","day"], ["E","uh"], ["F","eff"],
+      ["G","zhay"], ["H","ahsh"], ["I","ee"], ["J","zhee"], ["K","kah"], ["L","ell"],
+      ["M","em"], ["N","en"], ["O","oh"], ["P","pay"], ["Q","koo"], ["R","air (French R)"],
+      ["S","ess"], ["T","tay"], ["U","French u"], ["V","vay"], ["W","doo-bluh-vay"],
+      ["X","eeks"], ["Y","ee-grek"], ["Z","zed"]
+    ];
+
+    const phraseGroups = [
+      { id: "greetings", title: "Greetings & introductions", items: [
+        ["Bonjour !", "Hello! / Good day!"],
+        ["Salut !", "Hi! (informal)"],
+        ["Coucou !", "Hi there! (very informal)"],
+        ["Je m’appelle…", "My name is…"],
+        ["Je suis…", "I am…"],
+        ["Enchanté ! / Enchantée !", "Nice to meet you!"],
+        ["C’est mon ami. / C’est mon amie.", "This is my friend."]
+      ]},
+      { id: "responses", title: "How are you?", items: [
+        ["Ça va ?", "How’s it going?"],
+        ["Comment vas-tu ?", "How are you? (informal)"],
+        ["Ça va bien.", "I’m doing well."],
+        ["Très bien !", "Very well!"],
+        ["Ça va mal.", "I’m not doing well."],
+        ["Comme ci, comme ça.", "So-so."],
+        ["Et toi ?", "And you?"],
+        ["Moi aussi !", "Me too!"]
+      ]},
+      { id: "farewells", title: "Goodbyes", items: [
+        ["À tout à l’heure !", "See you in a few hours!"],
+        ["À plus tard !", "See you later today!"],
+        ["À demain !", "See you tomorrow!"],
+        ["À bientôt !", "See you soon!"],
+        ["Au revoir !", "Goodbye!"],
+        ["Adieu !", "Farewell! (long-term / dramatic)" ]
+      ]},
+      { id: "classroom", title: "In class", items: [
+        ["Bonjour, Madame !", "Hello, teacher!"],
+        ["Merci.", "Thank you."],
+        ["S’il vous plaît.", "Please."],
+        ["Bonne chance !", "Good luck!"],
+        ["Oui. / Non.", "Yes. / No."]
+      ]}
+    ];
+
+    const numberGrid = document.querySelector("#number-grid");
+    numberGrid.innerHTML = numbers.map(item => `
+      <article class="number-card">
+        <span class="numeral" aria-hidden="true">${item.n}</span>
+        <span class="french" lang="fr">${item.fr}</span>
+        <span class="english">${item.en}</span>
+        <div class="sound-row">
+          <button class="sound-button" type="button" data-speak="${item.fr}" aria-label="Hear ${item.fr}">${speakerSvg}</button>
+          <span class="sound-hint">sounds like “${item.hint}”</span>
+        </div>
+      </article>`).join("");
+
+    const alphabetGrid = document.querySelector("#alphabet-grid");
+    alphabetGrid.innerHTML = letters.map(([letter, hint]) => `
+      <button class="letter-button" type="button" data-speak="${letter}" data-letter="true" aria-label="Hear the French letter ${letter}">
+        <span class="letter">${letter}</span><span class="pronunciation">${hint}</span>
+      </button>`).join("");
+
+    const phraseGroupsEl = document.querySelector("#phrase-groups");
+    phraseGroupsEl.innerHTML = phraseGroups.map(group => `
+      <article class="phrase-group">
+        <h3>${group.title}</h3>
+        <ul class="phrase-list">${group.items.map(([fr, en]) => `
+          <li class="phrase-item">
+            <button class="sound-button" type="button" data-speak="${fr.replaceAll('"','&quot;')}" aria-label="Hear ${fr.replaceAll('"','&quot;')}">${speakerSvg}</button>
+            <span><span class="phrase-fr" lang="fr">${fr}</span><span class="phrase-en">${en}</span></span>
+          </li>`).join("")}</ul>
+      </article>`).join("");
+
+    let frenchVoice = null;
+    function chooseVoice() {
+      if (!("speechSynthesis" in window)) return;
+      const voices = window.speechSynthesis.getVoices();
+      frenchVoice = voices.find(v => /^fr-FR$/i.test(v.lang)) || voices.find(v => /^fr\b/i.test(v.lang)) || null;
+    }
+    chooseVoice();
+    if ("speechSynthesis" in window) window.speechSynthesis.addEventListener("voiceschanged", chooseVoice);
+
+    function speak(text, options = {}) {
+      if (!("speechSynthesis" in window)) {
+        alert("Speech playback is not supported in this browser. Try Chrome, Edge, or Safari.");
+        return;
+      }
+      window.speechSynthesis.cancel();
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.lang = "fr-FR";
+      utterance.rate = options.rate || .76;
+      utterance.pitch = 1;
+      if (frenchVoice) utterance.voice = frenchVoice;
+      window.speechSynthesis.speak(utterance);
+    }
+
+    function speakSequence(items, rate = .72) {
+      if (!("speechSynthesis" in window)) return speak(items[0] || "");
+      window.speechSynthesis.cancel();
+      items.forEach(text => {
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.lang = "fr-FR";
+        utterance.rate = rate;
+        if (frenchVoice) utterance.voice = frenchVoice;
+        window.speechSynthesis.speak(utterance);
+      });
+    }
+
+    document.addEventListener("click", event => {
+      const button = event.target.closest("[data-speak]");
+      if (!button) return;
+      const text = button.dataset.letter ? button.dataset.speak.toLowerCase() : button.dataset.speak;
+      speak(text, { rate: button.dataset.letter ? .62 : .76 });
+    });
+
+    document.querySelector("#play-numbers").addEventListener("click", () => speakSequence(numbers.map(x => x.fr)));
+    document.querySelector("#play-alphabet").addEventListener("click", () => speakSequence(letters.map(x => x[0].toLowerCase()), .6));
+    document.querySelector("#play-phrases").addEventListener("click", () => speakSequence([
+      "Bonjour !", "Comment vas-tu ?", "Très bien, merci. Et toi ?", "À demain !", "Au revoir !"
+    ], .72));
+
+    let currentNumber = 7;
+    let lastNumber = -1;
+    let correct = 0;
+    let attempts = 0;
+    let streak = 0;
+    let answered = false;
+
+    const quizNumber = document.querySelector("#quiz-number");
+    const answerInput = document.querySelector("#quiz-answer");
+    const feedback = document.querySelector("#feedback");
+    const scoreEl = document.querySelector("#score");
+    const streakEl = document.querySelector("#streak");
+
+    function normalizeAnswer(value) {
+      return value.trim().toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[’']/g, "'").replace(/\s+/g, " ");
+    }
+
+    function updateScore() {
+      scoreEl.textContent = `${correct} / ${attempts}`;
+      streakEl.textContent = `${streak} 🔥`;
+    }
+
+    function nextQuestion() {
+      let next;
+      do { next = Math.floor(Math.random() * numbers.length); } while (next === lastNumber && numbers.length > 1);
+      lastNumber = next;
+      currentNumber = next;
+      answered = false;
+      quizNumber.textContent = currentNumber;
+      answerInput.value = "";
+      answerInput.disabled = false;
+      feedback.className = "feedback";
+      feedback.textContent = "Take your best shot!";
+      answerInput.focus({ preventScroll: true });
+    }
+
+    document.querySelector("#quiz-form").addEventListener("submit", event => {
+      event.preventDefault();
+      if (answered) { nextQuestion(); return; }
+      const answer = answerInput.value;
+      if (!answer.trim()) {
+        feedback.className = "feedback incorrect";
+        feedback.textContent = "Type an answer first.";
+        answerInput.focus();
+        return;
+      }
+      answered = true;
+      attempts++;
+      const expected = numbers[currentNumber].fr;
+      if (normalizeAnswer(answer) === normalizeAnswer(expected)) {
+        correct++;
+        streak++;
+        feedback.className = "feedback correct";
+        feedback.textContent = `Bravo ! ${currentNumber} = ${expected}`;
+      } else {
+        streak = 0;
+        feedback.className = "feedback incorrect";
+        feedback.textContent = `Almost! ${currentNumber} is ${expected}.`;
+      }
+      answerInput.disabled = true;
+      updateScore();
+    });
+
+    document.querySelector("#hear-answer").addEventListener("click", () => speak(numbers[currentNumber].fr));
+    document.querySelector("#next-question").addEventListener("click", nextQuestion);
+
+    // Populate the ink-friendly two-sided print sheet from the same study data.
+    document.querySelector("#print-numbers").innerHTML = numbers.map(x => `
+      <div class="print-number"><b>${x.n}</b><span><strong>${x.fr}</strong> <em>(${x.en})</em></span></div>`).join("");
+    document.querySelector("#print-alphabet").innerHTML = letters.map(([letter, hint]) => `
+      <div class="letter-print-item"><b>${letter}</b><span>${hint}</span></div>`).join("");
+
+    function fillPrintList(selector, items) {
+      document.querySelector(selector).innerHTML = items.map(([fr, en]) => `<li><strong>${fr}</strong><span>${en}</span></li>`).join("");
+    }
+    fillPrintList("#print-greetings", phraseGroups[0].items);
+    fillPrintList("#print-responses", phraseGroups[1].items);
+    fillPrintList("#print-farewells", phraseGroups[2].items);
+  </script>
+</body>
+</html>
