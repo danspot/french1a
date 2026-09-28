@@ -1,0 +1,18 @@
+{
+  "name": "French 1A Study Guide",
+  "short_name": "French 1A",
+  "description": "An interactive beginner French guide for numbers, the alphabet, greetings, and farewells.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f4f8fb",
+  "theme_color": "#173b63",
+  "icons": [
+    {
+      "src": "./apple-touch-icon.png",
+      "sizes": "1254x1254",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
