@@ -400,6 +400,38 @@
 
     .speaker-icon { width: 17px; height: 17px; fill: currentColor; }
 
+    .voice-dialog {
+      width: min(520px, calc(100% - 28px));
+      padding: 0;
+      color: var(--ink);
+      background: white;
+      border: 0;
+      border-radius: 22px;
+      box-shadow: 0 26px 80px rgba(12, 32, 52, .32);
+    }
+    .voice-dialog::backdrop { background: rgba(13, 35, 56, .58); backdrop-filter: blur(4px); }
+    .voice-dialog-header { padding: 24px 26px 18px; color: white; background: var(--blue-dark); }
+    .voice-dialog-header h2 { margin: 0 0 5px; font-family: Georgia, serif; font-size: 1.75rem; }
+    .voice-dialog-header p { margin: 0; color: rgba(255,255,255,.72); font-size: .88rem; }
+    .voice-dialog-body { padding: 22px 26px 26px; }
+    .voice-field { margin-bottom: 18px; }
+    .voice-field label, .voice-field legend { display: block; margin-bottom: 7px; color: var(--blue-dark); font-weight: 850; font-size: .86rem; }
+    .voice-field select {
+      width: 100%;
+      min-height: 46px;
+      padding: 8px 12px;
+      color: var(--ink);
+      background: #f8fbfd;
+      border: 1.5px solid var(--line);
+      border-radius: 11px;
+    }
+    .range-line { display: grid; grid-template-columns: 1fr 45px; gap: 12px; align-items: center; }
+    .range-line input { width: 100%; accent-color: var(--blue); }
+    .range-line output { color: var(--blue); font-weight: 900; text-align: right; }
+    .voice-note { padding: 11px 13px; color: #72520b; background: #fff6df; border-radius: 10px; font-size: .8rem; }
+    .voice-actions { display: flex; justify-content: flex-end; gap: 9px; margin-top: 20px; }
+    #active-voice-name { font-weight: 850; color: var(--blue-dark); }
+
     @media (max-width: 850px) {
       .nav-links a { display: none; }
       .hero { grid-template-columns: 1fr; margin-top: 36px; gap: 20px; }
@@ -568,6 +600,7 @@
         <div class="hero-actions">
           <a class="btn" href="#quiz">Quiz me</a>
           <button class="btn secondary" type="button" data-speak="Bonjour ! Comment ça va ?" aria-label="Hear a welcome phrase">▶ Hear French</button>
+          <button class="btn secondary" type="button" id="voice-settings-open">⚙ Voice settings</button>
         </div>
       </div>
       <div class="hero-art" aria-hidden="true">
@@ -657,6 +690,32 @@
   </section>
 
   <footer class="screen-only">French 1A · Numbers, alphabet, greetings & farewells · Bonne chance !</footer>
+
+  <dialog class="voice-dialog screen-only" id="voice-dialog" aria-labelledby="voice-dialog-title">
+    <div class="voice-dialog-header">
+      <h2 id="voice-dialog-title">French voice settings</h2>
+      <p>Choose from the voices installed on this device.</p>
+    </div>
+    <div class="voice-dialog-body">
+      <div class="voice-field">
+        <label for="voice-select">French voice</label>
+        <select id="voice-select"><option>Loading French voices…</option></select>
+      </div>
+      <div class="voice-field">
+        <label for="pitch-control">Brightness / pitch</label>
+        <div class="range-line"><input id="pitch-control" type="range" min="0.8" max="1.5" step="0.05" value="1.15"><output id="pitch-value" for="pitch-control">1.15</output></div>
+      </div>
+      <div class="voice-field">
+        <label for="rate-control">Speaking speed</label>
+        <div class="range-line"><input id="rate-control" type="range" min="0.55" max="1.1" step="0.05" value="0.8"><output id="rate-value" for="rate-control">0.80</output></div>
+      </div>
+      <p class="voice-note">Currently using: <span id="active-voice-name">device default</span>. Speech volume is already set to the browser maximum. If only one French voice appears, download another under iPad Settings → Accessibility → Read &amp; Speak → Voices → French, then reopen this page.</p>
+      <div class="voice-actions">
+        <button class="btn secondary small" type="button" id="voice-dialog-close">Done</button>
+        <button class="btn small" type="button" id="test-voice">▶ Test voice</button>
+      </div>
+    </div>
+  </dialog>
 
   <!-- This section appears only when printing. It is intentionally two pages. -->
   <section class="print-sheet" aria-label="Two-sided printable French study guide">
@@ -881,13 +940,69 @@
       </article>`).join("");
 
     let frenchVoice = null;
+    let frenchVoices = [];
+    const voiceSelect = document.querySelector("#voice-select");
+    const pitchControl = document.querySelector("#pitch-control");
+    const rateControl = document.querySelector("#rate-control");
+    const pitchValue = document.querySelector("#pitch-value");
+    const rateValue = document.querySelector("#rate-value");
+    const activeVoiceName = document.querySelector("#active-voice-name");
+    const voiceDialog = document.querySelector("#voice-dialog");
+
+    function readPreference(key, fallback) {
+      try { return localStorage.getItem(key) ?? fallback; } catch { return fallback; }
+    }
+
+    function savePreference(key, value) {
+      try { localStorage.setItem(key, value); } catch { /* Private browsing may block storage. */ }
+    }
+
+    const speechPreferences = {
+      voice: readPreference("french1a.voice", ""),
+      pitch: Number(readPreference("french1a.pitch", "1.15")),
+      rate: Number(readPreference("french1a.rate", "0.8"))
+    };
+    pitchControl.value = speechPreferences.pitch;
+    rateControl.value = speechPreferences.rate;
+    pitchValue.value = speechPreferences.pitch.toFixed(2);
+    rateValue.value = speechPreferences.rate.toFixed(2);
+
+    function voiceKey(voice) { return voice.voiceURI || `${voice.name}|${voice.lang}`; }
+
     function chooseVoice() {
       if (!("speechSynthesis" in window)) return;
-      const voices = window.speechSynthesis.getVoices();
-      frenchVoice = voices.find(v => /^fr-FR$/i.test(v.lang)) || voices.find(v => /^fr\b/i.test(v.lang)) || null;
+      frenchVoices = window.speechSynthesis.getVoices()
+        .filter(voice => /^fr\b/i.test(voice.lang))
+        .sort((a, b) => Number(/^fr-FR$/i.test(b.lang)) - Number(/^fr-FR$/i.test(a.lang)) || a.name.localeCompare(b.name));
+
+      voiceSelect.innerHTML = "";
+      if (!frenchVoices.length) {
+        voiceSelect.innerHTML = "<option>No French voices reported yet</option>";
+        voiceSelect.disabled = true;
+        frenchVoice = null;
+        activeVoiceName.textContent = "French device default";
+        return;
+      }
+
+      voiceSelect.disabled = false;
+      frenchVoices.forEach(voice => {
+        const option = document.createElement("option");
+        option.value = voiceKey(voice);
+        option.textContent = `${voice.name} — ${voice.lang}${voice.localService ? " · downloaded" : ""}`;
+        voiceSelect.append(option);
+      });
+
+      frenchVoice = frenchVoices.find(voice => voiceKey(voice) === speechPreferences.voice)
+        || frenchVoices.find(voice => /^fr-FR$/i.test(voice.lang))
+        || frenchVoices[0];
+      speechPreferences.voice = voiceKey(frenchVoice);
+      voiceSelect.value = speechPreferences.voice;
+      activeVoiceName.textContent = `${frenchVoice.name} (${frenchVoice.lang})`;
     }
+
     chooseVoice();
     if ("speechSynthesis" in window) window.speechSynthesis.addEventListener("voiceschanged", chooseVoice);
+    setTimeout(chooseVoice, 300);
 
     function speak(text, options = {}) {
       if (!("speechSynthesis" in window)) {
@@ -897,19 +1012,22 @@
       window.speechSynthesis.cancel();
       const utterance = new SpeechSynthesisUtterance(text);
       utterance.lang = "fr-FR";
-      utterance.rate = options.rate || .76;
-      utterance.pitch = 1;
+      utterance.rate = options.rate ?? speechPreferences.rate;
+      utterance.pitch = speechPreferences.pitch;
+      utterance.volume = 1;
       if (frenchVoice) utterance.voice = frenchVoice;
       window.speechSynthesis.speak(utterance);
     }
 
-    function speakSequence(items, rate = .72) {
+    function speakSequence(items, rate = speechPreferences.rate) {
       if (!("speechSynthesis" in window)) return speak(items[0] || "");
       window.speechSynthesis.cancel();
       items.forEach(text => {
         const utterance = new SpeechSynthesisUtterance(text);
         utterance.lang = "fr-FR";
         utterance.rate = rate;
+        utterance.pitch = speechPreferences.pitch;
+        utterance.volume = 1;
         if (frenchVoice) utterance.voice = frenchVoice;
         window.speechSynthesis.speak(utterance);
       });
@@ -919,14 +1037,46 @@
       const button = event.target.closest("[data-speak]");
       if (!button) return;
       const text = button.dataset.letter ? button.dataset.speak.toLowerCase() : button.dataset.speak;
-      speak(text, { rate: button.dataset.letter ? .62 : .76 });
+      speak(text, { rate: button.dataset.letter ? Math.min(speechPreferences.rate, .68) : speechPreferences.rate });
     });
 
     document.querySelector("#play-numbers").addEventListener("click", () => speakSequence(numbers.map(x => x.fr)));
-    document.querySelector("#play-alphabet").addEventListener("click", () => speakSequence(letters.map(x => x[0].toLowerCase()), .6));
+    document.querySelector("#play-alphabet").addEventListener("click", () => speakSequence(letters.map(x => x[0].toLowerCase()), Math.min(speechPreferences.rate, .65)));
     document.querySelector("#play-phrases").addEventListener("click", () => speakSequence([
       "Bonjour !", "Comment vas-tu ?", "Très bien, merci. Et toi ?", "À demain !", "Au revoir !"
-    ], .72));
+    ]));
+
+    voiceSelect.addEventListener("change", () => {
+      frenchVoice = frenchVoices.find(voice => voiceKey(voice) === voiceSelect.value) || frenchVoice;
+      if (!frenchVoice) return;
+      speechPreferences.voice = voiceKey(frenchVoice);
+      activeVoiceName.textContent = `${frenchVoice.name} (${frenchVoice.lang})`;
+      savePreference("french1a.voice", speechPreferences.voice);
+      speak("Bonjour ! On commence le français !");
+    });
+
+    pitchControl.addEventListener("input", () => {
+      speechPreferences.pitch = Number(pitchControl.value);
+      pitchValue.value = speechPreferences.pitch.toFixed(2);
+      savePreference("french1a.pitch", speechPreferences.pitch);
+    });
+
+    rateControl.addEventListener("input", () => {
+      speechPreferences.rate = Number(rateControl.value);
+      rateValue.value = speechPreferences.rate.toFixed(2);
+      savePreference("french1a.rate", speechPreferences.rate);
+    });
+
+    document.querySelector("#voice-settings-open").addEventListener("click", () => {
+      chooseVoice();
+      if (typeof voiceDialog.showModal === "function") voiceDialog.showModal();
+      else voiceDialog.setAttribute("open", "");
+    });
+    document.querySelector("#voice-dialog-close").addEventListener("click", () => voiceDialog.close ? voiceDialog.close() : voiceDialog.removeAttribute("open"));
+    document.querySelector("#test-voice").addEventListener("click", () => speak("Bonjour ! On commence le français !"));
+    voiceDialog.addEventListener("click", event => {
+      if (event.target === voiceDialog) voiceDialog.close();
+    });
 
     let currentNumber = 7;
     let lastNumber = -1;
