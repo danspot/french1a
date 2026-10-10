@@ -1,12 +1,12 @@
 {
-  "name": "French 1A Study Guide",
-  "short_name": "French 1A",
-  "description": "An interactive beginner French guide for numbers, the alphabet, greetings, and farewells.",
+  "name": "French Test Prep #2",
+  "short_name": "Test Prep #2",
+  "description": "Interactive French practice for numbers 1–60, countries, flags, and nationalities.",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
-  "background_color": "#f4f8fb",
-  "theme_color": "#173b63",
+  "background_color": "#f8f5ec",
+  "theme_color": "#173f4f",
   "icons": [
     {
       "src": "./icon-192-v2.png",
