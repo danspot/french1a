@@ -669,6 +669,12 @@
         questionCard.innerHTML = `${meta}<h3>Match each flag to its country.</h3><p class="question-help">Drag each flag onto a name. On a touch screen, tap a flag and then tap its name.</p><div class="match-board"><div class="flag-bank">${flags.map(c => `<button class="flag-token" type="button" draggable="true" data-flag-id="${c.id}" aria-label="Flag to match">${flagMarkup(c.id)}</button>`).join("")}</div><div class="drop-list">${names.map(c => `<button class="drop-zone" type="button" data-country-id="${c.id}"><span class="placed-flag"></span><span>${c.country}</span><span class="clear-match" aria-hidden="true"></span></button>`).join("")}</div></div>${answerControls(false)}`;
         bindMatching();
       }
+      questionCard.querySelectorAll(".answer-input").forEach(input => {
+        input.setAttribute("autocomplete", "off");
+        input.setAttribute("autocorrect", "off");
+        input.setAttribute("autocapitalize", "off");
+        input.setAttribute("spellcheck", "false");
+      });
       bindQuestion(q);
       questionCard.querySelector("input")?.focus({preventScroll:true});
     }
