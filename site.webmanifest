@@ -1,7 +1,7 @@
 {
   "name": "French Test Prep #2",
   "short_name": "Test Prep #2",
-  "description": "Interactive French practice for numbers 1–60, countries, flags, and nationalities.",
+  "description": "Interactive French practice for numbers 1–60, countries, capitals, flags, and nationalities.",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",

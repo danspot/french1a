@@ -10,7 +10,7 @@
   <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon-180-v2.png">
   <link rel="icon" type="image/png" sizes="192x192" href="./icon-192-v2.png">
   <link rel="manifest" href="./site.webmanifest">
-  <title>Test Prep #2 — French Numbers, Countries & Nationalities</title>
+  <title>Test Prep #2 — French Numbers, Countries, Capitals & Nationalities</title>
   <style>
     :root {
       --ink: #173f4f;
@@ -200,15 +200,19 @@
 
     .match-board { display: grid; grid-template-columns: .75fr 1.25fr; gap: 22px; margin-top: 20px; }
     .flag-bank { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; align-content: start; }
-    .flag-token { padding: 8px; background: white; border: 2px solid var(--line); border-radius: 12px; cursor: grab; }
-    .flag-token.selected { border-color: var(--coral); box-shadow: 0 0 0 4px rgba(228,98,77,.15); }
-    .flag-token.placed { opacity: .25; pointer-events: none; }
+    .capital-bank { grid-template-columns: 1fr; }
+    .flag-token, .capital-token { padding: 8px; color: var(--ink); background: white; border: 2px solid var(--line); border-radius: 12px; cursor: grab; }
+    .flag-token.selected, .capital-token.selected { border-color: var(--coral); box-shadow: 0 0 0 4px rgba(228,98,77,.15); }
+    .flag-token.placed, .capital-token.placed { opacity: .25; pointer-events: none; }
     .flag-token .flag { width: 100%; height: auto; aspect-ratio: 3 / 2; }
+    .capital-token { min-height: 58px; padding: 10px 8px; font-weight: 950; }
     .drop-list { display: grid; gap: 10px; }
     .drop-zone { min-height: 66px; display: grid; grid-template-columns: 74px 1fr auto; align-items: center; gap: 12px; padding: 9px 12px; background: #f5f1e7; border: 2px dashed #b9c4c3; border-radius: 13px; font-weight: 900; }
     .drop-zone.over { border-color: var(--blue); background: var(--blue-pale); }
     .drop-zone .placed-flag { width: 68px; }
     .drop-zone .placed-flag .flag { width: 68px; height: 44px; }
+    .capital-match-board .drop-zone { grid-template-columns: minmax(105px, .9fr) 1.1fr auto; }
+    .placed-capital { color: var(--coral-dark); font-family: Georgia, serif; font-size: 1.05rem; }
     .clear-match { color: var(--coral-dark); background: transparent; border: 0; cursor: pointer; font-size: 1.15rem; }
 
     .results { display: none; text-align: center; }
@@ -258,6 +262,7 @@
       .answer-pair, .choice-grid { grid-template-columns: 1fr; }
       .match-board { grid-template-columns: 1fr; }
       .flag-bank { grid-template-columns: repeat(4, 1fr); }
+      .capital-bank { grid-template-columns: repeat(2, 1fr); }
       .flag-token { padding: 4px; }
       .quiz-toolbar { grid-template-columns: auto 1fr; }
       .score-pill { grid-column: 1 / -1; justify-self: end; }
@@ -282,7 +287,7 @@
         <div>
           <p class="kicker">French 1A · Study + practice</p>
           <h1>Test Prep <em>#2</em></h1>
-          <p class="hero-copy">Learn the numbers 1–60, recognize 14 country flags, and spell country names and nationalities in both masculine and feminine forms. Tap any speaker to hear the French.</p>
+          <p class="hero-copy">Learn the numbers 1–60, recognize 14 country flags, and spell country names, capital cities, and nationalities in both masculine and feminine forms. Tap any speaker to hear the French.</p>
           <div class="hero-actions">
             <a class="btn" href="#countries">Study pronunciation</a>
             <button class="btn secondary" type="button" data-start="mixed">Jump to the test →</button>
@@ -293,8 +298,8 @@
           <h2>Three things to know</h2>
           <ol class="coverage-list">
             <li><b>1</b><span>Numbers from <em>un</em> to <em>soixante</em></span></li>
-            <li><b>2</b><span>Countries + masculine &amp; feminine nationalities</span></li>
-            <li><b>3</b><span>Flags, exact spelling, accents &amp; capitalization</span></li>
+            <li><b>2</b><span>Countries, capital cities &amp; flags</span></li>
+            <li><b>3</b><span>Masculine &amp; feminine nationalities</span></li>
           </ol>
         </aside>
       </div>
@@ -303,7 +308,7 @@
     <section class="section country-section" id="countries" aria-labelledby="countries-title">
       <div class="wrap">
         <div class="section-head">
-          <div><p class="kicker">Pronunciation study guide</p><h2 id="countries-title">Les pays et les nationalités</h2><p>Listen in this order: country, masculine citizen word, feminine citizen word.</p></div>
+          <div><p class="kicker">Pronunciation study guide</p><h2 id="countries-title">Les pays, les capitales et les nationalités</h2><p>Study each country’s capital, then its masculine and feminine nationality words.</p></div>
           <div class="study-tools"><button class="btn secondary small" type="button" id="play-countries">▶ Play country names</button><button class="btn secondary small" type="button" id="stop-audio">■ Stop</button></div>
         </div>
         <div class="country-grid" id="country-grid"></div>
@@ -326,11 +331,11 @@
         <div class="quiz-intro" id="quiz-intro">
           <p class="kicker" style="color:#efb63e">Ready?</p>
           <h2 id="quiz-title">Choose your challenge.</h2>
-          <p>Every mode gives instant feedback and audio. The mixed test includes spelling, listening, nationalities, flag identification, and drag-to-match questions.</p>
+          <p>Every mode gives instant feedback and audio. The mixed test includes country and capital spelling, listening, nationalities, flags, and two kinds of drag-to-match questions.</p>
           <div class="mode-grid">
-            <button class="mode-card" type="button" data-start="mixed"><span class="mode-icon">🎯</span><h3>Test Prep #2</h3><p>26 mixed questions covering the complete lesson.</p></button>
+            <button class="mode-card" type="button" data-start="mixed"><span class="mode-icon">🎯</span><h3>Test Prep #2</h3><p>32 mixed questions covering the complete lesson.</p></button>
             <button class="mode-card" type="button" data-start="numbers"><span class="mode-icon">🔢</span><h3>1–60 Number Sprint</h3><p>Every number appears once, shuffled.</p></button>
-            <button class="mode-card" type="button" data-start="countries"><span class="mode-icon">🌍</span><h3>Country Challenge</h3><p>Flags, spellings, and both nationality forms.</p></button>
+            <button class="mode-card" type="button" data-start="countries"><span class="mode-icon">🌍</span><h3>Country Challenge</h3><p>Countries, capitals, flags, and both nationality forms.</p></button>
           </div>
           <p class="best-score" id="best-score">No saved score yet — today’s a clean slate.</p>
         </div>
@@ -390,20 +395,20 @@
     const speakerSvg = `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9v6h4l5 4V5L7 9H3zm13.5 3a4.5 4.5 0 0 0-2.5-4.03v8.05A4.5 4.5 0 0 0 16.5 12zm-2.5-8.7v2.06a7 7 0 0 1 0 13.28v2.06a9 9 0 0 0 0-17.4z"/></svg>`;
 
     const countries = [
-      { id:"us", en:"United States", country:"les États-Unis", bare:"États-Unis", masc:"américain", fem:"américaine" },
-      { id:"fr", en:"France", country:"la France", bare:"France", masc:"français", fem:"française" },
-      { id:"ch", en:"Switzerland", country:"la Suisse", bare:"Suisse", masc:"suisse", fem:"suisse" },
-      { id:"be", en:"Belgium", country:"la Belgique", bare:"Belgique", masc:"belge", fem:"belge" },
-      { id:"vn", en:"Vietnam", country:"le Viêt-Nam", bare:"Viêt-Nam", masc:"vietnamien", fem:"vietnamienne" },
-      { id:"ht", en:"Haiti", country:"Haïti", bare:"Haïti", masc:"haïtien", fem:"haïtienne" },
-      { id:"ma", en:"Morocco", country:"le Maroc", bare:"Maroc", masc:"marocain", fem:"marocaine" },
-      { id:"dz", en:"Algeria", country:"l’Algérie", bare:"Algérie", masc:"algérien", fem:"algérienne" },
-      { id:"tn", en:"Tunisia", country:"la Tunisie", bare:"Tunisie", masc:"tunisien", fem:"tunisienne" },
-      { id:"ca", en:"Canada", country:"le Canada", bare:"Canada", masc:"canadien", fem:"canadienne" },
-      { id:"tw", en:"Taiwan", country:"le Taïwan", bare:"Taïwan", masc:"taïwanais", fem:"taïwanaise" },
-      { id:"ml", en:"Mali", country:"le Mali", bare:"Mali", masc:"malien", fem:"malienne" },
-      { id:"sn", en:"Senegal", country:"le Sénégal", bare:"Sénégal", masc:"sénégalais", fem:"sénégalaise" },
-      { id:"tg", en:"Togo", country:"le Togo", bare:"Togo", masc:"togolais", fem:"togolaise" }
+      { id:"us", en:"United States", country:"les États-Unis", bare:"États-Unis", capital:"Washington D.C.", masc:"américain", fem:"américaine" },
+      { id:"fr", en:"France", country:"la France", bare:"France", capital:"Paris", masc:"français", fem:"française" },
+      { id:"ch", en:"Switzerland", country:"la Suisse", bare:"Suisse", capital:"Berne", masc:"suisse", fem:"suisse" },
+      { id:"be", en:"Belgium", country:"la Belgique", bare:"Belgique", capital:"Bruxelles", masc:"belge", fem:"belge" },
+      { id:"vn", en:"Vietnam", country:"le Viêt-Nam", bare:"Viêt-Nam", capital:"Hanoï", masc:"vietnamien", fem:"vietnamienne" },
+      { id:"ht", en:"Haiti", country:"Haïti", bare:"Haïti", capital:"Port-au-Prince", masc:"haïtien", fem:"haïtienne" },
+      { id:"ma", en:"Morocco", country:"le Maroc", bare:"Maroc", capital:"Rabat", masc:"marocain", fem:"marocaine" },
+      { id:"dz", en:"Algeria", country:"l’Algérie", bare:"Algérie", capital:"Alger", masc:"algérien", fem:"algérienne" },
+      { id:"tn", en:"Tunisia", country:"la Tunisie", bare:"Tunisie", capital:"Tunis", masc:"tunisien", fem:"tunisienne" },
+      { id:"ca", en:"Canada", country:"le Canada", bare:"Canada", capital:"Ottawa", masc:"canadien", fem:"canadienne" },
+      { id:"tw", en:"Taiwan", country:"le Taïwan", bare:"Taïwan", capital:"Taipei", masc:"taïwanais", fem:"taïwanaise" },
+      { id:"ml", en:"Mali", country:"le Mali", bare:"Mali", capital:"Bamako", masc:"malien", fem:"malienne" },
+      { id:"sn", en:"Senegal", country:"le Sénégal", bare:"Sénégal", capital:"Dakar", masc:"sénégalais", fem:"sénégalaise" },
+      { id:"tg", en:"Togo", country:"le Togo", bare:"Togo", capital:"Lomé", masc:"togolais", fem:"togolaise" }
     ];
 
     const baseNumbers = ["zéro","un","deux","trois","quatre","cinq","six","sept","huit","neuf","dix","onze","douze","treize","quatorze","quinze","seize","dix-sept","dix-huit","dix-neuf"];
@@ -585,9 +590,10 @@
     countryGrid.innerHTML = countries.map(c => `
       <article class="country-card">
         <div class="country-top">${flagMarkup(c.id)}<div class="country-name"><div class="country-title-row"><h3 lang="fr">${c.country}</h3><button class="sound-btn" type="button" data-speak="${c.country}" aria-label="Hear ${c.country}">${speakerSvg}</button></div><small>${c.en}</small></div></div>
+        <div class="word-row"><span><small>capital city</small><b lang="fr">${c.capital}</b></span><button class="sound-btn" type="button" data-speak="${c.capital}" aria-label="Hear ${c.capital}">${speakerSvg}</button></div>
         <div class="word-row"><span><small>masculine</small><b lang="fr">${c.masc}</b></span><button class="sound-btn" type="button" data-speak="${c.masc}" aria-label="Hear ${c.masc}">${speakerSvg}</button></div>
         <div class="word-row"><span><small>feminine</small><b lang="fr">${c.fem}</b></span><button class="sound-btn" type="button" data-speak="${c.fem}" aria-label="Hear ${c.fem}">${speakerSvg}</button></div>
-        <div class="word-row"><span><small>say all three</small><b>Country + citizens</b></span><button class="sound-btn" type="button" data-sequence="${c.country}|${c.masc}|${c.fem}" aria-label="Hear all words for ${c.en}">${speakerSvg}</button></div>
+        <div class="word-row"><span><small>say all four</small><b>Country + capital + citizens</b></span><button class="sound-btn" type="button" data-sequence="${c.country}|${c.capital}|${c.masc}|${c.fem}" aria-label="Hear all words for ${c.en}">${speakerSvg}</button></div>
       </article>`).join("");
 
     const numberBoard = document.querySelector("#number-board");
@@ -628,13 +634,18 @@
       });
     }
     function makeMatchQuestion() { return { type:"match", items:sample(countries, 4) }; }
+    function makeCapitalMatchQuestion() { return { type:"capitalMatch", items:sample(countries, 4) }; }
     function buildQueue(mode) {
       if (mode === "numbers") return makeNumberQuestions(true);
-      if (mode === "countries") return shuffle([...makeCountryQuestions(countries.length), makeMatchQuestion(), makeMatchQuestion()]);
+      if (mode === "countries") {
+        const capitals = shuffle(countries).map(item => ({type:"capitalSpell", item}));
+        return shuffle([...makeCountryQuestions(countries.length), ...capitals, makeMatchQuestion(), makeMatchQuestion(), makeCapitalMatchQuestion(), makeCapitalMatchQuestion()]);
+      }
       const nationality = sample(countries, 6).map(item => ({type:"nationality", item}));
       const flags = sample(countries, 6).map(item => ({type:"flagSpell", item}));
       const listening = sample(countries, 4).map(item => ({type:"countryListen", item}));
-      return shuffle([...makeNumberQuestions(false), ...nationality, ...flags, ...listening, makeMatchQuestion(), makeMatchQuestion()]);
+      const capitals = sample(countries, 5).map(item => ({type:"capitalSpell", item}));
+      return shuffle([...makeNumberQuestions(false), ...nationality, ...flags, ...listening, ...capitals, makeMatchQuestion(), makeMatchQuestion(), makeCapitalMatchQuestion()]);
     }
 
     function normalizeLoose(value) { return value.trim().toLocaleLowerCase("fr").normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[’']/g, "'").replace(/[-\s]+/g, " "); }
@@ -661,6 +672,9 @@
       } else if (q.type === "flagSpell") {
         questionCard.innerHTML = `${meta}<h3>Which country is this?</h3><p class="question-help">Spell the complete French name exactly as studied, including article, accents, hyphen, and capitalization.</p><div class="quiz-flag flag-holder">${flagMarkup(q.item.id)}</div><input class="answer-input" id="answer" autocomplete="off" spellcheck="false" placeholder="Example: la France">${accentTray()}${answerControls()}`;
         const flag = questionCard.querySelector(".quiz-flag .flag"); if (flag) { flag.style.width = "100%"; flag.style.height = "100%"; }
+      } else if (q.type === "capitalSpell") {
+        questionCard.innerHTML = `${meta}<h3>What is the capital of ${q.item.country}?</h3><p class="question-help">Write the capital exactly, including accents, hyphens, periods, and capitalization.</p><div class="quiz-flag flag-holder">${flagMarkup(q.item.id)}</div><input class="answer-input" id="answer" autocomplete="off" spellcheck="false" placeholder="Type the capital city…">${accentTray()}${answerControls()}`;
+        const flag = questionCard.querySelector(".quiz-flag .flag"); if (flag) { flag.style.width = "100%"; flag.style.height = "100%"; }
       } else if (q.type === "countryListen") {
         const choices = shuffle([q.item, ...sample(countries.filter(c => c.id !== q.item.id), 3)]);
         questionCard.innerHTML = `${meta}<h3>Which country do you hear?</h3><button class="listen-button" type="button" id="big-audio" aria-label="Play country name">${speakerSvg}</button><div class="choice-grid">${choices.map(c => `<button class="choice-btn" type="button" data-choice="${c.id}">${c.country}</button>`).join("")}</div>${answerControls(false)}`;
@@ -668,6 +682,10 @@
         const flags = shuffle(q.items), names = shuffle(q.items);
         questionCard.innerHTML = `${meta}<h3>Match each flag to its country.</h3><p class="question-help">Drag each flag onto a name. On a touch screen, tap a flag and then tap its name.</p><div class="match-board"><div class="flag-bank">${flags.map(c => `<button class="flag-token" type="button" draggable="true" data-flag-id="${c.id}" aria-label="Flag to match">${flagMarkup(c.id)}</button>`).join("")}</div><div class="drop-list">${names.map(c => `<button class="drop-zone" type="button" data-country-id="${c.id}"><span class="placed-flag"></span><span>${c.country}</span><span class="clear-match" aria-hidden="true"></span></button>`).join("")}</div></div>${answerControls(false)}`;
         bindMatching();
+      } else if (q.type === "capitalMatch") {
+        const capitals = shuffle(q.items), names = shuffle(q.items);
+        questionCard.innerHTML = `${meta}<h3>Match each capital to its country.</h3><p class="question-help">Drag each capital onto its country. On a touch screen, tap a capital and then tap the country.</p><div class="match-board capital-match-board"><div class="flag-bank capital-bank">${capitals.map(c => `<button class="capital-token" type="button" draggable="true" data-capital-id="${c.id}">${c.capital}</button>`).join("")}</div><div class="drop-list">${names.map(c => `<button class="drop-zone" type="button" data-country-id="${c.id}"><span class="placed-capital"></span><span>${c.country}</span><span class="clear-match" aria-hidden="true"></span></button>`).join("")}</div></div>${answerControls(false)}`;
+        bindCapitalMatching();
       }
       questionCard.querySelectorAll(".answer-input").forEach(input => {
         input.setAttribute("autocomplete", "off");
@@ -736,13 +754,55 @@
       });
     }
 
+    function bindCapitalMatching() {
+      let dragging = null, selected = null;
+      const tokens = [...questionCard.querySelectorAll(".capital-token")];
+      const zones = [...questionCard.querySelectorAll(".drop-zone")];
+      function refreshTokens() {
+        tokens.forEach(token => token.classList.toggle("placed", Object.values(matchState).includes(token.dataset.capitalId)));
+      }
+      function place(id, zone) {
+        Object.keys(matchState).forEach(countryId => { if (matchState[countryId] === id) delete matchState[countryId]; });
+        matchState[zone.dataset.countryId] = id;
+        const country = countries.find(c => c.id === id);
+        zone.querySelector(".placed-capital").textContent = country.capital;
+        zone.querySelector(".clear-match").textContent = "×";
+        refreshTokens();
+        selected = null;
+        tokens.forEach(token => token.classList.remove("selected"));
+      }
+      tokens.forEach(token => {
+        token.addEventListener("dragstart", event => { dragging = token.dataset.capitalId; event.dataTransfer.setData("text/plain", dragging); });
+        token.addEventListener("click", () => {
+          if (token.classList.contains("placed")) return;
+          selected = token.dataset.capitalId;
+          tokens.forEach(item => item.classList.toggle("selected", item === token));
+        });
+      });
+      zones.forEach(zone => {
+        zone.addEventListener("dragover", event => { event.preventDefault(); zone.classList.add("over"); });
+        zone.addEventListener("dragleave", () => zone.classList.remove("over"));
+        zone.addEventListener("drop", event => { event.preventDefault(); zone.classList.remove("over"); place(event.dataTransfer.getData("text/plain") || dragging, zone); });
+        zone.addEventListener("click", event => {
+          if (event.target.closest(".clear-match") && matchState[zone.dataset.countryId]) {
+            delete matchState[zone.dataset.countryId];
+            zone.querySelector(".placed-capital").textContent = "";
+            zone.querySelector(".clear-match").textContent = "";
+            refreshTokens();
+            return;
+          }
+          if (selected) place(selected, zone);
+        });
+      });
+    }
+
     function setFeedback(ok, html) {
       const feedback = questionCard.querySelector("#feedback");
       feedback.className = `feedback ${ok ? "good" : "bad"}`;
       feedback.innerHTML = html;
       questionCard.querySelector("#check-answer").hidden = true;
       questionCard.querySelector("#next-question").hidden = false;
-      questionCard.querySelectorAll("input, .choice-btn, .flag-token, .drop-zone").forEach(el => el.disabled = true);
+      questionCard.querySelectorAll("input, .choice-btn, .flag-token, .capital-token, .drop-zone").forEach(el => el.disabled = true);
       if (ok) score++;
       scorePill.textContent = `${score} / ${current + 1}`;
       answered = true;
@@ -769,6 +829,11 @@
         const value = questionCard.querySelector("#answer").value;
         if (!value.trim()) return nudge("Type the French country name first.");
         ok = normalizeExact(value) === q.item.country; correction = `<strong>Exact spelling: ${q.item.country}</strong>`;
+      } else if (q.type === "capitalSpell") {
+        const value = questionCard.querySelector("#answer").value;
+        if (!value.trim()) return nudge("Type the capital city first.");
+        ok = normalizeExact(value) === q.item.capital;
+        correction = `<strong>${q.item.country}: ${q.item.capital}</strong>`;
       } else if (q.type === "countryListen") {
         if (!selectedChoice) return nudge("Choose one answer first.");
         ok = selectedChoice === q.item.id; correction = `<strong>You heard: ${q.item.country}</strong>`;
@@ -776,6 +841,10 @@
         if (Object.keys(matchState).length < q.items.length) return nudge("Place all four flags before checking.");
         ok = q.items.every(c => matchState[c.id] === c.id);
         correction = ok ? "<strong>All four matches are correct.</strong>" : `<strong>Correct pairs:</strong> ${q.items.map(c => `${c.country} ${flagMarkup(c.id)}`).join(" ")}`;
+      } else if (q.type === "capitalMatch") {
+        if (Object.keys(matchState).length < q.items.length) return nudge("Place all four capitals before checking.");
+        ok = q.items.every(c => matchState[c.id] === c.id);
+        correction = ok ? "<strong>All four capital matches are correct.</strong>" : `<strong>Correct pairs:</strong> ${q.items.map(c => `${c.country} — ${c.capital}`).join(" · ")}`;
       }
       setFeedback(ok, ok ? `Bravo ! ${correction}` : `Not quite. ${correction}`);
       if (ok && q.type === "nationality") {
@@ -783,6 +852,12 @@
         audioButton.dataset.sequence = `${q.item.country}|${q.item.masc}|${q.item.fem}`;
         audioButton.innerHTML = `${speakerSvg} Hear all 3`;
         audioButton.setAttribute("aria-label", `Hear ${q.item.country}, ${q.item.masc}, and ${q.item.fem}`);
+      }
+      if (ok && q.type === "capitalSpell") {
+        const audioButton = questionCard.querySelector("#question-audio");
+        audioButton.dataset.sequence = `${q.item.country}|${q.item.capital}`;
+        audioButton.innerHTML = `${speakerSvg} Hear both`;
+        audioButton.setAttribute("aria-label", `Hear ${q.item.country} and ${q.item.capital}`);
       }
     }
     function nudge(message) { const feedback = questionCard.querySelector("#feedback"); feedback.className = "feedback bad"; feedback.textContent = message; }
