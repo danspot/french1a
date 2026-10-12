@@ -550,7 +550,7 @@
       const englishVoices = window.speechSynthesis.getVoices().filter(voice => /^en\b/i.test(voice.lang));
       u.voice = englishVoices.find(voice => /^en-US$/i.test(voice.lang) && voice.localService) || englishVoices.find(voice => /^en-US$/i.test(voice.lang)) || englishVoices[0] || null;
       u.lang = u.voice?.lang || "en-US";
-      u.rate = 1;
+      u.rate = 1.15;
       u.pitch = 1;
       window.speechSynthesis.speak(u);
     }
@@ -632,7 +632,7 @@
       const target = event.target.closest("[data-speak], [data-sequence]");
       if (!target) return;
       const rapidAction = rapidNumberTapAction(target);
-      if (rapidAction === "warn") return speakEnglish("Don't be... skih, beh, dee!");
+      if (rapidAction === "warn") return speakEnglish("Don't be skih beh dee!");
       if (rapidAction === "suppress") return;
       if (target.dataset.sequence) speakSequence(target.dataset.sequence.split("|"));
       else speak(target.dataset.speak);
