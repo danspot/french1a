@@ -632,7 +632,7 @@
       const target = event.target.closest("[data-speak], [data-sequence]");
       if (!target) return;
       const rapidAction = rapidNumberTapAction(target);
-      if (rapidAction === "warn") return speakEnglish("Don't be skibidi!");
+      if (rapidAction === "warn") return speakEnglish("Don't be... skih, beh, dee!");
       if (rapidAction === "suppress") return;
       if (target.dataset.sequence) speakSequence(target.dataset.sequence.split("|"));
       else speak(target.dataset.speak);
