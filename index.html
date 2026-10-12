@@ -543,6 +543,17 @@
         window.speechSynthesis.speak(u);
       });
     }
+    function speakEnglish(text) {
+      if (!("speechSynthesis" in window)) return;
+      window.speechSynthesis.cancel();
+      const u = new SpeechSynthesisUtterance(text);
+      const englishVoices = window.speechSynthesis.getVoices().filter(voice => /^en\b/i.test(voice.lang));
+      u.voice = englishVoices.find(voice => /^en-US$/i.test(voice.lang) && voice.localService) || englishVoices.find(voice => /^en-US$/i.test(voice.lang)) || englishVoices[0] || null;
+      u.lang = u.voice?.lang || "en-US";
+      u.rate = 1;
+      u.pitch = 1;
+      window.speechSynthesis.speak(u);
+    }
 
     voiceSelect.addEventListener("change", () => {
       frenchVoice = frenchVoices.find(voice => voiceKey(voice) === voiceSelect.value) || frenchVoice;
@@ -600,9 +611,29 @@
     const numberBoard = document.querySelector("#number-board");
     numberBoard.innerHTML = numbers.map(x => `<button class="number-chip" type="button" data-speak="${x.fr}" aria-label="${x.n}, ${x.fr}"><b>${x.n}</b><span lang="fr">${x.fr}</span></button>`).join("");
 
+    const rapidNumberTaps = { word:"", times:[], quietUntil:0 };
+    function rapidNumberTapAction(target) {
+      if (!target.classList.contains("number-chip")) return "normal";
+      const now = performance.now();
+      if (now < rapidNumberTaps.quietUntil) return "suppress";
+      if (rapidNumberTaps.word !== target.dataset.speak) {
+        rapidNumberTaps.word = target.dataset.speak;
+        rapidNumberTaps.times = [];
+      }
+      rapidNumberTaps.times = rapidNumberTaps.times.filter(time => now - time < 1200);
+      rapidNumberTaps.times.push(now);
+      if (rapidNumberTaps.times.length < 3) return "normal";
+      rapidNumberTaps.times = [];
+      rapidNumberTaps.quietUntil = now + 2200;
+      return "warn";
+    }
+
     document.addEventListener("click", event => {
       const target = event.target.closest("[data-speak], [data-sequence]");
       if (!target) return;
+      const rapidAction = rapidNumberTapAction(target);
+      if (rapidAction === "warn") return speakEnglish("Don't be skibidi!");
+      if (rapidAction === "suppress") return;
       if (target.dataset.sequence) speakSequence(target.dataset.sequence.split("|"));
       else speak(target.dataset.speak);
     });
