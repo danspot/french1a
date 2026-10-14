@@ -10,7 +10,7 @@
   <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon-180-v2.png">
   <link rel="icon" type="image/png" sizes="192x192" href="./icon-192-v2.png">
   <link rel="manifest" href="./site.webmanifest">
-  <title>Test Prep #2 — French Numbers, Countries, Capitals & Nationalities</title>
+  <title>Test Prep #2 — French Numbers, Places, Pronouns, Être & Conversation</title>
   <style>
     :root {
       --ink: #173f4f;
@@ -148,6 +148,29 @@
     .number-note strong { display: block; }
     .number-note p { margin: 2px 0 0; color: var(--muted); }
 
+    .grammar-section { background: rgba(255,255,255,.68); border-top: 1px solid rgba(23,63,79,.09); }
+    .grammar-grid { display: grid; grid-template-columns: .92fr 1.08fr; gap: 18px; }
+    .study-panel { padding: 23px; background: var(--paper); border: 1px solid #e4ddce; border-radius: 20px; box-shadow: 0 8px 24px rgba(23,63,79,.07); }
+    .study-panel > h3 { margin-bottom: 5px; font-family: Georgia, serif; font-size: 1.55rem; }
+    .study-panel > p { color: var(--muted); }
+    .pronoun-columns { display: grid; grid-template-columns: 1fr 1fr; gap: 13px; }
+    .pronoun-group { overflow: hidden; border: 1px solid var(--line); border-radius: 14px; }
+    .pronoun-group h4 { margin: 0; padding: 9px 12px; color: white; background: var(--blue); font-size: .82rem; text-transform: uppercase; letter-spacing: .1em; }
+    .pronoun-row { display: grid; grid-template-columns: minmax(80px,.8fr) 1fr auto; align-items: center; gap: 9px; padding: 10px 11px; border-top: 1px solid var(--line); }
+    .pronoun-row:first-of-type { border-top: 0; }
+    .pronoun-row b { display: block; }
+    .pronoun-row small { display: block; color: var(--muted); }
+    .etre-form { color: var(--coral-dark); font-family: Georgia, serif; font-size: 1.06rem; font-weight: 800; }
+    .pronoun-row .sound-btn { width: 33px; height: 33px; }
+    .dialogue-list { display: grid; gap: 10px; }
+    .dialogue-card { padding: 13px 14px; background: #f7f3e8; border-radius: 13px; }
+    .dialogue-card small { display: block; margin-bottom: 5px; color: var(--muted); font-weight: 750; }
+    .dialogue-line { display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 9px; }
+    .dialogue-line + .dialogue-line { margin-top: 6px; padding-top: 6px; border-top: 1px dashed #d8cfbb; }
+    .dialogue-line b { font-size: .98rem; }
+    .dialogue-line.response b { color: var(--coral-dark); }
+    .dialogue-line .sound-btn { width: 32px; height: 32px; }
+
     .quiz-section { min-height: 760px; padding: 86px 0; color: white; background: var(--ink); }
     .quiz-shell { width: min(980px, calc(100% - 32px)); margin-inline: auto; }
     .quiz-intro { text-align: center; }
@@ -159,6 +182,7 @@
     .mode-card .mode-icon { font-size: 1.7rem; }
     .mode-card h3 { margin: 8px 0 5px; font-size: 1.12rem; }
     .mode-card p { margin: 0; color: var(--muted); font-size: .88rem; }
+    .mode-card.wide { grid-column: 1 / -1; }
     .best-score { margin-top: 18px; color: rgba(255,255,255,.68); font-size: .88rem; }
 
     .quiz-panel { display: none; }
@@ -173,6 +197,8 @@
     .quiz-card h3 { margin-bottom: 12px; font-family: Georgia, serif; font-size: clamp(1.8rem, 4vw, 2.8rem); line-height: 1.1; }
     .question-help { color: var(--muted); }
     .giant-number { margin: 13px 0 22px; color: var(--coral); font-family: Georgia, serif; font-size: clamp(6rem, 18vw, 10rem); font-weight: 900; line-height: .9; text-align: center; }
+    .grammar-prompt { margin: 16px 0 22px; color: var(--coral-dark); font-family: Georgia, serif; font-size: clamp(2.5rem, 8vw, 4.8rem); font-weight: 800; line-height: 1; text-align: center; }
+    .translation-box { margin: 14px 0 20px; padding: 15px 17px; color: var(--ink); background: var(--blue-pale); border-left: 5px solid var(--blue); border-radius: 5px 13px 13px 5px; font-weight: 800; }
     .quiz-flag { width: min(230px, 70%); height: auto; aspect-ratio: 3 / 2; margin: 14px auto 24px; }
     .input-row { display: flex; gap: 10px; }
     .answer-input { width: 100%; min-height: 52px; padding: 12px 14px; color: var(--ink); background: white; border: 2px solid var(--line); border-radius: 13px; outline: none; }
@@ -248,7 +274,9 @@
       .hero-card { max-width: 580px; transform: none; }
       .country-grid { grid-template-columns: repeat(2, 1fr); }
       .number-board { grid-template-columns: repeat(6, 1fr); }
+      .grammar-grid { grid-template-columns: 1fr; }
       .mode-grid { grid-template-columns: 1fr; }
+      .mode-card.wide { grid-column: auto; }
     }
     @media (max-width: 590px) {
       .nav-links a { display: none; }
@@ -258,6 +286,7 @@
       .study-tools { margin-top: 16px; }
       .country-grid { grid-template-columns: 1fr; }
       .number-board { grid-template-columns: repeat(4, 1fr); }
+      .pronoun-columns { grid-template-columns: 1fr; }
       .quiz-card { padding: 24px 17px; border-radius: 21px; }
       .answer-pair, .choice-grid { grid-template-columns: 1fr; }
       .match-board { grid-template-columns: 1fr; }
@@ -277,7 +306,7 @@
   <header class="site-header">
     <nav class="nav wrap" aria-label="Main navigation">
       <a class="brand" href="#top"><span class="brand-badge">#2</span><span>French Test Prep</span></a>
-      <div class="nav-links"><a href="#countries">Countries</a><a href="#numbers">Numbers</a><a href="#quiz">Start test</a><button class="nav-voice" type="button" id="voice-settings-open">⚙ Voice</button></div>
+      <div class="nav-links"><a href="#countries">Places</a><a href="#numbers">Numbers</a><a href="#grammar">Grammar</a><a href="#quiz">Start test</a><button class="nav-voice" type="button" id="voice-settings-open">⚙ Voice</button></div>
     </nav>
   </header>
 
@@ -287,7 +316,7 @@
         <div>
           <p class="kicker">French 1A · Study + practice</p>
           <h1>Test Prep <em>#2</em></h1>
-          <p class="hero-copy">Learn the numbers 1–60, recognize 14 country flags, and spell country names, capital cities, and nationalities in both masculine and feminine forms. Tap any speaker to hear the French.</p>
+          <p class="hero-copy">Learn the numbers 1–60, recognize 16 place flags, spell capitals and nationalities, conjugate <em>être</em>, and practice the questions from class. Tap any speaker to hear the French.</p>
           <div class="hero-actions">
             <a class="btn" href="#countries">Study pronunciation</a>
             <button class="btn secondary" type="button" data-start="mixed">Jump to the test →</button>
@@ -295,11 +324,12 @@
         </div>
         <aside class="hero-card" aria-label="Test coverage">
           <span class="mini-label">What’s on this test</span>
-          <h2>Three things to know</h2>
+          <h2>Four things to know</h2>
           <ol class="coverage-list">
             <li><b>1</b><span>Numbers from <em>un</em> to <em>soixante</em></span></li>
             <li><b>2</b><span>Countries, capital cities &amp; flags</span></li>
             <li><b>3</b><span>Masculine &amp; feminine nationalities</span></li>
+            <li><b>4</b><span>Pronouns, <em>être</em> &amp; simple conversations</span></li>
           </ol>
         </aside>
       </div>
@@ -308,7 +338,7 @@
     <section class="section country-section" id="countries" aria-labelledby="countries-title">
       <div class="wrap">
         <div class="section-head">
-          <div><p class="kicker">Pronunciation study guide</p><h2 id="countries-title">Les pays, les capitales et les nationalités</h2><p>Study each country’s capital, then its masculine and feminine nationality words.</p></div>
+          <div><p class="kicker">Pronunciation study guide</p><h2 id="countries-title">Les pays, le Québec, les capitales et les nationalités</h2><p>Study each place’s capital, then its masculine and feminine nationality words.</p></div>
           <div class="study-tools"><button class="btn secondary small" type="button" id="play-countries">▶ Play country names</button><button class="btn secondary small" type="button" id="stop-audio">■ Stop</button></div>
         </div>
         <div class="country-grid" id="country-grid"></div>
@@ -326,17 +356,39 @@
       </div>
     </section>
 
+    <section class="section grammar-section" id="grammar" aria-labelledby="grammar-title">
+      <div class="wrap">
+        <div class="section-head">
+          <div><p class="kicker">Pronouns · être · conversation</p><h2 id="grammar-title">Build complete sentences.</h2><p>Connect each subject pronoun to the correct form of <em>être</em>, then rehearse the classroom questions and answers.</p></div>
+          <div class="study-tools"><button class="btn secondary small" type="button" id="play-etre">▶ Hear être</button><button class="btn secondary small" type="button" id="stop-audio-3">■ Stop</button></div>
+        </div>
+        <div class="grammar-grid">
+          <article class="study-panel">
+            <h3>Les pronoms personnels + être</h3>
+            <p>Singular forms are on the left; plural forms are on the right.</p>
+            <div class="pronoun-columns" id="pronoun-columns"></div>
+          </article>
+          <article class="study-panel">
+            <h3>Questions et réponses</h3>
+            <p>Learn the whole exchange—not just the question.</p>
+            <div class="dialogue-list" id="dialogue-list"></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
     <section class="quiz-section" id="quiz" aria-labelledby="quiz-title">
       <div class="quiz-shell">
         <div class="quiz-intro" id="quiz-intro">
           <p class="kicker" style="color:#efb63e">Ready?</p>
           <h2 id="quiz-title">Choose your challenge.</h2>
-          <p>Every mode gives instant feedback and audio. The mixed test includes country and capital spelling, listening, nationalities, flags, and two kinds of drag-to-match questions.</p>
+          <p>Every mode gives instant feedback and audio. The mixed test now includes numbers, places, capitals, nationalities, pronouns, <em>être</em>, and complete question-and-answer exchanges.</p>
           <div class="mode-grid">
-            <button class="mode-card" type="button" data-start="mixed"><span class="mode-icon">🎯</span><h3>Test Prep #2</h3><p>32 mixed questions covering the complete lesson.</p></button>
+            <button class="mode-card" type="button" data-start="mixed"><span class="mode-icon">🎯</span><h3>Test Prep #2</h3><p>43 mixed questions covering the complete lesson.</p></button>
             <button class="mode-card" type="button" data-start="numbers"><span class="mode-icon">🔢</span><h3>1–60 Number Sprint</h3><p>Every number appears once, shuffled.</p></button>
-            <button class="mode-card" type="button" data-start="countries"><span class="mode-icon">🌍</span><h3>Country Challenge</h3><p>Country names, flags, listening, and both nationality forms.</p></button>
-            <button class="mode-card" type="button" data-start="capitals"><span class="mode-icon">🏛️</span><h3>Capital Challenge</h3><p>Write capital cities and match each capital to its country.</p></button>
+            <button class="mode-card" type="button" data-start="countries"><span class="mode-icon">🌍</span><h3>Country Challenge</h3><p>Country/province names, flags, listening, and both nationality forms.</p></button>
+            <button class="mode-card" type="button" data-start="capitals"><span class="mode-icon">🏛️</span><h3>Capital Challenge</h3><p>Write capital cities and match each capital to its place.</p></button>
+            <button class="mode-card wide" type="button" data-start="grammar"><span class="mode-icon">💬</span><h3>Grammar &amp; Conversation</h3><p>Personal pronouns, every form of <em>être</em>, and the exact classroom questions and responses.</p></button>
           </div>
           <p class="best-score" id="best-score">No saved score yet — today’s a clean slate.</p>
         </div>
@@ -409,7 +461,29 @@
       { id:"tw", en:"Taiwan", country:"le Taïwan", bare:"Taïwan", capital:"Taipei", masc:"taïwanais", fem:"taïwanaise" },
       { id:"ml", en:"Mali", country:"le Mali", bare:"Mali", capital:"Bamako", masc:"malien", fem:"malienne" },
       { id:"sn", en:"Senegal", country:"le Sénégal", bare:"Sénégal", capital:"Dakar", masc:"sénégalais", fem:"sénégalaise" },
-      { id:"tg", en:"Togo", country:"le Togo", bare:"Togo", capital:"Lomé", masc:"togolais", fem:"togolaise" }
+      { id:"tg", en:"Togo", country:"le Togo", bare:"Togo", capital:"Lomé", masc:"togolais", fem:"togolaise" },
+      { id:"cd", en:"Congo (Kinshasa)", country:"le Congo", bare:"Congo", capital:"Kinshasa", masc:"congolais", fem:"congolaise" },
+      { id:"qc", en:"Quebec (province)", country:"le Québec", bare:"Québec", capital:"Québec", masc:"québécois", fem:"québécoise" }
+    ];
+
+    const pronouns = [
+      { key:"je", pronoun:"je / j’", subject:"je", meaning:"I", group:"Singular", etre:"suis", phrase:"je suis" },
+      { key:"tu", pronoun:"tu", subject:"tu", meaning:"you (familiar)", group:"Singular", etre:"es", phrase:"tu es" },
+      { key:"il", pronoun:"il", subject:"il", meaning:"he", group:"Singular", etre:"est", phrase:"il est" },
+      { key:"elle", pronoun:"elle", subject:"elle", meaning:"she", group:"Singular", etre:"est", phrase:"elle est" },
+      { key:"on", pronoun:"on", subject:"on", meaning:"one / we", group:"Singular", etre:"est", phrase:"on est" },
+      { key:"nous", pronoun:"nous", subject:"nous", meaning:"we", group:"Plural", etre:"sommes", phrase:"nous sommes" },
+      { key:"vous", pronoun:"vous", subject:"vous", meaning:"you (plural or formal)", group:"Plural", etre:"êtes", phrase:"vous êtes" },
+      { key:"ils", pronoun:"ils", subject:"ils", meaning:"they (masculine or mixed)", group:"Plural", etre:"sont", phrase:"ils sont" },
+      { key:"elles", pronoun:"elles", subject:"elles", meaning:"they (feminine)", group:"Plural", etre:"sont", phrase:"elles sont" }
+    ];
+
+    const dialogues = [
+      { id:"nationality", englishQuestion:"What is your nationality?", question:"Tu es de quelle nationalité ?", englishAnswer:"I am American.", answer:"Je suis américain.", mode:"exact" },
+      { id:"origin", englishQuestion:"What is your origin?", question:"Tu es de quelle origine ?", englishAnswer:"I am of Taiwanese origin.", answer:"Je suis d’origine taïwanaise.", mode:"exact" },
+      { id:"name", englishQuestion:"What is your name?", question:"Comment t’appelles-tu ?", englishAnswer:"My name is…", answer:"Je m’appelle…", mode:"prefix", prefix:"Je m’appelle" },
+      { id:"spellName", englishQuestion:"How do you spell your first name?", question:"Comment écrit-on ton prénom ?", englishAnswer:"It is spelled…", answer:"Ça s’écrit…", mode:"prefix", prefix:"Ça s’écrit" },
+      { id:"capital", englishQuestion:"Are you from the capital city?", question:"Tu es de la capitale ?", englishAnswer:"Yes / No.", answer:"Oui. / Non.", mode:"choice" }
     ];
 
     const baseNumbers = ["zéro","un","deux","trois","quatre","cinq","six","sept","huit","neuf","dix","onze","douze","treize","quatorze","quinze","seize","dix-sept","dix-huit","dix-neuf"];
@@ -452,7 +526,9 @@
         tw: `<rect width="90" height="60" fill="#fe0000"/><rect width="45" height="30" fill="#000095"/><circle cx="22.5" cy="15" r="8" fill="#fff"/>${Array.from({length:12},(_,i)=>`<path d="M22.5 2l1.6 6h-3.2z" fill="#fff" transform="rotate(${i*30} 22.5 15)"/>`).join("")}`,
         ml: `<rect width="30" height="60" fill="#14b53a"/><rect x="30" width="30" height="60" fill="#fcd116"/><rect x="60" width="30" height="60" fill="#ce1126"/>`,
         sn: `<rect width="30" height="60" fill="#00853f"/><rect x="30" width="30" height="60" fill="#fdef42"/><rect x="60" width="30" height="60" fill="#e31b23"/><polygon points="${starPoints(45,30,10,4)}" fill="#00853f"/>`,
-        tg: `<rect width="90" height="60" fill="#006a4e"/><rect y="12" width="90" height="12" fill="#ffce00"/><rect y="36" width="90" height="12" fill="#ffce00"/><rect width="36" height="36" fill="#d21034"/><polygon points="${starPoints(18,18,11,4.5)}" fill="#fff"/>`
+        tg: `<rect width="90" height="60" fill="#006a4e"/><rect y="12" width="90" height="12" fill="#ffce00"/><rect y="36" width="90" height="12" fill="#ffce00"/><rect width="36" height="36" fill="#d21034"/><polygon points="${starPoints(18,18,11,4.5)}" fill="#fff"/>`,
+        cd: `<rect width="90" height="60" fill="#007fff"/><polygon points="-12,54 2,66 102,6 88,-6" fill="#f7d618"/><polygon points="-5,57 2,63 95,3 88,-3" fill="#ce1021"/><polygon points="${starPoints(16,14,10,4)}" fill="#f7d618"/>`,
+        qc: `<rect width="90" height="60" fill="#003da5"/><rect x="39" width="12" height="60" fill="#fff"/><rect y="24" width="90" height="12" fill="#fff"/><text x="19" y="19" text-anchor="middle" font-size="17" font-family="serif" fill="#fff">⚜</text><text x="71" y="19" text-anchor="middle" font-size="17" font-family="serif" fill="#fff">⚜</text><text x="19" y="55" text-anchor="middle" font-size="17" font-family="serif" fill="#fff">⚜</text><text x="71" y="55" text-anchor="middle" font-size="17" font-family="serif" fill="#fff">⚜</text>`
       };
       return open + flags[id] + close;
     }
@@ -605,8 +681,14 @@
         <div class="word-row"><span><small>capital city</small><b lang="fr">${c.capital}</b></span><button class="sound-btn" type="button" data-speak="${c.capital}" aria-label="Hear ${c.capital}">${speakerSvg}</button></div>
         <div class="word-row"><span><small>masculine</small><b lang="fr">${c.masc}</b></span><button class="sound-btn" type="button" data-speak="${c.masc}" aria-label="Hear ${c.masc}">${speakerSvg}</button></div>
         <div class="word-row"><span><small>feminine</small><b lang="fr">${c.fem}</b></span><button class="sound-btn" type="button" data-speak="${c.fem}" aria-label="Hear ${c.fem}">${speakerSvg}</button></div>
-        <div class="word-row"><span><small>say all four</small><b>Country + capital + citizens</b></span><button class="sound-btn" type="button" data-sequence="${c.country}|${c.capital}|${c.masc}|${c.fem}" aria-label="Hear all words for ${c.en}">${speakerSvg}</button></div>
+        <div class="word-row"><span><small>say all four</small><b>Place + capital + citizens</b></span><button class="sound-btn" type="button" data-sequence="${c.country}|${c.capital}|${c.masc}|${c.fem}" aria-label="Hear all words for ${c.en}">${speakerSvg}</button></div>
       </article>`).join("");
+
+    const pronounColumns = document.querySelector("#pronoun-columns");
+    pronounColumns.innerHTML = ["Singular", "Plural"].map(group => `<section class="pronoun-group"><h4>${group}</h4>${pronouns.filter(item => item.group === group).map(item => `<div class="pronoun-row"><span><b lang="fr">${item.pronoun}</b><small>${item.meaning}</small></span><span class="etre-form" lang="fr">${item.phrase}</span><button class="sound-btn" type="button" data-speak="${item.phrase}" aria-label="Hear ${item.phrase}">${speakerSvg}</button></div>`).join("")}</section>`).join("");
+
+    const dialogueList = document.querySelector("#dialogue-list");
+    dialogueList.innerHTML = dialogues.map(item => `<article class="dialogue-card"><small>${item.englishQuestion} · ${item.englishAnswer}</small><div class="dialogue-line"><b lang="fr">${item.question}</b><button class="sound-btn" type="button" data-speak="${item.question}" aria-label="Hear ${item.question}">${speakerSvg}</button></div><div class="dialogue-line response"><b lang="fr">${item.answer}</b><button class="sound-btn" type="button" ${item.id === "capital" ? `data-sequence="Oui.|Non."` : `data-speak="${item.answer.replace("…", "")}"`} aria-label="Hear the answer">${speakerSvg}</button></div></article>`).join("");
 
     const numberBoard = document.querySelector("#number-board");
     numberBoard.innerHTML = numbers.map(x => `<button class="number-chip" type="button" data-speak="${x.fr}" aria-label="${x.n}, ${x.fr}"><b>${x.n}</b><span lang="fr">${x.fr}</span></button>`).join("");
@@ -639,7 +721,8 @@
     });
     document.querySelector("#play-countries").addEventListener("click", () => speakSequence(countries.map(c => c.country)));
     document.querySelector("#play-tens").addEventListener("click", () => speakSequence([10,20,30,40,50,60].map(n => numberWord(n))));
-    document.querySelectorAll("#stop-audio, #stop-audio-2").forEach(b => b.addEventListener("click", () => window.speechSynthesis?.cancel()));
+    document.querySelector("#play-etre").addEventListener("click", () => speakSequence(pronouns.map(item => item.phrase)));
+    document.querySelectorAll("#stop-audio, #stop-audio-2, #stop-audio-3").forEach(b => b.addEventListener("click", () => window.speechSynthesis?.cancel()));
 
     const quizIntro = document.querySelector("#quiz-intro");
     const quizPanel = document.querySelector("#quiz-panel");
@@ -661,12 +744,27 @@
     function makeCountryQuestions(count = countries.length) {
       const selected = shuffle(countries).slice(0, count);
       return selected.flatMap((c, i) => {
-        const types = i % 3 === 0 ? ["nationality"] : i % 3 === 1 ? ["flagSpell"] : ["countryListen"];
+        const types = ["cd", "qc"].includes(c.id) ? ["nationality"] : i % 3 === 0 ? ["nationality"] : i % 3 === 1 ? ["flagSpell"] : ["countryListen"];
         return types.map(type => ({ type, item:c }));
       });
     }
     function makeMatchQuestion() { return { type:"match", items:sample(countries, 4) }; }
     function makeCapitalMatchQuestion() { return { type:"capitalMatch", items:sample(countries, 4) }; }
+    function makeGrammarQuestions(full = true) {
+      const pronounSet = full ? shuffle(pronouns) : sample(pronouns, 2);
+      const etreSet = full ? shuffle(pronouns) : sample(pronouns, 3);
+      const pairSet = dialogues.slice(0, 2);
+      const phraseSet = full ? shuffle(dialogues) : sample(dialogues, 2);
+      const responsePool = dialogues.slice(2);
+      const responseSet = full ? shuffle(responsePool) : sample(responsePool, 2);
+      return shuffle([
+        ...pronounSet.map(item => ({type:"pronounChoice", item})),
+        ...etreSet.map(item => ({type:"etreSpell", item})),
+        ...pairSet.map(item => ({type:"dialoguePair", item})),
+        ...phraseSet.map(item => ({type:"phraseWrite", item})),
+        ...responseSet.map(item => ({type:"responseWrite", item}))
+      ]);
+    }
     function buildQueue(mode) {
       if (mode === "numbers") return makeNumberQuestions(true);
       if (mode === "countries") {
@@ -676,15 +774,17 @@
         const capitals = shuffle(countries).map(item => ({type:"capitalSpell", item}));
         return shuffle([...capitals, makeCapitalMatchQuestion(), makeCapitalMatchQuestion()]);
       }
+      if (mode === "grammar") return makeGrammarQuestions(true);
       const nationality = sample(countries, 6).map(item => ({type:"nationality", item}));
       const flags = sample(countries, 6).map(item => ({type:"flagSpell", item}));
       const listening = sample(countries, 4).map(item => ({type:"countryListen", item}));
       const capitals = sample(countries, 5).map(item => ({type:"capitalSpell", item}));
-      return shuffle([...makeNumberQuestions(false), ...nationality, ...flags, ...listening, ...capitals, makeMatchQuestion(), makeMatchQuestion(), makeCapitalMatchQuestion()]);
+      return shuffle([...makeNumberQuestions(false), ...nationality, ...flags, ...listening, ...capitals, makeMatchQuestion(), makeMatchQuestion(), makeCapitalMatchQuestion(), ...makeGrammarQuestions(false)]);
     }
 
     function normalizeLoose(value) { return value.trim().toLocaleLowerCase("fr").normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[’']/g, "'").replace(/[-\s]+/g, " "); }
     function normalizeExact(value) { return value.trim().replace(/[’']/g, "’").replace(/\s+/g, " "); }
+    function normalizePhrase(value) { return normalizeExact(value).toLocaleLowerCase("fr").replace(/[?!.…/]+$/g, "").trim(); }
     function accentTray() {
       return `<div class="accent-tray"><span>Insert:</span>${["É","é","è","ê","ë","à","â","î","ï","ô","ù","û","ü","ç","’","-"].map(x => `<button class="accent-btn" type="button" data-accent="${x}">${x}</button>`).join("")}</div>`;
     }
@@ -702,10 +802,21 @@
         questionCard.innerHTML = `${meta}<h3>Spell this number in French.</h3><div class="giant-number">${q.item.n}</div><div class="input-row"><input class="answer-input" id="answer" autocomplete="off" autocapitalize="none" spellcheck="false" placeholder="Type the French number…"></div>${answerControls()}`;
       } else if (q.type === "numberListen") {
         questionCard.innerHTML = `${meta}<h3>Which number do you hear?</h3><p class="question-help">Tap the speaker, then enter the number using digits.</p><button class="listen-button" type="button" id="big-audio" aria-label="Play number">${speakerSvg}</button><input class="answer-input" id="answer" type="number" min="1" max="60" inputmode="numeric" placeholder="Type 1–60…">${answerControls(false)}`;
+      } else if (q.type === "pronounChoice") {
+        const choices = shuffle([q.item, ...sample(pronouns.filter(item => item.key !== q.item.key), 3)]);
+        questionCard.innerHTML = `${meta}<h3>Which French subject pronoun means this?</h3><div class="translation-box">${q.item.meaning}</div><p class="question-help">${q.item.group} pronoun</p><div class="choice-grid">${choices.map(item => `<button class="choice-btn" type="button" data-choice="${item.key}">${item.pronoun}</button>`).join("")}</div>${answerControls()}`;
+      } else if (q.type === "etreSpell") {
+        questionCard.innerHTML = `${meta}<h3>Complete this form of <em>être</em>.</h3><div class="grammar-prompt">${q.item.subject} ___</div><p class="question-help">Type only the missing verb.</p><input class="answer-input" id="answer" autocomplete="off" spellcheck="false" placeholder="Form of être…">${accentTray()}${answerControls()}`;
+      } else if (q.type === "dialoguePair") {
+        questionCard.innerHTML = `${meta}<h3>Write both parts in French.</h3><div class="translation-box"><div><strong>Question:</strong> ${q.item.englishQuestion}</div><div><strong>Answer:</strong> ${q.item.englishAnswer}</div></div><div class="answer-pair"><div class="field"><label for="answer-question">Question in French</label><input class="answer-input" id="answer-question" autocomplete="off" spellcheck="false" placeholder="Type the complete question…"></div><div class="field"><label for="answer-response">Answer in French</label><input class="answer-input" id="answer-response" autocomplete="off" spellcheck="false" placeholder="Type the complete answer…"></div></div>${accentTray()}${answerControls()}`;
+      } else if (q.type === "phraseWrite") {
+        questionCard.innerHTML = `${meta}<h3>Write this question in French.</h3><div class="translation-box">${q.item.englishQuestion}</div><input class="answer-input" id="answer" autocomplete="off" spellcheck="false" placeholder="Type the complete French question…">${accentTray()}${answerControls()}`;
+      } else if (q.type === "responseWrite") {
+        questionCard.innerHTML = `${meta}<h3>Answer in French.</h3><div class="translation-box"><div><strong>${q.item.question}</strong></div><div>${q.item.englishAnswer}</div></div><input class="answer-input" id="answer" autocomplete="off" spellcheck="false" placeholder="Type the French response…">${accentTray()}${answerControls()}`;
       } else if (q.type === "nationality") {
         questionCard.innerHTML = `${meta}<h3>${q.item.country}</h3><p class="question-help">Write the masculine and feminine nationality words.</p>${flagMarkup(q.item.id)}<div class="answer-pair"><div class="field"><label for="answer-masc">Masculine citizen</label><input class="answer-input" id="answer-masc" autocomplete="off" spellcheck="false" placeholder="masculine"></div><div class="field"><label for="answer-fem">Feminine citizen</label><input class="answer-input" id="answer-fem" autocomplete="off" spellcheck="false" placeholder="feminine"></div></div>${accentTray()}${answerControls()}`;
       } else if (q.type === "flagSpell") {
-        questionCard.innerHTML = `${meta}<h3>Which country is this?</h3><p class="question-help">Spell the complete French name exactly as studied, including article, accents, hyphen, and capitalization.</p><div class="quiz-flag flag-holder">${flagMarkup(q.item.id)}</div><input class="answer-input" id="answer" autocomplete="off" spellcheck="false" placeholder="Example: la France">${accentTray()}${answerControls()}`;
+        questionCard.innerHTML = `${meta}<h3>Which country or province is this?</h3><p class="question-help">Spell the complete French name exactly as studied, including article, accents, hyphen, and capitalization.</p><div class="quiz-flag flag-holder">${flagMarkup(q.item.id)}</div><input class="answer-input" id="answer" autocomplete="off" spellcheck="false" placeholder="Example: la France">${accentTray()}${answerControls()}`;
         const flag = questionCard.querySelector(".quiz-flag .flag"); if (flag) { flag.style.width = "100%"; flag.style.height = "100%"; }
       } else if (q.type === "capitalSpell") {
         questionCard.innerHTML = `${meta}<h3>What is the capital of ${q.item.country}?</h3><p class="question-help">Write the capital exactly, including accents, hyphens, periods, and capitalization.</p><div class="quiz-flag flag-holder">${flagMarkup(q.item.id)}</div><input class="answer-input" id="answer" autocomplete="off" spellcheck="false" placeholder="Type the capital city…">${accentTray()}${answerControls()}`;
@@ -715,11 +826,11 @@
         questionCard.innerHTML = `${meta}<h3>Which country do you hear?</h3><button class="listen-button" type="button" id="big-audio" aria-label="Play country name">${speakerSvg}</button><div class="choice-grid">${choices.map(c => `<button class="choice-btn" type="button" data-choice="${c.id}">${c.country}</button>`).join("")}</div>${answerControls(false)}`;
       } else if (q.type === "match") {
         const flags = shuffle(q.items), names = shuffle(q.items);
-        questionCard.innerHTML = `${meta}<h3>Match each flag to its country.</h3><p class="question-help">Drag each flag onto a name. On a touch screen, tap a flag and then tap its name.</p><div class="match-board"><div class="flag-bank">${flags.map(c => `<button class="flag-token" type="button" draggable="true" data-flag-id="${c.id}" aria-label="Flag to match">${flagMarkup(c.id)}</button>`).join("")}</div><div class="drop-list">${names.map(c => `<button class="drop-zone" type="button" data-country-id="${c.id}"><span class="placed-flag"></span><span>${c.country}</span><span class="clear-match" aria-hidden="true"></span></button>`).join("")}</div></div>${answerControls(false)}`;
+        questionCard.innerHTML = `${meta}<h3>Match each flag to its country or province.</h3><p class="question-help">Drag each flag onto a name. On a touch screen, tap a flag and then tap its name.</p><div class="match-board"><div class="flag-bank">${flags.map(c => `<button class="flag-token" type="button" draggable="true" data-flag-id="${c.id}" aria-label="Flag to match">${flagMarkup(c.id)}</button>`).join("")}</div><div class="drop-list">${names.map(c => `<button class="drop-zone" type="button" data-country-id="${c.id}"><span class="placed-flag"></span><span>${c.country}</span><span class="clear-match" aria-hidden="true"></span></button>`).join("")}</div></div>${answerControls(false)}`;
         bindMatching();
       } else if (q.type === "capitalMatch") {
         const capitals = shuffle(q.items), names = shuffle(q.items);
-        questionCard.innerHTML = `${meta}<h3>Match each capital to its country.</h3><p class="question-help">Drag each capital onto its country. On a touch screen, tap a capital and then tap the country.</p><div class="match-board capital-match-board"><div class="flag-bank capital-bank">${capitals.map(c => `<button class="capital-token" type="button" draggable="true" data-capital-id="${c.id}">${c.capital}</button>`).join("")}</div><div class="drop-list">${names.map(c => `<button class="drop-zone" type="button" data-country-id="${c.id}"><span class="placed-capital"></span><span>${c.country}</span><span class="clear-match" aria-hidden="true"></span></button>`).join("")}</div></div>${answerControls(false)}`;
+        questionCard.innerHTML = `${meta}<h3>Match each capital to its place.</h3><p class="question-help">Drag each capital onto its country or province. On a touch screen, tap a capital and then tap the place.</p><div class="match-board capital-match-board"><div class="flag-bank capital-bank">${capitals.map(c => `<button class="capital-token" type="button" draggable="true" data-capital-id="${c.id}">${c.capital}</button>`).join("")}</div><div class="drop-list">${names.map(c => `<button class="drop-zone" type="button" data-country-id="${c.id}"><span class="placed-capital"></span><span>${c.country}</span><span class="clear-match" aria-hidden="true"></span></button>`).join("")}</div></div>${answerControls(false)}`;
         bindCapitalMatching();
       }
       questionCard.querySelectorAll(".answer-input").forEach(input => {
@@ -748,7 +859,12 @@
         selectedChoice = button.dataset.choice;
         questionCard.querySelectorAll("[data-choice]").forEach(b => b.classList.toggle("selected", b === button));
       }));
-      const audioText = q.type.startsWith("number") ? q.item.fr : q.item?.country;
+      const audioText = q.type.startsWith("number") ? q.item.fr
+        : q.type === "etreSpell" ? q.item.phrase
+        : q.type === "pronounChoice" ? q.item.pronoun.replace(" / j’", "")
+        : q.type === "responseWrite" ? (q.item.id === "capital" ? "Oui, je suis de la capitale." : q.item.answer.replace("…", ""))
+        : ["dialoguePair", "phraseWrite"].includes(q.type) ? q.item.question
+        : q.item?.country;
       const questionAudio = questionCard.querySelector("#question-audio");
       questionAudio?.addEventListener("click", () => {
         if (questionAudio.dataset.sequence) speakSequence(questionAudio.dataset.sequence.split("|"));
@@ -843,6 +959,13 @@
       answered = true;
     }
 
+    function responseMatches(value, item) {
+      const actual = normalizePhrase(value);
+      if (item.mode === "prefix") return actual.startsWith(normalizePhrase(item.prefix));
+      if (item.mode === "choice") return ["oui", "non", "oui je suis de la capitale", "non je ne suis pas de la capitale"].includes(actual);
+      return actual === normalizePhrase(item.answer);
+    }
+
     function checkAnswer() {
       if (answered) return nextQuestion();
       const q = queue[current];
@@ -855,6 +978,31 @@
         const value = questionCard.querySelector("#answer").value;
         if (!value) return nudge("Enter the number you heard.");
         ok = Number(value) === q.item.n; correction = `<strong>${q.item.fr} = ${q.item.n}</strong>`;
+      } else if (q.type === "pronounChoice") {
+        if (!selectedChoice) return nudge("Choose one pronoun first.");
+        ok = selectedChoice === q.item.key;
+        correction = `<strong>${q.item.pronoun} = ${q.item.meaning}</strong>`;
+      } else if (q.type === "etreSpell") {
+        const value = questionCard.querySelector("#answer").value;
+        if (!value.trim()) return nudge("Type the missing form of être.");
+        ok = normalizePhrase(value) === normalizePhrase(q.item.etre);
+        correction = `<strong>${q.item.phrase}</strong>`;
+      } else if (q.type === "dialoguePair") {
+        const question = questionCard.querySelector("#answer-question").value;
+        const response = questionCard.querySelector("#answer-response").value;
+        if (!question.trim() || !response.trim()) return nudge("Type both the question and the answer.");
+        ok = normalizePhrase(question) === normalizePhrase(q.item.question) && responseMatches(response, q.item);
+        correction = `<strong>${q.item.question}</strong><br>${q.item.answer}`;
+      } else if (q.type === "phraseWrite") {
+        const value = questionCard.querySelector("#answer").value;
+        if (!value.trim()) return nudge("Type the complete French question.");
+        ok = normalizePhrase(value) === normalizePhrase(q.item.question);
+        correction = `<strong>${q.item.question}</strong>`;
+      } else if (q.type === "responseWrite") {
+        const value = questionCard.querySelector("#answer").value;
+        if (!value.trim()) return nudge("Type a French response.");
+        ok = responseMatches(value, q.item);
+        correction = `<strong>${q.item.answer}</strong>`;
       } else if (q.type === "nationality") {
         const masc = questionCard.querySelector("#answer-masc").value, fem = questionCard.querySelector("#answer-fem").value;
         if (!masc.trim() || !fem.trim()) return nudge("Fill in both nationality words.");
@@ -862,7 +1010,7 @@
         correction = `<strong>${q.item.country}: ${q.item.masc} / ${q.item.fem}</strong>`;
       } else if (q.type === "flagSpell") {
         const value = questionCard.querySelector("#answer").value;
-        if (!value.trim()) return nudge("Type the French country name first.");
+        if (!value.trim()) return nudge("Type the French place name first.");
         ok = normalizeExact(value) === q.item.country; correction = `<strong>Exact spelling: ${q.item.country}</strong>`;
       } else if (q.type === "capitalSpell") {
         const value = questionCard.querySelector("#answer").value;
@@ -893,6 +1041,12 @@
         audioButton.dataset.sequence = `${q.item.country}|${q.item.capital}`;
         audioButton.innerHTML = `${speakerSvg} Hear both`;
         audioButton.setAttribute("aria-label", `Hear ${q.item.country} and ${q.item.capital}`);
+      }
+      if (ok && q.type === "dialoguePair") {
+        const audioButton = questionCard.querySelector("#question-audio");
+        audioButton.dataset.sequence = `${q.item.question}|${q.item.answer}`;
+        audioButton.innerHTML = `${speakerSvg} Hear both`;
+        audioButton.setAttribute("aria-label", "Hear the question and answer");
       }
     }
     function nudge(message) { const feedback = questionCard.querySelector("#feedback"); feedback.className = "feedback bad"; feedback.textContent = message; }
