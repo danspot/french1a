@@ -1,7 +1,7 @@
 {
-  "name": "French Test Prep #2",
-  "short_name": "Test Prep #2",
-  "description": "Interactive French practice for numbers, places, capitals, nationalities, personal pronouns, être, and classroom conversation.",
+  "name": "French 1A Study Guide",
+  "short_name": "French 1A",
+  "description": "Interactive French practice for Lessons 2 and 3: numbers, days, calendar terms, places, pronouns, être, vocabulary, and conversation.",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",

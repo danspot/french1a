@@ -6,11 +6,11 @@
   <meta name="theme-color" content="#173f4f">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
-  <meta name="apple-mobile-web-app-title" content="Test Prep #2">
+  <meta name="apple-mobile-web-app-title" content="French 1A">
   <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon-180-v2.png">
   <link rel="icon" type="image/png" sizes="192x192" href="./icon-192-v2.png">
   <link rel="manifest" href="./site.webmanifest">
-  <title>Test Prep #2 — French Numbers, Places, Pronouns, Être & Conversation</title>
+  <title>French 1A Study Guide — Lessons 2 & 3</title>
   <style>
     :root {
       --ink: #173f4f;
@@ -171,6 +171,40 @@
     .dialogue-line.response b { color: var(--coral-dark); }
     .dialogue-line .sound-btn { width: 32px; height: 32px; }
 
+    .lesson3-section { background: #f1eadb; border-top: 1px solid rgba(23,63,79,.1); }
+    .lesson3-banner { display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 22px; margin-bottom: 25px; padding: 24px 26px; color: white; background: var(--blue); border-radius: 24px 24px 24px 7px; box-shadow: var(--shadow); }
+    .lesson3-banner h2 { margin: 4px 0 7px; font-size: clamp(2.5rem, 6vw, 4.8rem); line-height: .95; }
+    .lesson3-banner p { max-width: 720px; margin: 0; color: rgba(255,255,255,.82); }
+    .lesson3-banner .kicker { color: #ffe09a; }
+    .lesson3-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; }
+    .lesson3-grid .wide { grid-column: 1 / -1; }
+    .lesson3-grid .study-panel { box-shadow: 0 8px 22px rgba(23,63,79,.08); }
+    .l3-number-board { grid-template-columns: repeat(8, 1fr); }
+    .day-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 8px; }
+    .day-card { position: relative; min-width: 0; padding: 14px 7px 11px; text-align: center; background: white; border: 1px solid var(--line); border-radius: 13px; }
+    .day-card b { display: block; color: var(--coral-dark); font-family: Georgia, serif; font-size: 1.08rem; }
+    .day-card small { color: var(--muted); }
+    .day-card .sound-btn { width: 31px; height: 31px; margin: 9px auto 0; }
+    .vocab-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 9px; }
+    .vocab-card { display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 8px; padding: 11px 12px; background: #f7f3e8; border-radius: 12px; }
+    .vocab-card b { display: block; }
+    .vocab-card small { color: var(--muted); }
+    .vocab-card .sound-btn { width: 32px; height: 32px; }
+    .calendar-drill { margin-top: 18px; padding-top: 16px; border-top: 1px dashed #d8cfbb; }
+    .calendar-drill h4 { margin: 0 0 4px; }
+    .calendar-drill > p { margin-bottom: 10px; color: var(--muted); font-size: .88rem; }
+    .date-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 7px; }
+    .date-chip { padding: 9px 5px; text-align: center; background: var(--ink); border-radius: 10px; }
+    .date-chip b { display: block; color: #ff7665; font-family: Georgia, serif; font-size: 1.18rem; }
+    .date-chip small { color: white; }
+    .month-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 8px; }
+    .month-card { display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 5px; padding: 10px; background: #f7f3e8; border-radius: 11px; }
+    .month-card b { display: block; font-size: .92rem; }
+    .month-card small { color: var(--muted); }
+    .month-card .sound-btn { width: 29px; height: 29px; }
+    .lesson-label { grid-column: 1 / -1; margin: 15px 0 -4px; color: rgba(255,255,255,.62); text-transform: uppercase; letter-spacing: .13em; font-size: .76rem; font-weight: 950; }
+    .mode-card.lesson3 { background: #fff4d6; border-color: rgba(239,182,62,.38); }
+
     .quiz-section { min-height: 760px; padding: 86px 0; color: white; background: var(--ink); }
     .quiz-shell { width: min(980px, calc(100% - 32px)); margin-inline: auto; }
     .quiz-intro { text-align: center; }
@@ -275,6 +309,11 @@
       .country-grid { grid-template-columns: repeat(2, 1fr); }
       .number-board { grid-template-columns: repeat(6, 1fr); }
       .grammar-grid { grid-template-columns: 1fr; }
+      .lesson3-grid { grid-template-columns: 1fr; }
+      .lesson3-grid .wide { grid-column: auto; }
+      .l3-number-board { grid-template-columns: repeat(6, 1fr); }
+      .day-grid { grid-template-columns: repeat(4, 1fr); }
+      .month-grid { grid-template-columns: repeat(4, 1fr); }
       .mode-grid { grid-template-columns: 1fr; }
       .mode-card.wide { grid-column: auto; }
     }
@@ -287,6 +326,11 @@
       .country-grid { grid-template-columns: 1fr; }
       .number-board { grid-template-columns: repeat(4, 1fr); }
       .pronoun-columns { grid-template-columns: 1fr; }
+      .lesson3-banner { grid-template-columns: 1fr; }
+      .l3-number-board { grid-template-columns: repeat(4, 1fr); }
+      .day-grid, .vocab-grid { grid-template-columns: repeat(2, 1fr); }
+      .date-grid { grid-template-columns: repeat(4, 1fr); }
+      .month-grid { grid-template-columns: repeat(2, 1fr); }
       .quiz-card { padding: 24px 17px; border-radius: 21px; }
       .answer-pair, .choice-grid { grid-template-columns: 1fr; }
       .match-board { grid-template-columns: 1fr; }
@@ -298,15 +342,15 @@
       .input-row { flex-direction: column; }
       .voice-dialog-body { padding: 20px 18px 22px; }
     }
-    @media print { .site-header, .hero-actions, .quiz-section, .footer, .study-tools, .sound-btn { display: none !important; } body { background: white; } .section { padding: 20px 0; } .country-card, .number-chip { break-inside: avoid; box-shadow: none; } }
+    @media print { .site-header, .hero-actions, .quiz-section, .footer, .study-tools, .sound-btn, .lesson3-banner .btn { display: none !important; } body { background: white; } .section { padding: 20px 0; } .country-card, .number-chip, .study-panel, .day-card { break-inside: avoid; box-shadow: none; } }
   </style>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to study guide</a>
   <header class="site-header">
     <nav class="nav wrap" aria-label="Main navigation">
-      <a class="brand" href="#top"><span class="brand-badge">#2</span><span>French Test Prep</span></a>
-      <div class="nav-links"><a href="#countries">Places</a><a href="#numbers">Numbers</a><a href="#grammar">Grammar</a><a href="#quiz">Start test</a><button class="nav-voice" type="button" id="voice-settings-open">⚙ Voice</button></div>
+      <a class="brand" href="#top"><span class="brand-badge">1A</span><span>French Study Guide</span></a>
+      <div class="nav-links"><a href="#countries">Lesson 2</a><a href="#lesson3">Lesson 3</a><a href="#quiz">Quiz me</a><button class="nav-voice" type="button" id="voice-settings-open">⚙ Voice</button></div>
     </nav>
   </header>
 
@@ -315,21 +359,21 @@
       <div class="hero-grid wrap">
         <div>
           <p class="kicker">French 1A · Study + practice</p>
-          <h1>Test Prep <em>#2</em></h1>
-          <p class="hero-copy">Learn the numbers 1–60, recognize 16 place flags, spell capitals and nationalities, conjugate <em>être</em>, and practice the questions from class. Tap any speaker to hear the French.</p>
+          <h1>French 1A <em>study hub</em></h1>
+          <p class="hero-copy">Review Lesson 2, then jump into the new Lesson 3 material: numbers 0–30, days and calendar words, pronouns, <em>être</em>, personal question pairs, and listening practice. Tap any speaker to hear the French.</p>
           <div class="hero-actions">
-            <a class="btn" href="#countries">Study pronunciation</a>
-            <button class="btn secondary" type="button" data-start="mixed">Jump to the test →</button>
+            <a class="btn" href="#lesson3">Open Lesson 3</a>
+            <button class="btn secondary" type="button" data-start="lesson3">Quiz Lesson 3 →</button>
           </div>
         </div>
         <aside class="hero-card" aria-label="Test coverage">
-          <span class="mini-label">What’s on this test</span>
-          <h2>Four things to know</h2>
+          <span class="mini-label">New lesson checklist</span>
+          <h2>Lesson 3 at a glance</h2>
           <ol class="coverage-list">
-            <li><b>1</b><span>Numbers from <em>un</em> to <em>soixante</em></span></li>
-            <li><b>2</b><span>Countries, capital cities &amp; flags</span></li>
-            <li><b>3</b><span>Masculine &amp; feminine nationalities</span></li>
-            <li><b>4</b><span>Pronouns, <em>être</em> &amp; simple conversations</span></li>
+            <li><b>1</b><span>Numbers from <em>zéro</em> to <em>trente</em></span></li>
+            <li><b>2</b><span>Days of the week &amp; calendar words</span></li>
+            <li><b>3</b><span>Pronouns and every form of <em>être</em></span></li>
+            <li><b>4</b><span>Ask and answer five personal questions</span></li>
           </ol>
         </aside>
       </div>
@@ -377,6 +421,72 @@
       </div>
     </section>
 
+    <section class="section lesson3-section" id="lesson3" aria-labelledby="lesson3-title">
+      <div class="wrap">
+        <div class="lesson3-banner">
+          <div>
+            <p class="kicker">New · Lesson 3</p>
+            <h2 id="lesson3-title">Dates, days &amp; introductions</h2>
+            <p>Know the whole exchange, not just one line. Practice hearing, spelling, translating, and switching between a question and its answer.</p>
+          </div>
+          <button class="btn" type="button" data-start="lesson3">Quiz this lesson →</button>
+        </div>
+
+        <div class="lesson3-grid">
+          <article class="study-panel wide">
+            <div class="section-head">
+              <div><p class="kicker">Les nombres</p><h3>Numbers 0–30</h3><p>Tap any number to hear it. The quiz asks you to spell what you hear—including compounds such as <em>vingt-deux</em>.</p></div>
+              <div class="study-tools"><button class="btn secondary small" type="button" id="play-l3-numbers">▶ Hear 0–30</button></div>
+            </div>
+            <div class="number-board l3-number-board" id="lesson3-number-board"></div>
+          </article>
+
+          <article class="study-panel wide">
+            <div class="section-head">
+              <div><p class="kicker">La semaine</p><h3>Days of the week</h3><p>French days are normally written with a lowercase first letter.</p></div>
+              <div class="study-tools"><button class="btn secondary small" type="button" id="play-days">▶ Hear the week</button></div>
+            </div>
+            <div class="day-grid" id="day-grid"></div>
+          </article>
+
+          <article class="study-panel">
+            <h3>Questions et réponses</h3>
+            <p>Practice in both directions: hear or read the question and answer it, then use an answer to rebuild the question.</p>
+            <div class="dialogue-list" id="lesson3-dialogue-list"></div>
+          </article>
+
+          <article class="study-panel">
+            <h3>Calendar sentences</h3>
+            <p>Use the exact classroom patterns for today, tomorrow, and the week.</p>
+            <div class="vocab-grid" id="calendar-vocab-grid"></div>
+            <div class="calendar-drill">
+              <h4>February calendar drill</h4>
+              <p><em>C’est quel jour ?</em> These are the seven highlighted dates from the class slide.</p>
+              <div class="date-grid" id="calendar-date-grid"></div>
+            </div>
+          </article>
+
+          <article class="study-panel">
+            <h3>Pronouns + <em>être</em></h3>
+            <p>Say the subject and verb together until the pair sounds automatic.</p>
+            <div class="pronoun-columns" id="lesson3-pronoun-columns"></div>
+          </article>
+
+          <article class="study-panel">
+            <h3>Story vocabulary only</h3>
+            <p>Know the meanings and sounds of these words. The poem and its character’s name are not included.</p>
+            <div class="vocab-grid" id="story-vocab-grid"></div>
+          </article>
+
+          <article class="study-panel wide">
+            <h3>Months for birthday answers</h3>
+            <p>Answer with <em>C’est le…</em> + the date + the month. Example: <em>C’est le vingt-deux mai.</em></p>
+            <div class="month-grid" id="month-grid"></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
     <section class="quiz-section" id="quiz" aria-labelledby="quiz-title">
       <div class="quiz-shell">
         <div class="quiz-intro" id="quiz-intro">
@@ -389,6 +499,13 @@
             <button class="mode-card" type="button" data-start="countries"><span class="mode-icon">🌍</span><h3>Country Challenge</h3><p>Country/province names, flags, listening, and both nationality forms.</p></button>
             <button class="mode-card" type="button" data-start="capitals"><span class="mode-icon">🏛️</span><h3>Capital Challenge</h3><p>Write capital cities and match each capital to its place.</p></button>
             <button class="mode-card wide" type="button" data-start="grammar"><span class="mode-icon">💬</span><h3>Grammar &amp; Conversation</h3><p>Personal pronouns, every form of <em>être</em>, and the exact classroom questions and responses.</p></button>
+            <div class="lesson-label">Lesson 3 practice</div>
+            <button class="mode-card lesson3 wide" type="button" data-start="lesson3"><span class="mode-icon">⭐</span><h3>Lesson 3 Mixed Quiz</h3><p>Numbers 0–30, days, calendar terms, pronouns, <em>être</em>, question pairs, and story vocabulary.</p></button>
+            <button class="mode-card lesson3" type="button" data-start="lesson3-numbers"><span class="mode-icon">🎧</span><h3>Hear &amp; Spell 0–30</h3><p>Write French number words from digits and from sound.</p></button>
+            <button class="mode-card lesson3" type="button" data-start="lesson3-days"><span class="mode-icon">📅</span><h3>Days &amp; Calendar</h3><p>English matching, sound-to-spelling, highlighted February dates, and birthday months.</p></button>
+            <button class="mode-card lesson3" type="button" data-start="lesson3-etre"><span class="mode-icon">🧩</span><h3>Pronouns &amp; être</h3><p>Match pronouns and supply the right verb form.</p></button>
+            <button class="mode-card lesson3" type="button" data-start="lesson3-talk"><span class="mode-icon">🗣️</span><h3>Question Pairs</h3><p>Answer a question—or work backward from the answer.</p></button>
+            <button class="mode-card lesson3 wide" type="button" data-start="lesson3-words"><span class="mode-icon">📖</span><h3>Story Words</h3><p>Practice the assigned vocabulary without the poem or character.</p></button>
           </div>
           <p class="best-score" id="best-score">No saved score yet — today’s a clean slate.</p>
         </div>
@@ -486,6 +603,72 @@
       { id:"capital", englishQuestion:"Are you from the capital city?", question:"Tu es de la capitale ?", englishAnswer:"Yes / No.", answer:"Oui. / Non.", mode:"choice" }
     ];
 
+    const lesson3Dialogues = [
+      { id:"l3-name", englishQuestion:"What is your name?", question:"Comment tu t’appelles ?", questionVariants:["Comment tu t’appelles", "Comment t’appelles-tu"], englishAnswer:"My name is Alex.", answer:"Je m’appelle Alex.", response:"name" },
+      { id:"l3-spell", englishQuestion:"How do you spell your first or last name?", question:"Comment s’écrit ton prénom / ton nom ?", speakQuestion:"Comment s’écrit ton prénom ?", questionVariants:["Comment s’écrit ton prénom / ton nom", "Comment s’écrit ton prénom", "Comment s’écrit ton nom", "Comment écrit-on ton prénom", "Comment écrit-on ton nom"], englishAnswer:"It is spelled A-L-E-X.", answer:"Ça s’écrit A-L-E-X.", response:"spelling" },
+      { id:"l3-nationality", englishQuestion:"What is your nationality?", question:"Tu es de quelle nationalité ?", questionVariants:["Tu es de quelle nationalité", "Quelle est ta nationalité"], englishAnswer:"I am American.", answer:"Je suis américain.", response:"nationality" },
+      { id:"l3-age", englishQuestion:"How old are you?", question:"Tu as quel âge ? / Quel âge as-tu ?", speakQuestion:"Tu as quel âge ?", questionVariants:["Tu as quel âge", "Quel âge as-tu"], englishAnswer:"I am twelve years old.", answer:"J’ai douze ans.", response:"age" },
+      { id:"l3-birthday", englishQuestion:"When is your birthday?", question:"C’est quand ton anniversaire ?", questionVariants:["C’est quand ton anniversaire", "Quand est ton anniversaire"], englishAnswer:"It is May twenty-second.", answer:"C’est le vingt-deux mai.", response:"birthday" }
+    ];
+
+    const days = [
+      { id:"monday", fr:"lundi", en:"Monday" },
+      { id:"tuesday", fr:"mardi", en:"Tuesday" },
+      { id:"wednesday", fr:"mercredi", en:"Wednesday" },
+      { id:"thursday", fr:"jeudi", en:"Thursday" },
+      { id:"friday", fr:"vendredi", en:"Friday" },
+      { id:"saturday", fr:"samedi", en:"Saturday" },
+      { id:"sunday", fr:"dimanche", en:"Sunday" }
+    ];
+
+    const calendarWords = [
+      { id:"today", fr:"aujourd’hui", en:"today" },
+      { id:"tomorrow", fr:"demain", en:"tomorrow" },
+      { id:"week", fr:"la semaine", en:"the week" },
+      { id:"weekend", fr:"le week-end", en:"the weekend" },
+      { id:"seven-days", fr:"La semaine a sept jours.", en:"The week has seven days." },
+      { id:"weekend-days", fr:"Le week-end est le samedi et le dimanche.", en:"The weekend is Saturday and Sunday." },
+      { id:"whatday-today", fr:"C’est quel jour aujourd’hui ?", en:"What day is it today?" },
+      { id:"todayis", fr:"Aujourd’hui, c’est mardi.", en:"Today is Tuesday." },
+      { id:"whatday-tomorrow", fr:"C’est quel jour demain ?", en:"What day is it tomorrow?" }
+    ];
+
+    const calendarDates = [
+      { id:"feb-1", date:1, dayId:"monday" },
+      { id:"feb-10", date:10, dayId:"wednesday" },
+      { id:"feb-12", date:12, dayId:"friday" },
+      { id:"feb-16", date:16, dayId:"tuesday" },
+      { id:"feb-21", date:21, dayId:"sunday" },
+      { id:"feb-25", date:25, dayId:"thursday" },
+      { id:"feb-27", date:27, dayId:"saturday" }
+    ].map(item => ({ ...item, day:days.find(day => day.id === item.dayId) }));
+
+    const months = [
+      { id:"jan", fr:"janvier", en:"January" },
+      { id:"feb", fr:"février", en:"February" },
+      { id:"mar", fr:"mars", en:"March" },
+      { id:"apr", fr:"avril", en:"April" },
+      { id:"may", fr:"mai", en:"May" },
+      { id:"jun", fr:"juin", en:"June" },
+      { id:"jul", fr:"juillet", en:"July" },
+      { id:"aug", fr:"août", en:"August" },
+      { id:"sep", fr:"septembre", en:"September" },
+      { id:"oct", fr:"octobre", en:"October" },
+      { id:"nov", fr:"novembre", en:"November" },
+      { id:"dec", fr:"décembre", en:"December" }
+    ];
+
+    const storyWords = [
+      { id:"born", fr:"né / née", speak:"né", en:"born" },
+      { id:"baptized", fr:"baptisé / baptisée", speak:"baptisé", en:"baptized" },
+      { id:"married", fr:"marié / mariée", speak:"marié", en:"married" },
+      { id:"sick", fr:"malade", speak:"malade", en:"sick" },
+      { id:"worse", fr:"pire", speak:"pire", en:"worse" },
+      { id:"dead", fr:"mort / morte", speak:"mort", en:"dead" },
+      { id:"buried", fr:"enterré / enterrée", speak:"enterré", en:"buried" },
+      { id:"ends", fr:"finit", speak:"finit", en:"ends / finishes" }
+    ];
+
     const baseNumbers = ["zéro","un","deux","trois","quatre","cinq","six","sept","huit","neuf","dix","onze","douze","treize","quatorze","quinze","seize","dix-sept","dix-huit","dix-neuf"];
     function numberWord(n) {
       if (n < 20) return baseNumbers[n];
@@ -497,6 +680,7 @@
       return `${tens[ten]}-${baseNumbers[unit]}`;
     }
     const numbers = Array.from({ length: 60 }, (_, i) => ({ n:i + 1, fr:numberWord(i + 1) }));
+    const lesson3Numbers = Array.from({ length: 31 }, (_, i) => ({ n:i, fr:numberWord(i) }));
 
     function starPoints(cx, cy, outer, inner, count = 5) {
       const pts = [];
@@ -693,6 +877,26 @@
     const numberBoard = document.querySelector("#number-board");
     numberBoard.innerHTML = numbers.map(x => `<button class="number-chip" type="button" data-speak="${x.fr}" aria-label="${x.n}, ${x.fr}"><b>${x.n}</b><span lang="fr">${x.fr}</span></button>`).join("");
 
+    const lesson3NumberBoard = document.querySelector("#lesson3-number-board");
+    lesson3NumberBoard.innerHTML = lesson3Numbers.map(x => `<button class="number-chip" type="button" data-speak="${x.fr}" aria-label="${x.n}, ${x.fr}"><b>${x.n}</b><span lang="fr">${x.fr}</span></button>`).join("");
+
+    const dayGrid = document.querySelector("#day-grid");
+    dayGrid.innerHTML = days.map(item => `<article class="day-card"><b lang="fr">${item.fr}</b><small>${item.en}</small><button class="sound-btn" type="button" data-speak="${item.fr}" aria-label="Hear ${item.fr}">${speakerSvg}</button></article>`).join("");
+
+    const lesson3DialogueList = document.querySelector("#lesson3-dialogue-list");
+    lesson3DialogueList.innerHTML = lesson3Dialogues.map(item => `<article class="dialogue-card"><small>${item.englishQuestion} · ${item.englishAnswer}</small><div class="dialogue-line"><b lang="fr">${item.question}</b><button class="sound-btn" type="button" data-speak="${item.speakQuestion || item.question}" aria-label="Hear ${item.speakQuestion || item.question}">${speakerSvg}</button></div><div class="dialogue-line response"><b lang="fr">${item.answer}</b><button class="sound-btn" type="button" data-speak="${item.answer}" aria-label="Hear ${item.answer}">${speakerSvg}</button></div></article>`).join("");
+
+    function vocabCards(items) {
+      return items.map(item => `<article class="vocab-card"><span><b lang="fr">${item.fr}</b><small>${item.en}</small></span><button class="sound-btn" type="button" data-speak="${item.speak || item.fr.replace("…", "")}" aria-label="Hear ${item.fr}">${speakerSvg}</button></article>`).join("");
+    }
+    document.querySelector("#calendar-vocab-grid").innerHTML = vocabCards(calendarWords);
+    document.querySelector("#story-vocab-grid").innerHTML = vocabCards(storyWords);
+    document.querySelector("#calendar-date-grid").innerHTML = calendarDates.map(item => `<article class="date-chip"><b>${item.date}</b><small lang="fr">${item.day.fr}</small></article>`).join("");
+    document.querySelector("#month-grid").innerHTML = months.map(item => `<article class="month-card"><span><b lang="fr">${item.fr}</b><small>${item.en}</small></span><button class="sound-btn" type="button" data-speak="${item.fr}" aria-label="Hear ${item.fr}">${speakerSvg}</button></article>`).join("");
+
+    const lesson3PronounColumns = document.querySelector("#lesson3-pronoun-columns");
+    lesson3PronounColumns.innerHTML = ["Singular", "Plural"].map(group => `<section class="pronoun-group"><h4>${group}</h4>${pronouns.filter(item => item.group === group).map(item => `<div class="pronoun-row"><span><b lang="fr">${item.pronoun}</b><small>${item.meaning}</small></span><span class="etre-form" lang="fr">${item.phrase}</span><button class="sound-btn" type="button" data-speak="${item.phrase}" aria-label="Hear ${item.phrase}">${speakerSvg}</button></div>`).join("")}</section>`).join("");
+
     const rapidNumberTaps = { word:"", times:[], quietUntil:0 };
     function rapidNumberTapAction(target) {
       if (!target.classList.contains("number-chip")) return "normal";
@@ -722,6 +926,8 @@
     document.querySelector("#play-countries").addEventListener("click", () => speakSequence(countries.map(c => c.country)));
     document.querySelector("#play-tens").addEventListener("click", () => speakSequence([10,20,30,40,50,60].map(n => numberWord(n))));
     document.querySelector("#play-etre").addEventListener("click", () => speakSequence(pronouns.map(item => item.phrase)));
+    document.querySelector("#play-l3-numbers").addEventListener("click", () => speakSequence(lesson3Numbers.map(item => item.fr), .9));
+    document.querySelector("#play-days").addEventListener("click", () => speakSequence(days.map(item => item.fr), .82));
     document.querySelectorAll("#stop-audio, #stop-audio-2, #stop-audio-3").forEach(b => b.addEventListener("click", () => window.speechSynthesis?.cancel()));
 
     const quizIntro = document.querySelector("#quiz-intro");
@@ -740,6 +946,38 @@
     function sample(array, n) { return shuffle(array).slice(0, n); }
     function makeNumberQuestions(all = false) {
       return shuffle(numbers).slice(0, all ? 60 : 8).map((x, i) => ({ type: i % 3 === 1 ? "numberListen" : "numberSpell", item:x }));
+    }
+    function makeLesson3NumberQuestions(full = true) {
+      const set = full ? shuffle(lesson3Numbers) : sample(lesson3Numbers, 7);
+      return set.map((item, i) => ({ type:i % 2 ? "numberListenSpell" : "numberSpell", item }));
+    }
+    function makeDayQuestions(full = true) {
+      const set = full ? shuffle(days) : sample(days, 4);
+      return shuffle(set.flatMap(item => [
+        { type:"dayEnglishChoice", item },
+        { type:"dayFrenchChoice", item },
+        { type:"dayListenSpell", item }
+      ]));
+    }
+    function makeCalendarQuestions(full = true) {
+      return (full ? shuffle(calendarWords) : sample(calendarWords, 4)).map(item => ({ type:"calendarChoice", item }));
+    }
+    function makeCalendarDateQuestions(full = true) {
+      return (full ? shuffle(calendarDates) : sample(calendarDates, 2)).map(item => ({ type:"calendarDateChoice", item }));
+    }
+    function makeMonthQuestions(full = true) {
+      return (full ? shuffle(months) : sample(months, 3)).map(item => ({ type:"monthChoice", item }));
+    }
+    function makeLesson3TalkQuestions(full = true) {
+      const set = full ? lesson3Dialogues : sample(lesson3Dialogues, 3);
+      return shuffle(set.flatMap(item => [
+        { type:"lesson3Response", item },
+        { type:"reverseQuestion", item }
+      ]));
+    }
+    function makeStoryQuestions(full = true) {
+      const set = full ? shuffle(storyWords) : sample(storyWords, 4);
+      return set.map((item, i) => ({ type:i % 2 ? "storyListenSpell" : "storyChoice", item }));
     }
     function makeCountryQuestions(count = countries.length) {
       const selected = shuffle(countries).slice(0, count);
@@ -767,6 +1005,22 @@
     }
     function buildQueue(mode) {
       if (mode === "numbers") return makeNumberQuestions(true);
+      if (mode === "lesson3-numbers") return makeLesson3NumberQuestions(true);
+      if (mode === "lesson3-days") return shuffle([...makeDayQuestions(true), ...makeCalendarQuestions(true), ...makeCalendarDateQuestions(true), ...makeMonthQuestions(true)]);
+      if (mode === "lesson3-etre") return makeGrammarQuestions(true).filter(q => ["pronounChoice", "etreSpell"].includes(q.type));
+      if (mode === "lesson3-talk") return makeLesson3TalkQuestions(true);
+      if (mode === "lesson3-words") return makeStoryQuestions(true);
+      if (mode === "lesson3") return shuffle([
+        ...makeLesson3NumberQuestions(false),
+        ...makeDayQuestions(false),
+        ...makeCalendarQuestions(false),
+        ...makeCalendarDateQuestions(false),
+        ...makeMonthQuestions(false),
+        ...sample(pronouns, 3).map(item => ({type:"pronounChoice", item})),
+        ...sample(pronouns, 4).map(item => ({type:"etreSpell", item})),
+        ...makeLesson3TalkQuestions(false),
+        ...makeStoryQuestions(false)
+      ]);
       if (mode === "countries") {
         return shuffle([...makeCountryQuestions(countries.length), makeMatchQuestion(), makeMatchQuestion()]);
       }
@@ -785,6 +1039,7 @@
     function normalizeLoose(value) { return value.trim().toLocaleLowerCase("fr").normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[’']/g, "'").replace(/[-\s]+/g, " "); }
     function normalizeExact(value) { return value.trim().replace(/[’']/g, "’").replace(/\s+/g, " "); }
     function normalizePhrase(value) { return normalizeExact(value).toLocaleLowerCase("fr").replace(/[?!.…/]+$/g, "").trim(); }
+    function normalizeLoosePhrase(value) { return normalizeLoose(value).replace(/[?!.,…/]+$/g, "").trim(); }
     function accentTray() {
       return `<div class="accent-tray"><span>Insert:</span>${["É","é","è","ê","ë","à","â","î","ï","ô","ù","û","ü","ç","’","-"].map(x => `<button class="accent-btn" type="button" data-accent="${x}">${x}</button>`).join("")}</div>`;
     }
@@ -802,6 +1057,34 @@
         questionCard.innerHTML = `${meta}<h3>Spell this number in French.</h3><div class="giant-number">${q.item.n}</div><div class="input-row"><input class="answer-input" id="answer" autocomplete="off" autocapitalize="none" spellcheck="false" placeholder="Type the French number…"></div>${answerControls()}`;
       } else if (q.type === "numberListen") {
         questionCard.innerHTML = `${meta}<h3>Which number do you hear?</h3><p class="question-help">Tap the speaker, then enter the number using digits.</p><button class="listen-button" type="button" id="big-audio" aria-label="Play number">${speakerSvg}</button><input class="answer-input" id="answer" type="number" min="1" max="60" inputmode="numeric" placeholder="Type 1–60…">${answerControls(false)}`;
+      } else if (q.type === "numberListenSpell") {
+        questionCard.innerHTML = `${meta}<h3>Spell the number you hear in French.</h3><p class="question-help">Tap the speaker, then write the complete French number word. Accents are optional.</p><button class="listen-button" type="button" id="big-audio" aria-label="Play number">${speakerSvg}</button><input class="answer-input" id="answer" autocomplete="off" spellcheck="false" placeholder="Example: vingt-deux">${accentTray()}${answerControls(false)}`;
+      } else if (q.type === "dayEnglishChoice") {
+        const choices = shuffle([q.item, ...sample(days.filter(item => item.id !== q.item.id), 3)]);
+        questionCard.innerHTML = `${meta}<h3>What does this day mean in English?</h3><div class="grammar-prompt" lang="fr">${q.item.fr}</div><div class="choice-grid">${choices.map(item => `<button class="choice-btn" type="button" data-choice="${item.id}">${item.en}</button>`).join("")}</div>${answerControls()}`;
+      } else if (q.type === "dayFrenchChoice") {
+        const choices = shuffle([q.item, ...sample(days.filter(item => item.id !== q.item.id), 3)]);
+        questionCard.innerHTML = `${meta}<h3>Which French day matches this English day?</h3><div class="translation-box">${q.item.en}</div><div class="choice-grid">${choices.map(item => `<button class="choice-btn" type="button" data-choice="${item.id}">${item.fr}</button>`).join("")}</div>${answerControls()}`;
+      } else if (q.type === "dayListenSpell") {
+        questionCard.innerHTML = `${meta}<h3>Write the day you hear in French.</h3><p class="question-help">Listen, then spell the complete French word.</p><button class="listen-button" type="button" id="big-audio" aria-label="Play day">${speakerSvg}</button><input class="answer-input" id="answer" autocomplete="off" spellcheck="false" placeholder="French day…">${accentTray()}${answerControls(false)}`;
+      } else if (q.type === "calendarChoice") {
+        const choices = shuffle([q.item, ...sample(calendarWords.filter(item => item.id !== q.item.id), 3)]);
+        questionCard.innerHTML = `${meta}<h3>Choose the French calendar expression.</h3><div class="translation-box">${q.item.en}</div><div class="choice-grid">${choices.map(item => `<button class="choice-btn" type="button" data-choice="${item.id}">${item.fr}</button>`).join("")}</div>${answerControls()}`;
+      } else if (q.type === "calendarDateChoice") {
+        const choices = shuffle([q.item.day, ...sample(days.filter(item => item.id !== q.item.day.id), 3)]);
+        questionCard.innerHTML = `${meta}<h3><em>C’est quel jour ?</em></h3><p class="question-help">Use the February calendar from class. What weekday is February ${q.item.date}?</p><div class="giant-number">${q.item.date}</div><div class="choice-grid">${choices.map(item => `<button class="choice-btn" type="button" data-choice="${item.id}">${item.fr}</button>`).join("")}</div>${answerControls()}`;
+      } else if (q.type === "monthChoice") {
+        const choices = shuffle([q.item, ...sample(months.filter(item => item.id !== q.item.id), 3)]);
+        questionCard.innerHTML = `${meta}<h3>Choose the French month.</h3><div class="translation-box">${q.item.en}</div><div class="choice-grid">${choices.map(item => `<button class="choice-btn" type="button" data-choice="${item.id}">${item.fr}</button>`).join("")}</div>${answerControls()}`;
+      } else if (q.type === "storyChoice") {
+        const choices = shuffle([q.item, ...sample(storyWords.filter(item => item.id !== q.item.id), 3)]);
+        questionCard.innerHTML = `${meta}<h3>Which French story word means this?</h3><div class="translation-box">${q.item.en}</div><div class="choice-grid">${choices.map(item => `<button class="choice-btn" type="button" data-choice="${item.id}">${item.fr}</button>`).join("")}</div>${answerControls()}`;
+      } else if (q.type === "storyListenSpell") {
+        questionCard.innerHTML = `${meta}<h3>Write the story word you hear.</h3><p class="question-help">Write the form that is spoken. Accents are optional.</p><button class="listen-button" type="button" id="big-audio" aria-label="Play story word">${speakerSvg}</button><input class="answer-input" id="answer" autocomplete="off" spellcheck="false" placeholder="French word…">${accentTray()}${answerControls(false)}`;
+      } else if (q.type === "lesson3Response") {
+        questionCard.innerHTML = `${meta}<h3>Answer this question in French.</h3><div class="translation-box"><strong lang="fr">${q.item.question}</strong><br>${q.item.englishQuestion}</div><p class="question-help">Use your own information where appropriate.</p><input class="answer-input" id="answer" autocomplete="off" spellcheck="false" placeholder="Your answer in French…">${accentTray()}${answerControls()}`;
+      } else if (q.type === "reverseQuestion") {
+        questionCard.innerHTML = `${meta}<h3>Which question could produce this answer?</h3><div class="translation-box"><strong lang="fr">${q.item.answer}</strong><br>${q.item.englishAnswer}</div><input class="answer-input" id="answer" autocomplete="off" spellcheck="false" placeholder="Write the French question…">${accentTray()}${answerControls()}`;
       } else if (q.type === "pronounChoice") {
         const choices = shuffle([q.item, ...sample(pronouns.filter(item => item.key !== q.item.key), 3)]);
         questionCard.innerHTML = `${meta}<h3>Which French subject pronoun means this?</h3><div class="translation-box">${q.item.meaning}</div><p class="question-help">${q.item.group} pronoun</p><div class="choice-grid">${choices.map(item => `<button class="choice-btn" type="button" data-choice="${item.key}">${item.pronoun}</button>`).join("")}</div>${answerControls()}`;
@@ -860,6 +1143,13 @@
         questionCard.querySelectorAll("[data-choice]").forEach(b => b.classList.toggle("selected", b === button));
       }));
       const audioText = q.type.startsWith("number") ? q.item.fr
+        : q.type.startsWith("day") ? q.item.fr
+        : q.type === "calendarDateChoice" ? q.item.day.fr
+        : q.type === "monthChoice" ? q.item.fr
+        : q.type.startsWith("story") ? (q.item.speak || q.item.fr)
+        : q.type === "calendarChoice" ? q.item.fr.replace("…", "")
+        : q.type === "lesson3Response" ? (q.item.speakQuestion || q.item.question)
+        : q.type === "reverseQuestion" ? q.item.answer
         : q.type === "etreSpell" ? q.item.phrase
         : q.type === "pronounChoice" ? q.item.pronoun.replace(" / j’", "")
         : q.type === "responseWrite" ? (q.item.id === "capital" ? "Oui, je suis de la capitale." : q.item.answer.replace("…", ""))
@@ -966,6 +1256,16 @@
       return actual === normalizePhrase(item.answer);
     }
 
+    function lesson3ResponseMatches(value, item) {
+      const actual = normalizeLoosePhrase(value);
+      if (item.response === "name") return /^je m'appelle\s+.+/.test(actual);
+      if (item.response === "spelling") return /^(ca s'ecrit|c'est)\s+.+/.test(actual);
+      if (item.response === "nationality") return /^je suis\s+.+/.test(actual);
+      if (item.response === "age") return /^j'ai\s+.+\s+ans$/.test(actual);
+      if (item.response === "birthday") return /^c'est le\s+.+/.test(actual);
+      return actual === normalizeLoosePhrase(item.answer);
+    }
+
     function checkAnswer() {
       if (answered) return nextQuestion();
       const q = queue[current];
@@ -978,6 +1278,39 @@
         const value = questionCard.querySelector("#answer").value;
         if (!value) return nudge("Enter the number you heard.");
         ok = Number(value) === q.item.n; correction = `<strong>${q.item.fr} = ${q.item.n}</strong>`;
+      } else if (q.type === "numberListenSpell") {
+        const value = questionCard.querySelector("#answer").value;
+        if (!value.trim()) return nudge("Type the French number you heard.");
+        ok = normalizeLoose(value) === normalizeLoose(q.item.fr); correction = `<strong>${q.item.n} = ${q.item.fr}</strong>`;
+      } else if (["dayEnglishChoice", "dayFrenchChoice", "calendarChoice", "storyChoice"].includes(q.type)) {
+        if (!selectedChoice) return nudge("Choose one answer first.");
+        ok = selectedChoice === q.item.id;
+        correction = `<strong>${q.item.fr} = ${q.item.en}</strong>`;
+      } else if (q.type === "calendarDateChoice") {
+        if (!selectedChoice) return nudge("Choose one weekday first.");
+        ok = selectedChoice === q.item.day.id;
+        correction = `<strong>Le ${q.item.date} février, c’est ${q.item.day.fr}.</strong>`;
+      } else if (q.type === "monthChoice") {
+        if (!selectedChoice) return nudge("Choose one month first.");
+        ok = selectedChoice === q.item.id;
+        correction = `<strong>${q.item.fr} = ${q.item.en}</strong>`;
+      } else if (q.type === "dayListenSpell") {
+        const value = questionCard.querySelector("#answer").value;
+        if (!value.trim()) return nudge("Type the French day you heard.");
+        ok = normalizeLoose(value) === normalizeLoose(q.item.fr); correction = `<strong>${q.item.fr} = ${q.item.en}</strong>`;
+      } else if (q.type === "storyListenSpell") {
+        const value = questionCard.querySelector("#answer").value;
+        if (!value.trim()) return nudge("Type the French word you heard.");
+        ok = normalizeLoose(value) === normalizeLoose(q.item.speak || q.item.fr); correction = `<strong>${q.item.fr} = ${q.item.en}</strong>`;
+      } else if (q.type === "lesson3Response") {
+        const value = questionCard.querySelector("#answer").value;
+        if (!value.trim()) return nudge("Answer the question in French.");
+        ok = lesson3ResponseMatches(value, q.item); correction = `<strong>${q.item.question}</strong><br>Example: ${q.item.answer}`;
+      } else if (q.type === "reverseQuestion") {
+        const value = questionCard.querySelector("#answer").value;
+        if (!value.trim()) return nudge("Write the matching question in French.");
+        ok = q.item.questionVariants.some(question => normalizeLoosePhrase(value) === normalizeLoosePhrase(question));
+        correction = `<strong>${q.item.question}</strong><br>${q.item.answer}`;
       } else if (q.type === "pronounChoice") {
         if (!selectedChoice) return nudge("Choose one pronoun first.");
         ok = selectedChoice === q.item.key;
