@@ -244,12 +244,26 @@
     .action-card .event-icon { display:grid; width:44px; height:44px; place-items:center; background:#fff9e9; border:2px solid #111; border-radius:50%; font-size:1.35rem; }
     .action-card b { display:block; color:#3d613b; }
     .action-card small { color:var(--muted); }
+    .grundy-match-board { position:relative; margin-top:14px; }
+    .grundy-match-lines { position:absolute; inset:0; z-index:1; width:100%; height:100%; overflow:visible; pointer-events:none; }
+    .grundy-match-grid { position:relative; z-index:2; display:grid; grid-template-columns:repeat(3,1fr); gap:42px; }
+    .grundy-match-column { display:grid; align-content:start; gap:8px; }
+    .grundy-match-column h4 { margin:0 0 2px; color:#d5e36f; font-size:.75rem; text-align:center; text-transform:uppercase; letter-spacing:.09em; }
+    .grundy-match-item { min-height:52px; display:grid; place-items:center; width:100%; padding:8px 6px; color:var(--ink); background:#fff9e9; border:2px solid #111; border-radius:11px; box-shadow:3px 3px 0 rgba(0,0,0,.48); cursor:pointer; font-weight:900; text-align:center; }
+    .grundy-match-item.picture { font-size:1.55rem; }
+    .grundy-match-item.selected { outline:4px solid #efca49; outline-offset:1px; }
+    .grundy-match-item.matched { opacity:.72; cursor:default; }
+    .grundy-match-controls { display:flex; flex-wrap:wrap; gap:8px; margin-top:16px; }
+    .grundy-match-feedback { min-height:44px; margin-top:10px; padding:10px 12px; color:#263a31; background:#eef0cb; border-radius:10px; }
+    .grundy-match-feedback.good { color:#155d49; background:#d9f0df; }
+    .grundy-match-feedback.bad { color:#8d3023; background:#ffe0d8; }
     .reveal-lab { grid-column:1 / -1; }
     .memory-lines { display:grid; gap:8px; margin:17px 0; }
-    .memory-line { min-height:48px; display:grid; grid-template-columns:40px 1fr; align-items:center; gap:9px; padding:9px 12px; background:white; border:2px solid #d7cfb6; border-radius:11px; }
+    .memory-line { min-height:48px; display:grid; grid-template-columns:40px 1fr auto; align-items:center; gap:9px; padding:9px 12px; background:white; border:2px solid #d7cfb6; border-radius:11px; }
     .memory-line.blank { color:#6f775f; background:#e8ecc6; border-style:dashed; }
     .memory-line .event-icon { font-size:1.35rem; text-align:center; }
     .memory-line b { font-family:Georgia,serif; font-size:1.05rem; }
+    .memory-line .sound-btn { width:32px; height:32px; }
     .grundy-mode { background:#e8efba; border-color:#94a64f; }
     .grundy-prompt-line { margin:17px 0; padding:18px; color:#f8f4df; background:#263a31; border:3px solid #101817; border-radius:14px; font-family:Georgia,serif; font-size:clamp(1.55rem,4vw,2.3rem); text-align:center; box-shadow:5px 5px 0 #9aaa50; }
 
@@ -387,6 +401,9 @@
       .quiz-calendar-day { min-height: 34px; padding: 5px 3px; font-size: .8rem; }
       .action-grid { grid-template-columns:1fr; }
       .grundy-art { max-height:460px; }
+      .grundy-match-grid { gap:14px; }
+      .grundy-match-item { min-height:48px; padding:6px 3px; font-size:.78rem; }
+      .grundy-match-item.picture { font-size:1.35rem; }
       .quiz-card { padding: 24px 17px; border-radius: 21px; }
       .answer-pair, .choice-grid { grid-template-columns: 1fr; }
       .match-board { grid-template-columns: 1fr; }
@@ -576,8 +593,18 @@
           </article>
           <article>
             <p class="kicker" style="color:#d5e36f">The seven-day story</p>
-            <h3 style="font-family:Georgia,serif;font-size:1.75rem">Match each action to its day</h3>
-            <div class="action-grid" id="grundy-action-grid"></div>
+            <h3 style="font-family:Georgia,serif;font-size:1.75rem">Connect the picture, action &amp; day</h3>
+            <p style="color:rgba(255,255,255,.72)">Tap one item in each column. Lines appear as you build each three-part match.</p>
+            <div class="grundy-match-board" id="grundy-match-board">
+              <svg class="grundy-match-lines" id="grundy-match-lines" aria-hidden="true"></svg>
+              <div class="grundy-match-grid">
+                <section class="grundy-match-column"><h4>Picture</h4><div class="grundy-match-column" id="grundy-picture-column"></div></section>
+                <section class="grundy-match-column"><h4>French action</h4><div class="grundy-match-column" id="grundy-action-column"></div></section>
+                <section class="grundy-match-column"><h4>French day</h4><div class="grundy-match-column" id="grundy-day-column"></div></section>
+              </div>
+            </div>
+            <div class="grundy-match-controls"><button class="btn small" type="button" id="grundy-check-match">Check matches</button><button class="btn secondary small" type="button" id="grundy-clear-match">Clear</button><button class="btn secondary small" type="button" id="grundy-shuffle-match">Shuffle</button></div>
+            <div class="grundy-match-feedback" id="grundy-match-feedback" aria-live="polite">Build seven three-part matches.</div>
           </article>
           <article class="reveal-lab">
             <p class="kicker">No microphone · no score</p>
@@ -1070,7 +1097,99 @@
       ...grundyRhyme.map(item => `<div class="rhyme-line"><span class="event-icon">${item.icon}</span><span><b lang="fr">${item.line}</b><small>${item.actionEn} on ${days.find(day => day.id === item.dayId).en}</small></span><button class="sound-btn" type="button" data-speak="${item.line}" aria-label="Hear ${item.line}">${speakerSvg}</button></div>`),
       `<div class="rhyme-line"><span class="event-icon">🏁</span><span><b lang="fr">${grundyClosing}</b><small>and that is how the rhyme ends</small></span><button class="sound-btn" type="button" data-speak="${grundyClosing}" aria-label="Hear the closing line">${speakerSvg}</button></div>`
     ].join("");
-    document.querySelector("#grundy-action-grid").innerHTML = grundyRhyme.map(item => `<article class="action-card"><span class="event-icon">${item.icon}</span><span><b lang="fr">${item.day}</b><small>${item.action} · ${item.actionEn}</small></span></article>`).join("");
+    const grundyMatchBoard = document.querySelector("#grundy-match-board");
+    const grundyMatchLines = document.querySelector("#grundy-match-lines");
+    const grundyMatchColors = ["#ef6651", "#54a8cf", "#efca49", "#9db95a", "#a985d5", "#ef9a4d", "#55b49c"];
+    let grundyMatchConnections = [];
+    let grundyMatchDraft = { picture:null, action:null, day:null };
+
+    function grundyMatchElement(column, id) {
+      return [...grundyMatchBoard.querySelectorAll(`[data-match-column="${column}"]`)].find(item => item.dataset.matchId === id);
+    }
+    function grundyMatchPoint(column, id, edge) {
+      const item = grundyMatchElement(column, id);
+      if (!item) return null;
+      const boardRect = grundyMatchBoard.getBoundingClientRect();
+      const rect = item.getBoundingClientRect();
+      return { x:(edge === "right" ? rect.right : rect.left) - boardRect.left, y:(rect.top + rect.bottom) / 2 - boardRect.top };
+    }
+    function grundyLine(from, to, color, dashed = false) {
+      if (!from || !to) return "";
+      const bend = Math.max(14, (to.x - from.x) * .42);
+      return `<path d="M ${from.x} ${from.y} C ${from.x + bend} ${from.y}, ${to.x - bend} ${to.y}, ${to.x} ${to.y}" fill="none" stroke="${color}" stroke-width="4" stroke-linecap="round"${dashed ? ` stroke-dasharray="7 7"` : ""}/>`;
+    }
+    function drawGrundyMatchLines() {
+      const width = grundyMatchBoard.clientWidth, height = grundyMatchBoard.clientHeight;
+      grundyMatchLines.setAttribute("viewBox", `0 0 ${width} ${height}`);
+      const completed = grundyMatchConnections.map((match, index) => {
+        const color = grundyMatchColors[index % grundyMatchColors.length];
+        return grundyLine(grundyMatchPoint("picture", match.picture, "right"), grundyMatchPoint("action", match.action, "left"), color)
+          + grundyLine(grundyMatchPoint("action", match.action, "right"), grundyMatchPoint("day", match.day, "left"), color);
+      }).join("");
+      const draftColor = "#efca49";
+      const draft = grundyLine(grundyMatchPoint("picture", grundyMatchDraft.picture, "right"), grundyMatchPoint("action", grundyMatchDraft.action, "left"), draftColor, true)
+        + grundyLine(grundyMatchPoint("action", grundyMatchDraft.action, "right"), grundyMatchPoint("day", grundyMatchDraft.day, "left"), draftColor, true);
+      grundyMatchLines.innerHTML = completed + draft;
+    }
+    function resetGrundyMatchFeedback(message = "Build seven three-part matches.") {
+      const feedback = document.querySelector("#grundy-match-feedback");
+      feedback.className = "grundy-match-feedback";
+      feedback.textContent = message;
+    }
+    function renderGrundyMatchBoard() {
+      const renderColumn = (selector, column, items, label) => {
+        document.querySelector(selector).innerHTML = shuffle(items).map(item => `<button class="grundy-match-item${column === "picture" ? " picture" : ""}" type="button" data-match-column="${column}" data-match-id="${item.id}" aria-label="${label(item)}">${column === "picture" ? item.icon : column === "action" ? item.action : item.day}</button>`).join("");
+      };
+      renderColumn("#grundy-picture-column", "picture", grundyRhyme, item => `${item.actionEn} picture`);
+      renderColumn("#grundy-action-column", "action", grundyRhyme, item => item.action);
+      renderColumn("#grundy-day-column", "day", grundyRhyme, item => item.day);
+      grundyMatchConnections = [];
+      grundyMatchDraft = { picture:null, action:null, day:null };
+      resetGrundyMatchFeedback();
+      requestAnimationFrame(drawGrundyMatchLines);
+    }
+    grundyMatchBoard.addEventListener("click", event => {
+      const button = event.target.closest("[data-match-column]");
+      if (!button || button.disabled) return;
+      const column = button.dataset.matchColumn;
+      grundyMatchBoard.querySelectorAll(`[data-match-column="${column}"].selected`).forEach(item => item.classList.remove("selected"));
+      grundyMatchDraft[column] = button.dataset.matchId;
+      button.classList.add("selected");
+      drawGrundyMatchLines();
+      if (Object.values(grundyMatchDraft).every(Boolean)) {
+        grundyMatchConnections.push({...grundyMatchDraft});
+        Object.entries(grundyMatchDraft).forEach(([matchColumn, id]) => {
+          const item = grundyMatchElement(matchColumn, id);
+          item.classList.remove("selected");
+          item.classList.add("matched");
+          item.disabled = true;
+        });
+        grundyMatchDraft = { picture:null, action:null, day:null };
+        resetGrundyMatchFeedback(`${grundyMatchConnections.length} of 7 matches connected.`);
+        drawGrundyMatchLines();
+      }
+    });
+    document.querySelector("#grundy-clear-match").addEventListener("click", () => {
+      grundyMatchConnections = [];
+      grundyMatchDraft = { picture:null, action:null, day:null };
+      grundyMatchBoard.querySelectorAll(".grundy-match-item").forEach(item => { item.disabled = false; item.classList.remove("selected", "matched"); });
+      resetGrundyMatchFeedback();
+      drawGrundyMatchLines();
+    });
+    document.querySelector("#grundy-shuffle-match").addEventListener("click", renderGrundyMatchBoard);
+    document.querySelector("#grundy-check-match").addEventListener("click", () => {
+      const feedback = document.querySelector("#grundy-match-feedback");
+      if (grundyMatchConnections.length < grundyRhyme.length) {
+        feedback.className = "grundy-match-feedback bad";
+        feedback.textContent = `Connect all seven matches first—${grundyRhyme.length - grundyMatchConnections.length} to go.`;
+        return;
+      }
+      const correct = grundyMatchConnections.every(match => match.picture === match.action && match.action === match.day);
+      feedback.className = `grundy-match-feedback ${correct ? "good" : "bad"}`;
+      feedback.textContent = correct ? "Magnifique ! All seven three-part matches are correct." : "Some lines are crossed. Clear the board and try another arrangement.";
+    });
+    window.addEventListener("resize", drawGrundyMatchLines);
+    renderGrundyMatchBoard();
 
     let grundyMemoryItems = [], grundyMemoryHidden = [], grundyMemoryRevealed = false;
     function newGrundyMemorySet() {
@@ -1083,7 +1202,7 @@
     function renderGrundyMemorySet() {
       document.querySelector("#grundy-memory-lines").innerHTML = grundyMemoryItems.map((item, index) => {
         const hidden = grundyMemoryHidden.includes(index) && !grundyMemoryRevealed;
-        return `<div class="memory-line${hidden ? " blank" : ""}"><span class="event-icon">${hidden ? "❓" : item.icon}</span><b lang="fr">${hidden ? "Say the missing line aloud…" : item.line}</b></div>`;
+        return `<div class="memory-line${hidden ? " blank" : ""}"><span class="event-icon">${hidden ? "❓" : item.icon}</span><b lang="fr">${hidden ? "Say the missing line aloud…" : item.line}</b>${hidden ? "" : `<button class="sound-btn" type="button" data-speak="${item.line}" aria-label="Hear ${item.line}">${speakerSvg}</button>`}</div>`;
       }).join("");
       document.querySelector("#grundy-reveal").disabled = grundyMemoryRevealed;
       document.querySelector("#grundy-reveal").textContent = grundyMemoryRevealed ? "Answers revealed ✓" : "Reveal & play answers";
@@ -1310,7 +1429,7 @@
       } else if (q.type === "storyListenSpell") {
         questionCard.innerHTML = `${meta}<h3>Write the story word you hear.</h3><p class="question-help">Write the form that is spoken. Accents are optional.</p><button class="listen-button" type="button" id="big-audio" aria-label="Play story word">${speakerSvg}</button><input class="answer-input" id="answer" autocomplete="off" spellcheck="false" placeholder="French word…">${accentTray()}${answerControls(false)}`;
       } else if (q.type === "grundySpeakReveal") {
-        questionCard.innerHTML = `${meta}<h3>Say the missing lines aloud.</h3><p class="question-help">This one is practice, not graded. Recite both blanks, then reveal and listen.</p><div class="memory-lines">${q.items.map((item, index) => q.hidden.includes(index) ? `<div class="memory-line blank" data-memory-index="${index}"><span class="event-icon">❓</span><b>Say the missing line…</b></div>` : `<div class="memory-line"><span class="event-icon">${item.icon}</span><b lang="fr">${item.line}</b></div>`).join("")}</div><div class="quiz-actions"><button class="btn small" type="button" id="quiz-reveal-grundy">Reveal &amp; play answers</button><button class="btn blue small" type="button" id="next-question" hidden>Next →</button></div><div class="feedback" id="feedback">Take a breath and say both lines from memory.</div>`;
+        questionCard.innerHTML = `${meta}<h3>Say the missing lines aloud.</h3><p class="question-help">This one is practice, not graded. Recite both blanks, then reveal and listen.</p><div class="memory-lines">${q.items.map((item, index) => q.hidden.includes(index) ? `<div class="memory-line blank" data-memory-index="${index}"><span class="event-icon">❓</span><b>Say the missing line…</b></div>` : `<div class="memory-line"><span class="event-icon">${item.icon}</span><b lang="fr">${item.line}</b><button class="sound-btn" type="button" data-speak="${item.line}" aria-label="Hear ${item.line}">${speakerSvg}</button></div>`).join("")}</div><div class="quiz-actions"><button class="btn small" type="button" id="quiz-reveal-grundy">Reveal &amp; play answers</button><button class="btn blue small" type="button" id="next-question" hidden>Next →</button></div><div class="feedback" id="feedback">Take a breath and say both lines from memory.</div>`;
       } else if (q.type === "grundyListenDay") {
         questionCard.innerHTML = `${meta}<h3>Listen and fill in the weekday.</h3><p class="question-help">Tap the speaker. Type only the missing French weekday.</p><div class="grundy-prompt-line">${q.item.action} un ________</div><button class="listen-button" type="button" id="big-audio" aria-label="Play rhyme line">${speakerSvg}</button><input class="answer-input" id="answer" autocomplete="off" spellcheck="false" placeholder="French weekday…">${accentTray()}${answerControls(false)}`;
       } else if (q.type === "grundyActionChoice") {
@@ -1419,7 +1538,7 @@
         q.hidden.forEach(index => {
           const line = questionCard.querySelector(`[data-memory-index="${index}"]`);
           line.classList.remove("blank");
-          line.innerHTML = `<span class="event-icon">${q.items[index].icon}</span><b lang="fr">${q.items[index].line}</b>`;
+          line.innerHTML = `<span class="event-icon">${q.items[index].icon}</span><b lang="fr">${q.items[index].line}</b><button class="sound-btn" type="button" data-speak="${q.items[index].line}" aria-label="Hear ${q.items[index].line}">${speakerSvg}</button>`;
         });
         event.currentTarget.disabled = true;
         event.currentTarget.textContent = "Answers revealed ✓";
