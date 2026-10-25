@@ -10,7 +10,7 @@
   <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon-180-v2.png">
   <link rel="icon" type="image/png" sizes="192x192" href="./icon-192-v2.png">
   <link rel="manifest" href="./site.webmanifest">
-  <title>French 1A Study Guide — Lessons 2 & 3</title>
+  <title>French 1A Study Guide — Lessons 2, 3 & 4</title>
   <style>
     :root {
       --ink: #173f4f;
@@ -220,6 +220,39 @@
     .lesson-label { grid-column: 1 / -1; margin: 15px 0 -4px; color: rgba(255,255,255,.62); text-transform: uppercase; letter-spacing: .13em; font-size: .76rem; font-weight: 950; }
     .mode-card.lesson3 { background: #fff4d6; border-color: rgba(239,182,62,.38); }
 
+    .grundy-section { position: relative; overflow: hidden; color: #f8f4df; background: radial-gradient(circle at 76% 15%, rgba(137,159,63,.26), transparent 28%), linear-gradient(145deg, #182624 0%, #24382f 52%, #171d24 100%); }
+    .grundy-section::before { content:""; position:absolute; inset:0; pointer-events:none; opacity:.22; background-image: radial-gradient(circle at 20% 30%, #b8ca65 0 2px, transparent 3px), radial-gradient(circle at 80% 70%, #7fa35c 0 1px, transparent 2px); background-size: 47px 47px, 31px 31px; }
+    .grundy-section .wrap { position: relative; }
+    .grundy-hero { display:grid; grid-template-columns: 1.05fr .75fr; align-items:center; gap:30px; }
+    .grundy-copy .kicker { color:#d5e36f; }
+    .grundy-copy h2 { margin-bottom:15px; font-size:clamp(3.1rem, 7vw, 6.2rem); line-height:.88; color:white; text-shadow:5px 5px 0 #111; }
+    .grundy-copy h2 em { color:#d5e36f; font-style:normal; }
+    .grundy-copy > p { max-width:650px; color:rgba(255,255,255,.76); font-size:1.05rem; }
+    .grundy-art { width:100%; max-height:620px; object-fit:contain; filter:drop-shadow(0 24px 30px rgba(0,0,0,.45)); }
+    .comic-burst { display:inline-block; margin-bottom:15px; padding:7px 14px; color:#1b2422; background:#efca49; clip-path:polygon(5% 8%, 14% 16%, 20% 2%, 29% 15%, 39% 4%, 47% 15%, 58% 3%, 67% 15%, 79% 4%, 84% 18%, 97% 12%, 91% 35%, 100% 48%, 90% 62%, 96% 88%, 80% 82%, 72% 98%, 60% 84%, 49% 97%, 39% 84%, 26% 97%, 20% 80%, 4% 88%, 9% 63%, 0 49%, 10% 35%); font-weight:1000; letter-spacing:.06em; text-transform:uppercase; }
+    .grundy-board { display:grid; grid-template-columns:.92fr 1.08fr; gap:18px; margin-top:26px; }
+    .rhyme-card, .reveal-lab { padding:24px; color:var(--ink); background:#fff9e9; border:3px solid #111; border-radius:18px; box-shadow:8px 8px 0 #0c1514; }
+    .rhyme-card h3, .reveal-lab h3 { margin-bottom:7px; font-family:Georgia,serif; font-size:1.75rem; }
+    .rhyme-line { display:grid; grid-template-columns:36px 1fr auto; align-items:center; gap:9px; padding:8px 5px; border-bottom:1px dashed #c9bf9e; }
+    .rhyme-line:last-child { border-bottom:0; }
+    .rhyme-line .event-icon { font-size:1.35rem; text-align:center; }
+    .rhyme-line b { color:#3d613b; font-family:Georgia,serif; font-size:1.08rem; }
+    .rhyme-line small { display:block; color:var(--muted); }
+    .rhyme-line .sound-btn { width:31px; height:31px; }
+    .action-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:10px; }
+    .action-card { display:grid; grid-template-columns:44px 1fr; align-items:center; gap:10px; padding:12px; color:var(--ink); background:#eef0cb; border:2px solid #111; border-radius:13px; box-shadow:4px 4px 0 rgba(0,0,0,.45); }
+    .action-card .event-icon { display:grid; width:44px; height:44px; place-items:center; background:#fff9e9; border:2px solid #111; border-radius:50%; font-size:1.35rem; }
+    .action-card b { display:block; color:#3d613b; }
+    .action-card small { color:var(--muted); }
+    .reveal-lab { grid-column:1 / -1; }
+    .memory-lines { display:grid; gap:8px; margin:17px 0; }
+    .memory-line { min-height:48px; display:grid; grid-template-columns:40px 1fr; align-items:center; gap:9px; padding:9px 12px; background:white; border:2px solid #d7cfb6; border-radius:11px; }
+    .memory-line.blank { color:#6f775f; background:#e8ecc6; border-style:dashed; }
+    .memory-line .event-icon { font-size:1.35rem; text-align:center; }
+    .memory-line b { font-family:Georgia,serif; font-size:1.05rem; }
+    .grundy-mode { background:#e8efba; border-color:#94a64f; }
+    .grundy-prompt-line { margin:17px 0; padding:18px; color:#f8f4df; background:#263a31; border:3px solid #101817; border-radius:14px; font-family:Georgia,serif; font-size:clamp(1.55rem,4vw,2.3rem); text-align:center; box-shadow:5px 5px 0 #9aaa50; }
+
     .quiz-section { min-height: 760px; padding: 86px 0; color: white; background: var(--ink); }
     .quiz-shell { width: min(980px, calc(100% - 32px)); margin-inline: auto; }
     .quiz-intro { text-align: center; }
@@ -330,6 +363,9 @@
       .day-grid { grid-template-columns: repeat(4, 1fr); }
       .month-grid { grid-template-columns: repeat(4, 1fr); }
       .phrase-groups { grid-template-columns: repeat(2, 1fr); }
+      .grundy-hero, .grundy-board { grid-template-columns:1fr; }
+      .grundy-art { max-width:520px; margin-inline:auto; }
+      .reveal-lab { grid-column:auto; }
       .mode-grid { grid-template-columns: 1fr; }
       .mode-card.wide { grid-column: auto; }
     }
@@ -349,6 +385,8 @@
       .month-grid { grid-template-columns: repeat(2, 1fr); }
       .phrase-groups { grid-template-columns: 1fr; }
       .quiz-calendar-day { min-height: 34px; padding: 5px 3px; font-size: .8rem; }
+      .action-grid { grid-template-columns:1fr; }
+      .grundy-art { max-height:460px; }
       .quiz-card { padding: 24px 17px; border-radius: 21px; }
       .answer-pair, .choice-grid { grid-template-columns: 1fr; }
       .match-board { grid-template-columns: 1fr; }
@@ -360,7 +398,7 @@
       .input-row { flex-direction: column; }
       .voice-dialog-body { padding: 20px 18px 22px; }
     }
-    @media print { .site-header, .hero-actions, .quiz-section, .footer, .study-tools, .sound-btn, .lesson3-banner .btn { display: none !important; } body { background: white; } .section { padding: 20px 0; } .country-card, .number-chip, .study-panel, .day-card { break-inside: avoid; box-shadow: none; } }
+    @media print { .site-header, .hero-actions, .quiz-section, .footer, .study-tools, .sound-btn, .lesson3-banner .btn, .grundy-art, .reveal-lab { display: none !important; } body { background: white; } .section { padding: 20px 0; } .country-card, .number-chip, .study-panel, .day-card, .rhyme-card { break-inside: avoid; box-shadow: none; } .grundy-section { color:var(--ink); background:white; } .grundy-copy h2 { color:var(--ink); text-shadow:none; } .grundy-copy > p { color:var(--muted); } }
   </style>
 </head>
 <body>
@@ -368,7 +406,7 @@
   <header class="site-header">
     <nav class="nav wrap" aria-label="Main navigation">
       <a class="brand" href="#top"><span class="brand-badge">1A</span><span>French Study Guide</span></a>
-      <div class="nav-links"><a href="#countries">Lesson 2</a><a href="#lesson3">Lesson 3</a><a href="#quiz">Quiz me</a><button class="nav-voice" type="button" id="voice-settings-open">⚙ Voice</button></div>
+      <div class="nav-links"><a href="#countries">Lesson 2</a><a href="#lesson3">Lesson 3</a><a href="#grundy">Lesson 4</a><a href="#quiz">Quiz me</a><button class="nav-voice" type="button" id="voice-settings-open">⚙ Voice</button></div>
     </nav>
   </header>
 
@@ -381,6 +419,7 @@
           <p class="hero-copy">Review Lesson 2, then jump into the new Lesson 3 material: numbers 0–30, days and calendar words, pronouns, <em>être</em>, personal question pairs, and listening practice. Tap any speaker to hear the French.</p>
           <div class="hero-actions">
             <a class="btn" href="#lesson3">Open Lesson 3</a>
+            <a class="btn blue" href="#grundy">Open Lesson 4</a>
             <button class="btn secondary" type="button" data-start="lesson3">Quiz Lesson 3 →</button>
           </div>
         </div>
@@ -513,6 +552,47 @@
       </div>
     </section>
 
+    <section class="section grundy-section" id="grundy" aria-labelledby="grundy-title">
+      <div class="wrap">
+        <div class="grundy-hero">
+          <div class="grundy-copy">
+            <span class="comic-burst">New · Lesson 4</span>
+            <p class="kicker">Une comptine à mémoriser</p>
+            <h2 id="grundy-title">Salomon <em>Grundy</em></h2>
+            <p>Seven days. Seven dramatic events. Learn the exact rhyme, connect every action to its weekday, then practice hearing, rebuilding, and reciting it.</p>
+            <div class="hero-actions">
+              <button class="btn" type="button" id="play-grundy-rhyme">▶ Hear the whole rhyme</button>
+              <button class="btn secondary" type="button" data-start="grundy">Enter the memory challenge →</button>
+            </div>
+          </div>
+          <img class="grundy-art" src="./salomon-grundy-comic.png" alt="Playful comic-book swamp character holding a seven-panel picture calendar">
+        </div>
+
+        <div class="grundy-board">
+          <article class="rhyme-card">
+            <p class="kicker">The exact rhyme</p>
+            <h3>Read it with rhythm</h3>
+            <div id="grundy-rhyme-lines"></div>
+          </article>
+          <article>
+            <p class="kicker" style="color:#d5e36f">The seven-day story</p>
+            <h3 style="font-family:Georgia,serif;font-size:1.75rem">Match each action to its day</h3>
+            <div class="action-grid" id="grundy-action-grid"></div>
+          </article>
+          <article class="reveal-lab">
+            <p class="kicker">No microphone · no score</p>
+            <h3>Say it, then reveal it</h3>
+            <p>Read the visible lines aloud and recite the missing ones from memory. Reveal plays the hidden answers so you can check your rhythm and pronunciation.</p>
+            <div class="memory-lines" id="grundy-memory-lines"></div>
+            <div class="quiz-actions">
+              <button class="btn small" type="button" id="grundy-reveal">Reveal &amp; play answers</button>
+              <button class="btn secondary small" type="button" id="grundy-another">Another set ↻</button>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
     <section class="quiz-section" id="quiz" aria-labelledby="quiz-title">
       <div class="quiz-shell">
         <div class="quiz-intro" id="quiz-intro">
@@ -533,6 +613,8 @@
             <button class="mode-card lesson3" type="button" data-start="lesson3-talk"><span class="mode-icon">🗣️</span><h3>Question Pairs</h3><p>Answer a question—or work backward from the answer.</p></button>
             <button class="mode-card lesson3" type="button" data-start="chapter1"><span class="mode-icon">👋</span><h3>Chapter 1 Conversations</h3><p>Greetings, farewells, names, responses, introductions, and age.</p></button>
             <button class="mode-card lesson3 wide" type="button" data-start="lesson3-words"><span class="mode-icon">📖</span><h3>Story Words</h3><p>Practice the assigned vocabulary without the poem or character.</p></button>
+            <div class="lesson-label">Lesson 4 · rhyme memory</div>
+            <button class="mode-card grundy-mode wide" type="button" data-start="grundy"><span class="mode-icon">🧟</span><h3>Salomon Grundy Memory Mix</h3><p>Hear and type weekdays, match days to actions, rebuild missing lines, and practice aloud with reveal cards—all shuffled together.</p></button>
           </div>
           <p class="best-score" id="best-score">No saved score yet — today’s a clean slate.</p>
         </div>
@@ -729,6 +811,19 @@
       { id:"buried", fr:"enterré / enterrée", speak:"enterré", en:"buried" },
       { id:"ends", fr:"finit", speak:"finit", en:"ends / finishes" }
     ];
+
+    const grundyOpening = "Salomon Grundy,";
+    const grundyClosing = "Et c’est ainsi que finit Salomon Grundy.";
+    const grundyRhyme = [
+      { id:"grundy-born", dayId:"monday", day:"lundi", action:"Né", actionEn:"born", icon:"🍼", line:"Né un lundi," },
+      { id:"grundy-baptized", dayId:"tuesday", day:"mardi", action:"Baptisé", actionEn:"baptized", icon:"💧", line:"Baptisé un mardi," },
+      { id:"grundy-married", dayId:"wednesday", day:"mercredi", action:"Marié", actionEn:"married", icon:"💍", line:"Marié un mercredi," },
+      { id:"grundy-sick", dayId:"thursday", day:"jeudi", action:"Malade", actionEn:"sick", icon:"🌡️", line:"Malade un jeudi," },
+      { id:"grundy-worse", dayId:"friday", day:"vendredi", action:"Pire", actionEn:"worse", icon:"⛈️", line:"Pire un vendredi," },
+      { id:"grundy-dead", dayId:"saturday", day:"samedi", action:"Mort", actionEn:"dead", icon:"🪦", line:"Mort un samedi," },
+      { id:"grundy-buried", dayId:"sunday", day:"dimanche", action:"Enterré", actionEn:"buried", icon:"⛏️", line:"Enterré un dimanche." }
+    ];
+    const grundyFullRhyme = [grundyOpening, ...grundyRhyme.map(item => item.line), grundyClosing];
 
     const baseNumbers = ["zéro","un","deux","trois","quatre","cinq","six","sept","huit","neuf","dix","onze","douze","treize","quatorze","quinze","seize","dix-sept","dix-huit","dix-neuf"];
     function numberWord(n) {
@@ -970,6 +1065,31 @@
     const lesson3PronounColumns = document.querySelector("#lesson3-pronoun-columns");
     lesson3PronounColumns.innerHTML = ["Singular", "Plural"].map(group => `<section class="pronoun-group"><h4>${group}</h4>${pronouns.filter(item => item.group === group).map(item => `<div class="pronoun-row"><span><b lang="fr">${item.pronoun}</b><small>${item.meaning}</small></span><span class="etre-form" lang="fr">${item.phrase}</span><button class="sound-btn" type="button" data-speak="${item.phrase}" aria-label="Hear ${item.phrase}">${speakerSvg}</button></div>`).join("")}</section>`).join("");
 
+    document.querySelector("#grundy-rhyme-lines").innerHTML = [
+      `<div class="rhyme-line"><span class="event-icon">📖</span><span><b lang="fr">${grundyOpening}</b><small>the opening</small></span><button class="sound-btn" type="button" data-speak="${grundyOpening}" aria-label="Hear ${grundyOpening}">${speakerSvg}</button></div>`,
+      ...grundyRhyme.map(item => `<div class="rhyme-line"><span class="event-icon">${item.icon}</span><span><b lang="fr">${item.line}</b><small>${item.actionEn} on ${days.find(day => day.id === item.dayId).en}</small></span><button class="sound-btn" type="button" data-speak="${item.line}" aria-label="Hear ${item.line}">${speakerSvg}</button></div>`),
+      `<div class="rhyme-line"><span class="event-icon">🏁</span><span><b lang="fr">${grundyClosing}</b><small>and that is how the rhyme ends</small></span><button class="sound-btn" type="button" data-speak="${grundyClosing}" aria-label="Hear the closing line">${speakerSvg}</button></div>`
+    ].join("");
+    document.querySelector("#grundy-action-grid").innerHTML = grundyRhyme.map(item => `<article class="action-card"><span class="event-icon">${item.icon}</span><span><b lang="fr">${item.day}</b><small>${item.action} · ${item.actionEn}</small></span></article>`).join("");
+
+    let grundyMemoryItems = [], grundyMemoryHidden = [], grundyMemoryRevealed = false;
+    function newGrundyMemorySet() {
+      const start = Math.floor(Math.random() * 4);
+      grundyMemoryItems = grundyRhyme.slice(start, start + 4);
+      grundyMemoryHidden = [1, 3];
+      grundyMemoryRevealed = false;
+      renderGrundyMemorySet();
+    }
+    function renderGrundyMemorySet() {
+      document.querySelector("#grundy-memory-lines").innerHTML = grundyMemoryItems.map((item, index) => {
+        const hidden = grundyMemoryHidden.includes(index) && !grundyMemoryRevealed;
+        return `<div class="memory-line${hidden ? " blank" : ""}"><span class="event-icon">${hidden ? "❓" : item.icon}</span><b lang="fr">${hidden ? "Say the missing line aloud…" : item.line}</b></div>`;
+      }).join("");
+      document.querySelector("#grundy-reveal").disabled = grundyMemoryRevealed;
+      document.querySelector("#grundy-reveal").textContent = grundyMemoryRevealed ? "Answers revealed ✓" : "Reveal & play answers";
+    }
+    newGrundyMemorySet();
+
     const rapidNumberTaps = { word:"", times:[], quietUntil:0 };
     function rapidNumberTapAction(target) {
       if (!target.classList.contains("number-chip")) return "normal";
@@ -1002,6 +1122,14 @@
     document.querySelector("#play-l3-numbers").addEventListener("click", () => speakSequence(lesson3Numbers.map(item => item.fr), .9));
     document.querySelector("#play-days").addEventListener("click", () => speakSequence(days.map(item => item.fr), .82));
     document.querySelector("#play-chapter1").addEventListener("click", () => speakSequence(chapter1Phrases.map(item => item.speak || item.fr.replace("…", "")), .86));
+    document.querySelector("#play-grundy-rhyme").addEventListener("click", () => speakSequence(grundyFullRhyme, .78));
+    document.querySelector("#grundy-reveal").addEventListener("click", () => {
+      if (grundyMemoryRevealed) return;
+      grundyMemoryRevealed = true;
+      renderGrundyMemorySet();
+      speakSequence(grundyMemoryHidden.map(index => grundyMemoryItems[index].line), .76);
+    });
+    document.querySelector("#grundy-another").addEventListener("click", () => { window.speechSynthesis?.cancel(); newGrundyMemorySet(); });
     document.querySelectorAll("#stop-audio, #stop-audio-2, #stop-audio-3").forEach(b => b.addEventListener("click", () => window.speechSynthesis?.cancel()));
 
     const quizIntro = document.querySelector("#quiz-intro");
@@ -1060,6 +1188,19 @@
       const writing = sample(writingPool, full ? 12 : 4).map(item => ({ type:"chapter1Write", item }));
       return shuffle([...recognition, ...writing]);
     }
+    function makeGrundyQuestions() {
+      const listening = grundyRhyme.map(item => ({ type:"grundyListenDay", item }));
+      const matching = grundyRhyme.flatMap(item => [
+        { type:"grundyActionChoice", item },
+        { type:"grundyDayChoice", item }
+      ]);
+      const missingLines = grundyRhyme.slice(1, 6).map(item => ({ type:"grundyMissingLine", item }));
+      const speaking = [0, 1, 2, 3].map(start => {
+        const items = grundyRhyme.slice(start, start + 4);
+        return { type:"grundySpeakReveal", items, hidden:[1, 3], item:items[0] };
+      });
+      return shuffle([...listening, ...matching, ...missingLines, ...speaking]);
+    }
     function makeCountryQuestions(count = countries.length) {
       const selected = shuffle(countries).slice(0, count);
       return selected.flatMap((c, i) => {
@@ -1091,6 +1232,7 @@
       if (mode === "lesson3-etre") return makeGrammarQuestions(true).filter(q => ["pronounChoice", "etreSpell"].includes(q.type));
       if (mode === "lesson3-talk") return shuffle([...makeLesson3TalkQuestions(true), ...makeChapter1Questions(false)]);
       if (mode === "chapter1") return makeChapter1Questions(true);
+      if (mode === "grundy") return makeGrundyQuestions();
       if (mode === "lesson3-words") return makeStoryQuestions(true);
       if (mode === "lesson3") return shuffle([
         ...makeLesson3NumberQuestions(false),
@@ -1130,11 +1272,14 @@
       return `<div class="quiz-actions"><button class="btn small" type="button" id="check-answer">Check answer</button>${includeAudio ? `<button class="btn secondary small" type="button" id="question-audio">${speakerSvg} Hear it</button>` : ""}<button class="btn blue small" type="button" id="next-question" hidden>Next →</button></div><div class="feedback" id="feedback">Take your best shot.</div>`;
     }
 
+    function isScoredQuestion(question) { return question.type !== "grundySpeakReveal"; }
+
     function renderQuestion() {
       answered = false; selectedChoice = null; activeInput = null; matchState = {};
       const q = queue[current];
       progressBar.style.width = `${(current / queue.length) * 100}%`;
-      scorePill.textContent = `${score} / ${current}`;
+      const gradedSoFar = queue.slice(0, current).filter(isScoredQuestion).length;
+      scorePill.textContent = q.type === "grundySpeakReveal" ? "Say it aloud" : `${score} / ${gradedSoFar}`;
       const meta = `<div class="question-meta">Question ${current + 1} of ${queue.length}</div>`;
       if (q.type === "numberSpell") {
         questionCard.innerHTML = `${meta}<h3>Spell this number in French.</h3><div class="giant-number">${q.item.n}</div><div class="input-row"><input class="answer-input" id="answer" autocomplete="off" autocapitalize="none" spellcheck="false" placeholder="Type the French number…"></div>${answerControls()}`;
@@ -1164,6 +1309,20 @@
         questionCard.innerHTML = `${meta}<h3>Which French story word means this?</h3><div class="translation-box">${q.item.en}</div><div class="choice-grid">${choices.map(item => `<button class="choice-btn" type="button" data-choice="${item.id}">${item.fr}</button>`).join("")}</div>${answerControls()}`;
       } else if (q.type === "storyListenSpell") {
         questionCard.innerHTML = `${meta}<h3>Write the story word you hear.</h3><p class="question-help">Write the form that is spoken. Accents are optional.</p><button class="listen-button" type="button" id="big-audio" aria-label="Play story word">${speakerSvg}</button><input class="answer-input" id="answer" autocomplete="off" spellcheck="false" placeholder="French word…">${accentTray()}${answerControls(false)}`;
+      } else if (q.type === "grundySpeakReveal") {
+        questionCard.innerHTML = `${meta}<h3>Say the missing lines aloud.</h3><p class="question-help">This one is practice, not graded. Recite both blanks, then reveal and listen.</p><div class="memory-lines">${q.items.map((item, index) => q.hidden.includes(index) ? `<div class="memory-line blank" data-memory-index="${index}"><span class="event-icon">❓</span><b>Say the missing line…</b></div>` : `<div class="memory-line"><span class="event-icon">${item.icon}</span><b lang="fr">${item.line}</b></div>`).join("")}</div><div class="quiz-actions"><button class="btn small" type="button" id="quiz-reveal-grundy">Reveal &amp; play answers</button><button class="btn blue small" type="button" id="next-question" hidden>Next →</button></div><div class="feedback" id="feedback">Take a breath and say both lines from memory.</div>`;
+      } else if (q.type === "grundyListenDay") {
+        questionCard.innerHTML = `${meta}<h3>Listen and fill in the weekday.</h3><p class="question-help">Tap the speaker. Type only the missing French weekday.</p><div class="grundy-prompt-line">${q.item.action} un ________</div><button class="listen-button" type="button" id="big-audio" aria-label="Play rhyme line">${speakerSvg}</button><input class="answer-input" id="answer" autocomplete="off" spellcheck="false" placeholder="French weekday…">${accentTray()}${answerControls(false)}`;
+      } else if (q.type === "grundyActionChoice") {
+        const choices = shuffle([q.item, ...sample(grundyRhyme.filter(item => item.id !== q.item.id), 3)]);
+        questionCard.innerHTML = `${meta}<h3>What happened on this day?</h3><div class="grundy-prompt-line" lang="fr">${q.item.day}</div><div class="choice-grid">${choices.map(item => `<button class="choice-btn" type="button" data-choice="${item.id}">${item.icon} ${item.action} · ${item.actionEn}</button>`).join("")}</div>${answerControls(false)}`;
+      } else if (q.type === "grundyDayChoice") {
+        const choices = shuffle([q.item, ...sample(grundyRhyme.filter(item => item.id !== q.item.id), 3)]);
+        questionCard.innerHTML = `${meta}<h3>On which day did this happen?</h3><div class="grundy-prompt-line">${q.item.icon} ${q.item.action} <small>(${q.item.actionEn})</small></div><div class="choice-grid">${choices.map(item => `<button class="choice-btn" type="button" data-choice="${item.id}">${item.day}</button>`).join("")}</div>${answerControls(false)}`;
+      } else if (q.type === "grundyMissingLine") {
+        const index = grundyRhyme.findIndex(item => item.id === q.item.id);
+        const choices = shuffle([q.item, ...sample(grundyRhyme.filter(item => item.id !== q.item.id), 3)]);
+        questionCard.innerHTML = `${meta}<h3>Choose the missing line.</h3><p class="question-help">Use the rhyme’s exact order.</p><div class="grundy-prompt-line"><span>${grundyRhyme[index - 1].line}</span><br><strong>________________</strong><br><span>${grundyRhyme[index + 1].line}</span></div><div class="choice-grid">${choices.map(item => `<button class="choice-btn" type="button" data-choice="${item.id}">${item.line}</button>`).join("")}</div>${answerControls(false)}`;
       } else if (q.type === "chapter1Choice") {
         const choices = shuffle([q.item, ...sample(chapter1Phrases.filter(item => item.id !== q.item.id), 3)]);
         questionCard.innerHTML = `${meta}<h3>Choose the correct French phrase.</h3><div class="translation-box">${q.item.en}</div><div class="choice-grid">${choices.map(item => `<button class="choice-btn" type="button" data-choice="${item.id}">${item.fr}</button>`).join("")}</div>${answerControls()}`;
@@ -1238,6 +1397,7 @@
         : q.type === "calendarDateChoice" ? q.item.day.fr
         : q.type === "monthChoice" ? q.item.fr
         : q.type.startsWith("story") ? (q.item.speak || q.item.fr)
+        : q.type.startsWith("grundy") ? q.item.line
         : q.type.startsWith("chapter1") ? (q.item.speak || q.item.accepted[0])
         : q.type === "calendarChoice" ? q.item.fr.replace("…", "")
         : q.type === "lesson3Response" ? (q.item.speakQuestion || q.item.question)
@@ -1254,6 +1414,22 @@
       });
       questionCard.querySelector("#big-audio")?.addEventListener("click", () => speak(audioText));
       questionCard.querySelector("#check-answer")?.addEventListener("click", checkAnswer);
+      questionCard.querySelector("#quiz-reveal-grundy")?.addEventListener("click", event => {
+        if (answered) return;
+        q.hidden.forEach(index => {
+          const line = questionCard.querySelector(`[data-memory-index="${index}"]`);
+          line.classList.remove("blank");
+          line.innerHTML = `<span class="event-icon">${q.items[index].icon}</span><b lang="fr">${q.items[index].line}</b>`;
+        });
+        event.currentTarget.disabled = true;
+        event.currentTarget.textContent = "Answers revealed ✓";
+        questionCard.querySelector("#next-question").hidden = false;
+        const feedback = questionCard.querySelector("#feedback");
+        feedback.className = "feedback good";
+        feedback.textContent = "Nice practice—listen, repeat, then move on when ready.";
+        answered = true;
+        speakSequence(q.hidden.map(index => q.items[index].line), .76);
+      });
       questionCard.querySelector("#next-question")?.addEventListener("click", nextQuestion);
     }
 
@@ -1337,7 +1513,8 @@
       questionCard.querySelector("#next-question").hidden = false;
       questionCard.querySelectorAll("input, .choice-btn, .flag-token, .capital-token, .drop-zone").forEach(el => el.disabled = true);
       if (ok) score++;
-      scorePill.textContent = `${score} / ${current + 1}`;
+      const gradedThroughCurrent = queue.slice(0, current + 1).filter(isScoredQuestion).length;
+      scorePill.textContent = `${score} / ${gradedThroughCurrent}`;
       answered = true;
     }
 
@@ -1374,10 +1551,19 @@
         const value = questionCard.querySelector("#answer").value;
         if (!value.trim()) return nudge("Type the French number you heard.");
         ok = normalizeLoose(value) === normalizeLoose(q.item.fr); correction = `<strong>${q.item.n} = ${q.item.fr}</strong>`;
+      } else if (q.type === "grundyListenDay") {
+        const value = questionCard.querySelector("#answer").value;
+        if (!value.trim()) return nudge("Type the missing French weekday.");
+        ok = normalizeLoose(value) === normalizeLoose(q.item.day);
+        correction = `<strong>${q.item.line}</strong><br>${q.item.actionEn} on ${days.find(day => day.id === q.item.dayId).en}`;
       } else if (["dayEnglishChoice", "dayFrenchChoice", "calendarChoice", "storyChoice", "chapter1Choice", "chapter1Listen"].includes(q.type)) {
         if (!selectedChoice) return nudge("Choose one answer first.");
         ok = selectedChoice === q.item.id;
         correction = `<strong>${q.item.fr} = ${q.item.en}</strong>`;
+      } else if (["grundyActionChoice", "grundyDayChoice", "grundyMissingLine"].includes(q.type)) {
+        if (!selectedChoice) return nudge("Choose one answer first.");
+        ok = selectedChoice === q.item.id;
+        correction = `<strong>${q.item.line}</strong><br>${q.item.actionEn} on ${days.find(day => day.id === q.item.dayId).en}`;
       } else if (q.type === "calendarDateChoice") {
         if (!selectedChoice) return nudge("Choose one weekday first.");
         ok = selectedChoice === q.item.day.id;
@@ -1500,12 +1686,13 @@
     }
     function finishTest() {
       quizPanel.classList.remove("active"); results.classList.add("active"); progressBar.style.width = "100%";
-      const percent = Math.round((score / queue.length) * 100);
+      const scoredTotal = queue.filter(isScoredQuestion).length;
+      const percent = Math.round((score / scoredTotal) * 100);
       document.querySelector("#result-medal").textContent = percent >= 90 ? "🏆" : percent >= 75 ? "🥇" : percent >= 60 ? "🥈" : "🌱";
       document.querySelector("#result-title").textContent = percent >= 90 ? "Magnifique !" : percent >= 75 ? "Très bien !" : percent >= 60 ? "Bien joué !" : "Keep practicing!";
       document.querySelector("#result-message").textContent = percent >= 80 ? "You’re looking ready for the test." : "Review the study guide, then give it another go.";
-      document.querySelector("#result-score").textContent = `${score} / ${queue.length} · ${percent}%`;
-      try { const old = JSON.parse(localStorage.getItem("french.test2.best") || "{}"); if (!old.percent || percent > old.percent) localStorage.setItem("french.test2.best", JSON.stringify({percent, score, total:queue.length})); } catch {}
+      document.querySelector("#result-score").textContent = `${score} / ${scoredTotal} · ${percent}%`;
+      try { const old = JSON.parse(localStorage.getItem("french.test2.best") || "{}"); if (!old.percent || percent > old.percent) localStorage.setItem("french.test2.best", JSON.stringify({percent, score, total:scoredTotal})); } catch {}
     }
     function updateBest() {
       try { const best = JSON.parse(localStorage.getItem("french.test2.best") || "{}"); document.querySelector("#best-score").textContent = best.percent ? `Best saved score: ${best.score}/${best.total} · ${best.percent}%` : "No saved score yet — today’s a clean slate."; } catch {}
