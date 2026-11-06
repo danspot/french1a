@@ -390,6 +390,27 @@
     .voice-note strong { color: var(--ink); }
     .voice-actions { display: flex; justify-content: flex-end; flex-wrap: wrap; gap: 9px; margin-top: 20px; }
 
+    .stats-dialog { width: min(900px, calc(100% - 28px)); }
+    .stats-body { padding: 24px; }
+    .stats-summary { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; margin: 0 0 16px; }
+    .stats-metric { padding: 16px; background: var(--green-pale); border: 1px solid #c5dfd2; border-radius: 14px; }
+    .stats-metric dt { color: #285b49; font-size: .82rem; font-weight: 850; }
+    .stats-metric dd { margin: 7px 0 0; font-size: clamp(1.35rem, 3vw, 1.9rem); font-weight: 950; }
+    .stats-metric small { display: block; margin-top: 5px; color: var(--muted); font-size: .76rem; }
+    .stats-extras { display: flex; flex-wrap: wrap; gap: 8px 20px; margin-bottom: 22px; color: var(--muted); }
+    .stats-extras strong { color: var(--ink); }
+    .stats-block + .stats-block { margin-top: 25px; }
+    .stats-block h3 { margin-bottom: 8px; font-family: Georgia, serif; font-size: 1.4rem; }
+    .stats-table { width: 100%; border-collapse: collapse; text-align: left; font-size: .88rem; }
+    .stats-table th, .stats-table td { padding: 11px 8px; border-bottom: 1px solid var(--line); vertical-align: top; }
+    .stats-table th { color: var(--muted); font-size: .77rem; }
+    .stats-table td small { display: block; margin-top: 3px; color: var(--muted); }
+    .stats-table td:first-child { width: 44%; }
+    .stats-empty { padding: 18px; color: var(--muted); background: var(--cream); border-radius: 12px; }
+    .stats-note { margin: 22px 0 0; padding: 14px 16px; color: var(--muted); background: var(--blue-pale); border-radius: 12px; font-size: .82rem; }
+    .stats-footer { display: flex; justify-content: flex-end; padding-top: 20px; }
+    .quiz-stats-button { margin-top: 16px; }
+
     @media (max-width: 860px) {
       .hero-grid { grid-template-columns: 1fr; }
       .hero-card { max-width: 580px; transform: none; }
@@ -451,6 +472,11 @@
       .score-pill { grid-column: 1 / -1; justify-self: end; }
       .input-row { flex-direction: column; }
       .voice-dialog-body { padding: 20px 18px 22px; }
+      .stats-body { padding: 18px 14px; }
+      .stats-summary { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .stats-metric { padding: 13px; }
+      .stats-table { font-size: .78rem; }
+      .stats-table th, .stats-table td { padding-inline: 4px; }
     }
     @media (any-pointer: coarse) {
       .btn.small, .brand, .nav-voice, .nav-links a, .quiz-toolbar button, .dialog-x { min-height: 44px; min-width: 44px; }
@@ -481,6 +507,7 @@
             <a class="btn" href="#lesson5">Open Lesson 5</a>
             <button class="btn blue" type="button" data-start="lesson5">Practice Lesson 5 →</button>
             <a class="btn secondary" href="#quiz">All practice modes</a>
+            <button class="btn secondary" type="button" data-open-stats>📊 Usage stats</button>
           </div>
         </div>
         <aside class="hero-card" aria-label="Test coverage">
@@ -711,6 +738,7 @@
           <p class="kicker" style="color:#efb63e">Ready?</p>
           <h2 id="quiz-title">Choose your challenge.</h2>
           <p>Choose a lesson or a focused skill. Writing and matching give instant feedback; speaking rounds let you reveal a model and repeat aloud without a microphone or a score.</p>
+          <button class="btn secondary small quiz-stats-button" type="button" data-open-stats>📊 View usage stats</button>
           <div class="mode-grid">
             <div class="lesson-label">New · Lesson 5 · months &amp; everyday conversations</div>
             <button class="mode-card lesson5 wide" type="button" data-start="lesson5"><span class="mode-icon">🌟</span><h3>Lesson 5 Practice Mix</h3><p>24 activities: all twelve months across writing, listening, speaking, and number matching, plus twelve phrases with missing words.</p></button>
@@ -755,7 +783,7 @@
           <h2 id="result-title">Bravo !</h2>
           <p id="result-message">You finished Test Prep #2.</p>
           <div class="result-score" id="result-score">0 / 0</div>
-          <div class="result-actions"><button class="btn" type="button" id="retry-test">Try this mode again</button><button class="btn secondary" type="button" id="choose-mode">Choose another mode</button></div>
+          <div class="result-actions"><button class="btn" type="button" id="retry-test">Try this mode again</button><button class="btn secondary" type="button" id="choose-mode">Choose another mode</button><button class="btn secondary" type="button" data-open-stats>📊 View usage stats</button></div>
         </div>
       </div>
     </section>
@@ -788,6 +816,33 @@
         <button class="btn secondary small" type="button" id="voice-dialog-close">Done</button>
         <button class="btn small" type="button" id="test-voice">▶ Preview</button>
       </div>
+    </div>
+  </dialog>
+
+  <dialog class="voice-dialog stats-dialog" id="stats-dialog" aria-labelledby="stats-dialog-title">
+    <div class="voice-dialog-header">
+      <h2 id="stats-dialog-title">Your practice stats</h2>
+      <p>Practice history saved on this iPad or browser.</p>
+      <button class="dialog-x" type="button" id="stats-dialog-x" aria-label="Close usage stats">×</button>
+    </div>
+    <div class="stats-body">
+      <p id="stats-since"></p>
+      <dl class="stats-summary" id="stats-summary"></dl>
+      <div class="stats-extras" id="stats-extras"></div>
+      <section class="stats-block" aria-labelledby="stats-week-title">
+        <h3 id="stats-week-title">The last 7 days</h3>
+        <table class="stats-table"><thead><tr><th scope="col">Day</th><th scope="col">Active time</th><th scope="col">Correct / answered</th></tr></thead><tbody id="stats-days"></tbody></table>
+      </section>
+      <section class="stats-block" aria-labelledby="stats-activities-title">
+        <h3 id="stats-activities-title">By activity</h3>
+        <div id="stats-activities"></div>
+      </section>
+      <section class="stats-block" aria-labelledby="stats-recent-title">
+        <h3 id="stats-recent-title">Recent practice</h3>
+        <div id="stats-recent"></div>
+      </section>
+      <p class="stats-note" id="stats-note"></p>
+      <div class="stats-footer"><button class="btn small" type="button" id="stats-dialog-close">Done</button></div>
     </div>
   </dialog>
 
@@ -1425,6 +1480,158 @@
     const scorePill = document.querySelector("#score-pill");
     let queue = [], current = 0, score = 0, currentMode = "mixed", answered = false, selectedChoice = null, activeInput = null, matchState = {};
 
+    const usageStorageKey = "french.usage.v1";
+    const usageModeNames = {
+      mixed:"Lesson 2 · Test prep", numbers:"Lesson 2 · Numbers 1–60", countries:"Lesson 2 · Countries", capitals:"Lesson 2 · Capitals", grammar:"Lesson 2 · Grammar & conversation",
+      lesson3:"Lesson 3 · Mixed quiz", "lesson3-numbers":"Lesson 3 · Numbers 0–30", "lesson3-days":"Lesson 3 · Days & calendar", "lesson3-etre":"Lesson 3 · Pronouns & être", "lesson3-talk":"Lesson 3 · Question pairs", chapter1:"Chapter 1 · Conversations", "lesson3-words":"Lesson 3 · Story words", grundy:"Lesson 4 · Salomon Grundy",
+      lesson5:"Lesson 5 · Practice mix", "months-write":"Lesson 5 · Write the months", "months-listen-write":"Lesson 5 · Hear & spell months", "months-speak":"Lesson 5 · Say the months", "months-read-number":"Lesson 5 · Written month → number", "months-hear-number":"Lesson 5 · Spoken month → number", "phrase-gaps":"Lesson 5 · Missing words"
+    };
+    const statsDialog = document.querySelector("#stats-dialog");
+    let usageCanSave = true;
+    function emptyUsageCounters() { return { activeMs:0, started:0, completed:0, answered:0, correct:0, hints:0, speaking:0 }; }
+    function usageNumber(value) { return typeof value === "number" && Number.isFinite(value) ? Math.max(0, Math.min(Number.MAX_SAFE_INTEGER, Math.floor(value))) : 0; }
+    function cleanUsageCounters(value) { return Object.fromEntries(Object.keys(emptyUsageCounters()).map(key => [key, usageNumber(value?.[key])])); }
+    function freshUsageStats() { return { version:1, since:Date.now(), activeMs:0, days:{}, modes:{}, recent:[] }; }
+    function loadUsageStats() {
+      const clean = freshUsageStats();
+      try {
+        const saved = JSON.parse(localStorage.getItem(usageStorageKey) || "null");
+        if (saved?.version !== 1) return clean;
+        clean.since = Math.min(Date.now(), usageNumber(saved.since)) || clean.since;
+        clean.activeMs = usageNumber(saved.activeMs);
+        Object.entries(saved.days || {}).filter(([key]) => /^\d{4}-\d{2}-\d{2}$/.test(key)).sort(([a], [b]) => b.localeCompare(a)).slice(0, 366).forEach(([key, value]) => { clean.days[key] = cleanUsageCounters(value); });
+        Object.keys(usageModeNames).forEach(mode => { if (saved.modes?.[mode]) clean.modes[mode] = cleanUsageCounters(saved.modes[mode]); });
+        clean.recent = (Array.isArray(saved.recent) ? saved.recent : []).filter(item => item && Object.keys(usageModeNames).includes(item.mode)).slice(0, 20).map(item => ({ ...cleanUsageCounters(item), mode:item.mode, at:Math.min(Date.now(), usageNumber(item.at)), total:usageNumber(item.total), finished:item.finished === true }));
+      } catch { usageCanSave = false; }
+      return clean;
+    }
+    const usageStats = loadUsageStats();
+    let currentUsageSession = null;
+    let usageLastTick = Date.now(), usageLastInteraction = usageLastTick;
+    let usagePageVisible = !document.hidden, usageViewingStats = false;
+
+    function usageDayKey(timestamp) {
+      const date = new Date(timestamp);
+      return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, "0")}-${String(date.getDate()).padStart(2, "0")}`;
+    }
+    function usageDay(timestamp = Date.now()) { return usageStats.days[usageDayKey(timestamp)] ||= emptyUsageCounters(); }
+    function saveUsageStats() {
+      Object.keys(usageStats.days).sort().reverse().slice(366).forEach(key => { delete usageStats.days[key]; });
+      try { localStorage.setItem(usageStorageKey, JSON.stringify(usageStats)); usageCanSave = true; }
+      catch { usageCanSave = false; }
+    }
+    function flushUsageTime(now = Date.now()) {
+      const end = Math.min(now, usageLastInteraction + 120000);
+      if (usagePageVisible && !usageViewingStats && end > usageLastTick) {
+        usageStats.activeMs += end - usageLastTick;
+        // Split elapsed time at local midnight, including daylight-saving changes.
+        let cursor = usageLastTick;
+        while (cursor < end) {
+          const midnight = new Date(cursor);
+          midnight.setHours(24, 0, 0, 0);
+          const until = Math.min(end, midnight.getTime());
+          usageDay(cursor).activeMs += until - cursor;
+          cursor = until;
+        }
+      }
+      usageLastTick = now;
+    }
+    function usageInteraction() {
+      if (usageViewingStats) return;
+      flushUsageTime();
+      usageLastInteraction = Date.now();
+    }
+    ["pointerdown", "keydown", "scroll"].forEach(event => document.addEventListener(event, usageInteraction, { passive:true, capture:true }));
+    setInterval(() => { flushUsageTime(); saveUsageStats(); }, 15000);
+    document.addEventListener("visibilitychange", () => {
+      flushUsageTime();
+      usagePageVisible = !document.hidden;
+      usageLastTick = usageLastInteraction = Date.now();
+      saveUsageStats();
+    });
+    window.addEventListener("pagehide", () => { flushUsageTime(); usagePageVisible = false; saveUsageStats(); });
+    window.addEventListener("pageshow", () => { usagePageVisible = !document.hidden; usageLastTick = usageLastInteraction = Date.now(); });
+
+    function incrementUsage(field) {
+      if (!currentUsageSession) return;
+      usageDay()[field]++;
+      (usageStats.modes[currentUsageSession.mode] ||= emptyUsageCounters())[field]++;
+      currentUsageSession[field]++;
+    }
+    function endUsageSession() { flushUsageTime(); currentUsageSession = null; saveUsageStats(); }
+    function beginUsageSession(mode) {
+      endUsageSession();
+      currentUsageSession = { ...emptyUsageCounters(), mode, at:Date.now(), total:queue.filter(isScoredQuestion).length, finished:false };
+      usageStats.recent.unshift(currentUsageSession);
+      usageStats.recent = usageStats.recent.slice(0, 20);
+      incrementUsage("started");
+      saveUsageStats();
+    }
+    function recordUsageAnswer(correct) {
+      incrementUsage("answered");
+      if (correct) incrementUsage("correct");
+      flushUsageTime(); saveUsageStats();
+    }
+    function recordUsageHint() { incrementUsage("hints"); saveUsageStats(); }
+    function recordUsageSpeaking() { incrementUsage("speaking"); saveUsageStats(); }
+    function completeUsageSession() {
+      if (!currentUsageSession) return;
+      incrementUsage("completed");
+      currentUsageSession.finished = true;
+      endUsageSession();
+    }
+    function usageDuration(milliseconds) {
+      const seconds = Math.floor(milliseconds / 1000);
+      if (seconds < 60) return `${seconds} sec`;
+      const minutes = Math.floor(seconds / 60);
+      return minutes < 60 ? `${minutes} min` : `${Math.floor(minutes / 60)} hr ${minutes % 60} min`;
+    }
+    function usageAccuracy(value) { return value.answered ? `${Math.round(value.correct / value.answered * 100)}%` : "—"; }
+    function renderUsageStats() {
+      const totals = Object.values(usageStats.modes).reduce((sum, item) => {
+        Object.keys(sum).forEach(key => { sum[key] += item[key]; });
+        return sum;
+      }, emptyUsageCounters());
+      const days = Object.values(usageStats.days).filter(day => Object.values(day).some(value => value > 0)).length;
+      document.querySelector("#stats-since").textContent = `Recording since ${new Date(usageStats.since).toLocaleDateString()}. Earlier practice is not included.`;
+      document.querySelector("#stats-summary").innerHTML = [
+        ["Active practice time", usageDuration(usageStats.activeMs), "Estimate; excludes idle time"],
+        ["Days practiced", days, "Days recorded in the last year"],
+        ["Quizzes completed", totals.completed, `${totals.started} started`],
+        ["Answer accuracy", usageAccuracy(totals), `${totals.correct} correct / ${totals.answered} answered`]
+      ].map(([label, value, detail]) => `<div class="stats-metric"><dt>${label}</dt><dd><span class="stats-value">${value}</span><small>${detail}</small></dd></div>`).join("");
+      document.querySelector("#stats-extras").innerHTML = `<span>Spoken word hints: <strong>${totals.hints}</strong></span><span>Quiz speaking rounds: <strong>${totals.speaking}</strong></span>`;
+      document.querySelector("#stats-days").innerHTML = Array.from({ length:7 }, (_, index) => {
+        const date = new Date();
+        date.setHours(12, 0, 0, 0); date.setDate(date.getDate() - index);
+        const key = usageDayKey(date);
+        const label = date.toLocaleDateString(undefined, { weekday:"short", month:"short", day:"numeric" });
+        if (key < usageDayKey(usageStats.since)) return `<tr><td>${label}</td><td colspan="2">Not recorded</td></tr>`;
+        const day = usageStats.days[key] || emptyUsageCounters();
+        return `<tr><td>${label}</td><td>${usageDuration(day.activeMs)}</td><td>${day.correct} / ${day.answered}</td></tr>`;
+      }).join("");
+      const activities = Object.entries(usageStats.modes).sort((a, b) => b[1].started - a[1].started);
+      document.querySelector("#stats-activities").innerHTML = activities.length ? `<table class="stats-table"><thead><tr><th scope="col">Activity</th><th scope="col">Finished / started</th><th scope="col">Answers</th><th scope="col">Accuracy</th></tr></thead><tbody>${activities.map(([mode, value]) => `<tr><td>${usageModeNames[mode]}<small>${value.hints} word hints · ${value.speaking} speaking rounds</small></td><td>${value.completed} / ${value.started}</td><td>${value.correct} / ${value.answered}</td><td>${usageAccuracy(value)}</td></tr>`).join("")}</tbody></table>` : `<p class="stats-empty">No quizzes yet. Start any practice activity to build your history.</p>`;
+      document.querySelector("#stats-recent").innerHTML = usageStats.recent.length ? `<table class="stats-table"><thead><tr><th scope="col">Activity</th><th scope="col">Status</th><th scope="col">Result</th></tr></thead><tbody>${usageStats.recent.slice(0, 10).map(item => `<tr><td>${usageModeNames[item.mode]}<small>${new Date(item.at).toLocaleString(undefined, { month:"short", day:"numeric", hour:"numeric", minute:"2-digit" })}</small></td><td>${item.finished ? "Completed" : item.answered || item.speaking ? "Partial" : "Started"}</td><td>${item.answered ? `${item.correct} / ${item.answered} correct` : "—"}<small>${item.speaking ? `${item.speaking} speaking rounds` : `${item.answered} of ${item.total} scored questions answered`}</small></td></tr>`).join("")}</tbody></table>` : `<p class="stats-empty">Your most recent practice sessions will appear here.</p>`;
+      document.querySelector("#stats-note").textContent = `${usageCanSave ? "Saved only in this browser on this device; clearing its website data removes this history." : "This browser is not saving stats. These numbers are available for this visit only."} Active time pauses while this panel is open, while the app is hidden, or after two minutes without a tap, keypress, or scroll. Speaking rounds are ungraded and excluded from accuracy.`;
+    }
+    function openUsageStats() {
+      flushUsageTime(); saveUsageStats();
+      usageViewingStats = true;
+      renderUsageStats();
+      if (typeof statsDialog.showModal === "function") statsDialog.showModal();
+      else statsDialog.setAttribute("open", "");
+    }
+    function resumeUsageAfterStats() { usageViewingStats = false; usageLastTick = usageLastInteraction = Date.now(); }
+    function closeUsageStats() {
+      if (typeof statsDialog.close === "function") statsDialog.close();
+      else { statsDialog.removeAttribute("open"); resumeUsageAfterStats(); }
+    }
+    document.querySelectorAll("[data-open-stats]").forEach(button => button.addEventListener("click", openUsageStats));
+    document.querySelectorAll("#stats-dialog-x, #stats-dialog-close").forEach(button => button.addEventListener("click", closeUsageStats));
+    statsDialog.addEventListener("close", resumeUsageAfterStats);
+    statsDialog.addEventListener("click", event => { if (event.target === statsDialog) closeUsageStats(); });
+
     function shuffle(array) {
       const a = [...array];
       for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; }
@@ -1724,7 +1931,7 @@
         else speak(audioText);
       });
       questionCard.querySelector("#big-audio")?.addEventListener("click", () => speak(audioText));
-      questionCard.querySelectorAll("[data-gap-hint]").forEach(button => button.addEventListener("click", () => speak(q.gaps[Number(button.dataset.gapHint)].word)));
+      questionCard.querySelectorAll("[data-gap-hint]").forEach(button => button.addEventListener("click", () => { recordUsageHint(); speak(q.gaps[Number(button.dataset.gapHint)].word); }));
       questionCard.querySelector("#reveal-month")?.addEventListener("click", event => {
         if (answered) return;
         const reveal = questionCard.querySelector("#month-reveal");
@@ -1734,6 +1941,7 @@
         questionCard.querySelector("#next-question").hidden = false;
         questionCard.querySelector("#feedback").textContent = "Listen and repeat the French name, then continue when you’re ready.";
         answered = true;
+        recordUsageSpeaking();
         speak(q.item.fr);
       });
       questionCard.querySelector("#check-answer")?.addEventListener("click", checkAnswer);
@@ -1751,6 +1959,7 @@
         feedback.className = "feedback good";
         feedback.textContent = "Nice practice—listen, repeat, then move on when ready.";
         answered = true;
+        recordUsageSpeaking();
         speakSequence(q.hidden.map(index => q.items[index].line), .76);
       });
       questionCard.querySelector("#next-question")?.addEventListener("click", nextQuestion);
@@ -1839,6 +2048,7 @@
       const gradedThroughCurrent = queue.slice(0, current + 1).filter(isScoredQuestion).length;
       scorePill.textContent = `${score} / ${gradedThroughCurrent}`;
       answered = true;
+      recordUsageAnswer(ok);
     }
 
     function responseMatches(value, item) {
@@ -2022,15 +2232,18 @@
     }
     function startTest(mode) {
       currentMode = mode; queue = buildQueue(mode); current = 0; score = 0;
+      beginUsageSession(mode);
       window.speechSynthesis?.cancel();
       quizIntro.style.display = "none"; results.classList.remove("active"); quizPanel.classList.add("active");
       document.querySelector("#quiz").scrollIntoView({behavior:"smooth"});
       renderQuestion();
     }
     function showModes() {
+      endUsageSession();
       window.speechSynthesis?.cancel(); quizPanel.classList.remove("active"); results.classList.remove("active"); quizIntro.style.display = "block"; updateBest();
     }
     function finishTest() {
+      completeUsageSession();
       quizPanel.classList.remove("active"); results.classList.add("active"); progressBar.style.width = "100%";
       const scoredTotal = queue.filter(isScoredQuestion).length;
       if (!scoredTotal) {

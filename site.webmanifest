@@ -1,7 +1,7 @@
 {
   "name": "French 1A Study Guide",
   "short_name": "French 1A",
-  "description": "Interactive French practice for Lessons 2–5: numbers, days, months, calendar terms, conversations, spoken word hints, and the Salomon Grundy rhyme.",
+  "description": "Interactive French practice for Lessons 2–5: numbers, days, months, conversations, spoken word hints, the Salomon Grundy rhyme, and on-device usage stats.",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
