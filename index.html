@@ -452,6 +452,12 @@
       .input-row { flex-direction: column; }
       .voice-dialog-body { padding: 20px 18px 22px; }
     }
+    @media (any-pointer: coarse) {
+      .btn.small, .brand, .nav-voice, .nav-links a, .quiz-toolbar button, .dialog-x { min-height: 44px; min-width: 44px; }
+      .sound-btn, .accent-btn { min-width: 44px; min-height: 44px; }
+      .country-title-row .sound-btn { flex-basis: 44px; }
+      .pronoun-columns { grid-template-columns: repeat(auto-fit, minmax(min(100%, 270px), 1fr)); }
+    }
     @media print { .site-header, .hero-actions, .quiz-section, .footer, .study-tools, .sound-btn, .lesson3-banner .btn, .grundy-art, .reveal-lab, .lesson5-actions { display: none !important; } body { background: white; } .section { padding: 20px 0; } .country-card, .number-chip, .study-panel, .day-card, .rhyme-card { break-inside: avoid; box-shadow: none; } .grundy-section { color:var(--ink); background:white; } .grundy-copy h2 { color:var(--ink); text-shadow:none; } .grundy-copy > p { color:var(--muted); } }
   </style>
 </head>
@@ -1673,7 +1679,10 @@
         input.setAttribute("spellcheck", "false");
       });
       bindQuestion(q);
-      questionCard.querySelector("input")?.focus({preventScroll:true});
+      // Let touch users read or play the prompt before opening the on-screen keyboard.
+      if (!window.matchMedia("(any-pointer: coarse)").matches) {
+        questionCard.querySelector("input")?.focus({preventScroll:true});
+      }
     }
 
     function bindQuestion(q) {
